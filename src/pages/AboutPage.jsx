@@ -102,6 +102,10 @@ function AboutPage() {
                   that everyone deserves access to world-class education, regardless of their location 
                   or background.
                 </p>
+                <p className="text-gray-600 leading-relaxed mt-4">
+                  <strong>Pulsarion IT Solutions Limited</strong> is the driving force behind EduConnect, 
+                  bringing cutting-edge educational technology solutions to learners worldwide.
+                </p>
               </div>
               
               <div>

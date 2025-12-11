@@ -53,6 +53,15 @@ function Footer() {
           </div>
 
           <div>
+            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <ul className="space-y-3">
+              <li className="text-white/80">Email: pusarionitsoutions@gmail.com</li>
+              <li className="text-white/80">Phone: +260 777 342 846</li>
+              <li className="text-white/80">Company: Pulsarion IT Solutions Limited</li>
+            </ul>
+          </div>
+
+          <div>
             <h4 className="text-lg font-semibold mb-4">Newsletter</h4>
             <p className="text-white/80 mb-4">
               Subscribe to get the latest updates and course offerings.
@@ -78,7 +87,7 @@ function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
           <p className="text-white/70 text-sm">
-            © 2025 EduConnect. All rights reserved.
+            © 2025 EduConnect. Powered by Pulsarion IT Solutions Limited. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-6 text-sm">
             <Link to="/privacy" className="text-white/70 hover:text-[#FF6B35] transition-colors duration-200">Privacy Policy</Link>

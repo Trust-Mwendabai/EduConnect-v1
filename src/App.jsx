@@ -23,6 +23,7 @@ import CareersPage from './pages/CareersPage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import EmailVerificationPage from './pages/EmailVerificationPage'
+import FeaturesDemoPage from './pages/FeaturesDemoPage'
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/verify-email" element={<EmailVerificationPage />} />
+        <Route path="/demo" element={<FeaturesDemoPage />} />
       </Routes>
     </Router>
   )

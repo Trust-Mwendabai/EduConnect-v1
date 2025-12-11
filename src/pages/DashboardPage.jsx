@@ -20,11 +20,22 @@ import {
   BarChart3,
   Users,
   Play,
-  Star
+  Star,
+  Bot,
+  Accessibility,
+  Sparkles
 } from 'lucide-react'
+import AICompanion from '../components/ai/AICompanion'
+import AccessibilityPanel from '../components/accessibility/AccessibilityPanel'
+import AnalyticsDashboard from '../components/analytics/AnalyticsDashboard'
+import DocumentGenerator from '../components/documents/DocumentGenerator'
+import { NotificationProvider, useNotifications } from '../components/notifications/NotificationSystem'
 
 function DashboardPage() {
+  const { showSuccess, showError, showWarning, showInfo } = useNotifications()
   const [activeTab, setActiveTab] = useState('overview')
+  const [showAICompanion, setShowAICompanion] = useState(false)
+  const [showAccessibility, setShowAccessibility] = useState(false)
   const [notifications, setNotifications] = useState([
     { id: 1, type: 'assignment', message: 'New assignment posted in Web Development', time: '2 hours ago', read: false },
     { id: 2, type: 'payment', message: 'Payment reminder: Course fees due', time: '5 hours ago', read: false },
@@ -61,6 +72,9 @@ function DashboardPage() {
       thumbnail: 'https://picsum.photos/seed/db/400/200'
     }
   ])
+
+  const [showDocumentGenerator, setShowDocumentGenerator] = useState(false)
+  const [showAnalytics, setShowAnalytics] = useState(false)
 
   const [upcomingAssignments] = useState([
     {
@@ -175,6 +189,20 @@ function DashboardPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setShowAICompanion(true)}
+                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
+                title="AI Learning Companion"
+              >
+                <Bot size={20} />
+              </button>
+              <button 
+                onClick={() => setShowAccessibility(true)}
+                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
+                title="Accessibility Settings"
+              >
+                <Accessibility size={20} />
+              </button>
               <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
                 <Bell size={20} />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
@@ -190,7 +218,7 @@ function DashboardPage() {
       <div className="container-custom py-6">
         {/* Navigation Tabs */}
         <div className="flex gap-1 bg-gray-100 p-1 rounded-lg mb-6">
-          {['overview', 'courses', 'assignments', 'attendance', 'financial', 'ai-suggestions'].map((tab) => (
+          {['overview', 'courses', 'assignments', 'attendance', 'financial', 'ai-suggestions', 'analytics', 'documents'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -614,9 +642,82 @@ function DashboardPage() {
             ))}
           </div>
         )}
+
+        {/* Analytics Tab */}
+        {activeTab === 'analytics' && (
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold text-[#011F5B]">Learning Analytics</h2>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setShowAnalytics(true)}
+                  className="px-4 py-2 bg-[#011F5B] text-white rounded-lg hover:bg-[#003262] transition-colors"
+                >
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  Open Analytics
+                </button>
+              </div>
+            </div>
+            <AnalyticsDashboard userRole="student" />
+          </div>
+        )}
+
+        {/* Documents Tab */}
+        {activeTab === 'documents' && (
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold text-[#011F5B]">Documents & Forms</h2>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setShowDocumentGenerator(true)}
+                  className="px-4 py-2 bg-[#011F5B] text-white rounded-lg hover:bg-[#003262] transition-colors"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  Generate Documents
+                </button>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <DocumentGenerator documentType="clearance" />
+              <DocumentGenerator documentType="receipt" />
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* AI Companion */}
+      <AICompanion
+        isOpen={showAICompanion}
+        onClose={() => setShowAICompanion(false)}
+      />
+
+      {/* Accessibility Panel */}
+      <AccessibilityPanel
+        isOpen={showAccessibility}
+        onClose={() => setShowAccessibility(false)}
+      />
+
+      {/* Analytics Dashboard */}
+      <AnalyticsDashboard
+        isOpen={showAnalytics}
+        onClose={() => setShowAnalytics(false)}
+        userRole="student"
+      />
+
+      {/* Document Generator */}
+      <DocumentGenerator
+        isOpen={showDocumentGenerator}
+        onClose={() => setShowDocumentGenerator(false)}
+      />
     </div>
   )
 }
 
-export default DashboardPage
+// Wrapper component with NotificationProvider
+const DashboardPageWrapper = () => (
+  <NotificationProvider>
+    <DashboardPage />
+  </NotificationProvider>
+)
+
+export default DashboardPageWrapper

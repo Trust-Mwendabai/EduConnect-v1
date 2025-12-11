@@ -7,20 +7,20 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: 'support@educonnect.com',
+    details: 'pusarionitsoutions@gmail.com',
     subdetails: 'We reply within 24 hours'
   },
   {
     icon: Phone,
     title: 'Call Us',
-    details: '+1 (555) 123-4567',
-    subdetails: 'Mon-Fri, 9AM-6PM EST'
+    details: '+260 777 342 846',
+    subdetails: 'Mon-Fri, 9AM-6PM CAT'
   },
   {
     icon: MapPin,
-    title: 'Visit Us',
-    details: '123 Education Street',
-    subdetails: 'New York, NY 10001'
+    title: 'Company',
+    details: 'Pulsarion IT Solutions Limited',
+    subdetails: 'Educational Technology Solutions Provider'
   }
 ]
 

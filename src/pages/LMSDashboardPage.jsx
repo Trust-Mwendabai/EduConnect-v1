@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, Calendar, Clock, DollarSign, Bell, TrendingUp, Award, AlertCircle, CheckCircle, PlayCircle, FileText, Target, Brain, Lightbulb, BarChart3, Users, Video, Download, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, ShoppingCart, GraduationCap, MessageSquare, Settings, LogOut, Menu, ChevronLeft, Search } from 'lucide-react'
+import { BookOpen, Calendar, Clock, DollarSign, Bell, TrendingUp, Award, AlertCircle, CheckCircle, PlayCircle, FileText, Target, Brain, Lightbulb, BarChart3, Users, Video, Download, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, ShoppingCart, GraduationCap, MessageSquare, Settings, LogOut, Menu, ChevronLeft, Search, Bot, Accessibility, Sparkles } from 'lucide-react'
+import AICompanion from '../components/ai/AICompanion'
+import AccessibilityPanel from '../components/accessibility/AccessibilityPanel'
+import { NotificationProvider, useNotifications } from '../components/notifications/NotificationSystem'
 
-export default function LMSDashboardPage() {
+function LMSDashboardPage() {
+  const { showSuccess, showError, showWarning, showInfo } = useNotifications()
   const [activeSection, setActiveSection] = useState('overview')
   const [showNotifications, setShowNotifications] = useState(false)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
+  const [showAICompanion, setShowAICompanion] = useState(false)
+  const [showAccessibility, setShowAccessibility] = useState(false)
 
   const activeCourses = [
     {
@@ -292,27 +297,17 @@ export default function LMSDashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <div className={`${isSidebarOpen ? 'w-64' : 'w-20'} bg-[#011F5B] text-white transition-all duration-300 flex flex-col`}>
+      <div className="w-64 bg-[#011F5B] text-white flex flex-col">
         {/* Sidebar Header */}
         <div className="p-4 border-b border-blue-800">
-          <div className="flex items-center justify-between">
-            {isSidebarOpen && (
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] rounded-lg flex items-center justify-center">
-                  <GraduationCap size={20} className="text-white" />
-                </div>
-                <div>
-                  <h2 className="font-bold text-lg">EduConnect</h2>
-                  <p className="text-xs text-blue-200">Student Portal</p>
-                </div>
-              </div>
-            )}
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 hover:bg-blue-800 rounded-lg transition-colors"
-            >
-              {isSidebarOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
-            </button>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] rounded-lg flex items-center justify-center">
+              <GraduationCap size={20} className="text-white" />
+            </div>
+            <div>
+              <h2 className="font-bold text-lg">EduConnect</h2>
+              <p className="text-xs text-blue-200">Student Portal</p>
+            </div>
           </div>
         </div>
 
@@ -340,7 +335,7 @@ export default function LMSDashboardPage() {
                   }`}
                 >
                   <Icon size={20} />
-                  {isSidebarOpen && <span className="font-medium">{item.label}</span>}
+                  <span className="font-medium">{item.label}</span>
                 </button>
               )
             })}
@@ -353,17 +348,13 @@ export default function LMSDashboardPage() {
             <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] rounded-full flex items-center justify-center">
               <User size={20} className="text-white" />
             </div>
-            {isSidebarOpen && (
-              <div className="flex-1">
-                <p className="font-medium">John Doe</p>
-                <p className="text-xs text-blue-200">Student ID: STU001</p>
-              </div>
-            )}
-            {isSidebarOpen && (
-              <button className="p-2 hover:bg-blue-800 rounded-lg transition-colors">
-                <LogOut size={18} />
-              </button>
-            )}
+            <div className="flex-1">
+              <p className="font-medium">John Doe</p>
+              <p className="text-xs text-blue-200">Student ID: STU001</p>
+            </div>
+            <button className="p-2 hover:bg-blue-800 rounded-lg transition-colors">
+              <LogOut size={18} />
+            </button>
           </div>
         </div>
       </div>
@@ -401,6 +392,20 @@ export default function LMSDashboardPage() {
                     className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
                   />
                 </div>
+                <button 
+                  onClick={() => setShowAICompanion(true)}
+                  className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
+                  title="AI Learning Companion"
+                >
+                  <Bot size={20} />
+                </button>
+                <button 
+                  onClick={() => setShowAccessibility(true)}
+                  className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
+                  title="Accessibility Settings"
+                >
+                  <Accessibility size={20} />
+                </button>
                 <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
                   <Bell size={20} />
                   <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
@@ -703,6 +708,27 @@ export default function LMSDashboardPage() {
           )}
         </div>
       </div>
+
+      {/* AI Companion */}
+      <AICompanion
+        isOpen={showAICompanion}
+        onClose={() => setShowAICompanion(false)}
+      />
+
+      {/* Accessibility Panel */}
+      <AccessibilityPanel
+        isOpen={showAccessibility}
+        onClose={() => setShowAccessibility(false)}
+      />
     </div>
   )
 }
+
+// Wrapper component with NotificationProvider
+const LMSDashboardPageWrapper = () => (
+  <NotificationProvider>
+    <LMSDashboardPage />
+  </NotificationProvider>
+)
+
+export default LMSDashboardPageWrapper;
