@@ -278,7 +278,8 @@ export default function LMSDashboardPage() {
   const unreadCount = notifications.filter(n => !n.read).length
 
   const sidebarItems = [
-    { id: 'overview', label: 'Overview', icon: Home },
+    { id: 'home', label: 'Back to Home', icon: Home },
+    { id: 'overview', label: 'Overview', icon: BarChart3 },
     { id: 'courses', label: 'My Courses', icon: GraduationCap },
     { id: 'assignments', label: 'Assignments', icon: FileText },
     { id: 'marketplace', label: 'Marketplace', icon: ShoppingCart },
@@ -323,9 +324,17 @@ export default function LMSDashboardPage() {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveSection(item.id)}
+                  onClick={() => {
+                    if (item.id === 'home') {
+                      window.location.href = '/'
+                    } else {
+                      setActiveSection(item.id)
+                    }
+                  }}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
-                    activeSection === item.id
+                    item.id === 'home'
+                      ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                      : activeSection === item.id
                       ? 'bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white shadow-lg'
                       : 'text-blue-100 hover:bg-blue-800 hover:text-white'
                   }`}

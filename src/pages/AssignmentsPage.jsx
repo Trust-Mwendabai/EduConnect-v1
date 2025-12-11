@@ -27,9 +27,6 @@ function AssignmentsPage() {
   const [selectedCourse, setSelectedCourse] = useState('all')
   const [uploadProgress, setUploadProgress] = useState(0)
   const [isUploading, setIsUploading] = useState(false)
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [showSubmissionModal, setShowSubmissionModal] = useState(false)
-  const [currentAssignment, setCurrentAssignment] = useState(null)
 
   const [assignments] = useState([
     {
@@ -183,17 +180,9 @@ function AssignmentsPage() {
     return 'text-red-600'
   }
 
-  const handleFileSelect = (event, assignment) => {
+  const handleFileUpload = (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedFile(file)
-      setCurrentAssignment(assignment)
-      setShowSubmissionModal(true)
-    }
-  }
-
-  const handleFileUpload = () => {
-    if (selectedFile) {
       setIsUploading(true)
       setUploadProgress(0)
       
@@ -203,30 +192,11 @@ function AssignmentsPage() {
           if (prev >= 100) {
             clearInterval(interval)
             setIsUploading(false)
-            setShowSubmissionModal(false)
-            setSelectedFile(null)
             return 100
           }
           return prev + 10
         })
       }, 200)
-    }
-  }
-
-  const handleDragOver = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-  }
-
-  const handleDrop = (e, assignment) => {
-    e.preventDefault()
-    e.stopPropagation()
-    
-    const file = e.dataTransfer.files[0]
-    if (file) {
-      setSelectedFile(file)
-      setCurrentAssignment(assignment)
-      setShowSubmissionModal(true)
     }
   }
 
@@ -389,24 +359,17 @@ function AssignmentsPage() {
                 
                 {!assignment.submitted ? (
                   <div className="space-y-4">
-                    <div 
-                      className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#FF6B35] transition-colors"
-                      onDragOver={handleDragOver}
-                      onDrop={(e) => handleDrop(e, assignment)}
-                    >
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
                       <Upload className="mx-auto text-gray-400 mb-4" size={48} />
                       <h4 className="text-lg font-medium text-gray-700 mb-2">Submit Your Work</h4>
                       <p className="text-gray-500 mb-4">
-                        Drag and drop your file here, or click to browse
-                      </p>
-                      <p className="text-xs text-gray-400 mb-4">
-                        Supported formats: PDF, DOC, DOCX, ZIP, RAR (Max 50MB)
+                        Upload your assignment file. Supported formats: PDF, DOC, DOCX, ZIP, RAR
                       </p>
                       <input
                         type="file"
                         id={`file-upload-${assignment.id}`}
                         className="hidden"
-                        onChange={(e) => handleFileSelect(e, assignment)}
+                        onChange={handleFileUpload}
                         accept=".pdf,.doc,.docx,.zip,.rar"
                       />
                       <label
@@ -418,16 +381,20 @@ function AssignmentsPage() {
                       </label>
                     </div>
                     
-                    {/* Submission Guidelines */}
-                    <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                      <h5 className="text-sm font-semibold text-blue-900 mb-2">Submission Guidelines:</h5>
-                      <ul className="text-xs text-blue-800 space-y-1 list-disc list-inside">
-                        <li>Ensure your file is properly named (e.g., YourName_Assignment.pdf)</li>
-                        <li>Double-check that all required sections are completed</li>
-                        <li>Submit before the deadline to avoid penalties</li>
-                        <li>Keep a backup copy of your work</li>
-                      </ul>
-                    </div>
+                    {isUploading && (
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-gray-600">Uploading...</span>
+                          <span className="text-gray-600">{uploadProgress}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] h-2 rounded-full transition-all"
+                            style={{ width: `${uploadProgress}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -452,76 +419,20 @@ function AssignmentsPage() {
                       </div>
                     </div>
 
-                    {/* Submission Status Timeline */}
+                    {/* Plagiarism Check */}
                     <div className="p-4 bg-white border rounded-lg">
-                      <h5 className="font-medium text-[#011F5B] mb-3">Submission Status</h5>
-                      <div className="space-y-3">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <CheckCircle size={16} className="text-green-600" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900">Submitted</p>
-                            <p className="text-xs text-gray-500">{assignment.submittedAt}</p>
-                          </div>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <Shield className="text-[#011F5B]" size={20} />
+                          <h5 className="font-medium">Plagiarism Check</h5>
                         </div>
-                        
-                        <div className="flex items-start gap-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                            assignment.plagiarismChecked ? 'bg-green-100' : 'bg-yellow-100'
-                          }`}>
-                            {assignment.plagiarismChecked ? (
-                              <CheckCircle size={16} className="text-green-600" />
-                            ) : (
-                              <Clock size={16} className="text-yellow-600" />
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900">Plagiarism Check</p>
-                            {assignment.plagiarismChecked ? (
-                              <p className="text-xs text-gray-500">
-                                Completed - {assignment.plagiarismScore}% similarity
-                              </p>
-                            ) : (
-                              <p className="text-xs text-gray-500">In progress...</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="flex items-start gap-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                            assignment.grade ? 'bg-green-100' : 'bg-gray-100'
-                          }`}>
-                            {assignment.grade ? (
-                              <CheckCircle size={16} className="text-green-600" />
-                            ) : (
-                              <Clock size={16} className="text-gray-400" />
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900">Grading</p>
-                            {assignment.grade ? (
-                              <p className="text-xs text-gray-500">Completed</p>
-                            ) : (
-                              <p className="text-xs text-gray-500">Pending review</p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Plagiarism Check Details */}
-                    {assignment.plagiarismChecked && (
-                      <div className="p-4 bg-white border rounded-lg">
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-2">
-                            <Shield className="text-[#011F5B]" size={20} />
-                            <h5 className="font-medium">Plagiarism Analysis</h5>
-                          </div>
+                        {assignment.plagiarismChecked && (
                           <span className={`font-medium ${getPlagiarismColor(assignment.plagiarismScore)}`}>
                             {assignment.plagiarismScore}% similarity
                           </span>
-                        </div>
+                        )}
+                      </div>
+                      {assignment.plagiarismChecked ? (
                         <div className="space-y-2">
                           <div className="w-full bg-gray-200 rounded-full h-2">
                             <div 
@@ -533,19 +444,19 @@ function AssignmentsPage() {
                               style={{ width: `${assignment.plagiarismScore}%` }}
                             ></div>
                           </div>
-                          <div className="flex items-center justify-between text-xs text-gray-600">
-                            <span>0%</span>
-                            <span>50%</span>
-                            <span>100%</span>
-                          </div>
-                          <p className="text-sm text-gray-700 mt-2">
-                            {assignment.plagiarismScore < 15 ? '✓ Original work detected - Excellent!' :
-                             assignment.plagiarismScore < 30 ? '⚠ Some similarities found - Review recommended' :
-                             '⚠ High similarity detected - Instructor review required'}
+                          <p className="text-sm text-gray-600">
+                            {assignment.plagiarismScore < 15 ? 'Original work detected' :
+                             assignment.plagiarismScore < 30 ? 'Some similarities found' :
+                             'High similarity detected - review required'}
                           </p>
                         </div>
-                      </div>
-                    )}
+                      ) : (
+                        <div className="flex items-center gap-2 text-yellow-600">
+                          <AlertCircle size={16} />
+                          <span className="text-sm">Plagiarism check in progress...</span>
+                        </div>
+                      )}
+                    </div>
 
                     {/* Grade and Feedback */}
                     {assignment.grade && (
@@ -650,84 +561,6 @@ function AssignmentsPage() {
             </div>
           </div>
         </div>
-
-        {/* Submission Modal */}
-        {showSubmissionModal && selectedFile && currentAssignment && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg max-w-md w-full p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-[#011F5B]">Confirm Submission</h3>
-                <button 
-                  onClick={() => {
-                    setShowSubmissionModal(false)
-                    setSelectedFile(null)
-                  }}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              <div className="space-y-4">
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600 mb-2">Assignment:</p>
-                  <p className="font-medium text-gray-900">{currentAssignment.title}</p>
-                </div>
-
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <FileText className="text-blue-600 flex-shrink-0" size={20} />
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-gray-900 truncate">{selectedFile.name}</p>
-                      <p className="text-sm text-gray-600">{formatFileSize(selectedFile.size)}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {isUploading && (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600">Uploading...</span>
-                      <span className="text-gray-600">{uploadProgress}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] h-2 rounded-full transition-all"
-                        style={{ width: `${uploadProgress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                  <p className="text-xs text-yellow-800">
-                    <strong>Note:</strong> Once submitted, you cannot modify your submission. Please ensure this is your final version.
-                  </p>
-                </div>
-
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => {
-                      setShowSubmissionModal(false)
-                      setSelectedFile(null)
-                    }}
-                    className="flex-1 py-2 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                    disabled={isUploading}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleFileUpload}
-                    className="flex-1 py-2 px-4 bg-[#FF6B35] text-white rounded-lg hover:bg-[#E55A2B] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={isUploading}
-                  >
-                    {isUploading ? 'Submitting...' : 'Submit'}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )

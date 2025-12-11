@@ -1,0 +1,12 @@
+# Redirects for SPA (Single Page Application)
+# This ensures all routes are handled by React Router
+
+# Redirect all requests to index.html for client-side routing
+/*    /index.html   200
+
+# API proxy rules (if needed in the future)
+# /api/*  https://your-api-domain.com/:splat  200
+
+# Custom redirects (examples)
+# /old-path  /new-path  301
+# /blog/*    /articles/:splat  301

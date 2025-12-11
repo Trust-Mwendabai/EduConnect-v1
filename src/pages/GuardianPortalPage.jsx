@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { User, TrendingUp, Calendar, DollarSign, MessageSquare, AlertCircle, CheckCircle, Clock, Award, BookOpen, Send, Phone, Mail, Star, BarChart3, PieChart, Activity, FileText, CreditCard, Bell, ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Users, TrendingUp, Calendar, DollarSign, Bell, Award, AlertCircle, CheckCircle, MessageSquare, FileText, Target, Brain, BarChart3, Clock, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, GraduationCap, Settings, LogOut, Menu, ChevronLeft, Search, BookOpen, Video, Mail, Phone, MapPin, Download, Eye } from 'lucide-react'
 
 export default function GuardianPortalPage() {
-  const [selectedStudent, setSelectedStudent] = useState('1')
+  const [selectedStudent, setSelectedStudent] = useState('john')
   const [activeTab, setActiveTab] = useState('overview')
   const [messageText, setMessageText] = useState('')
   const [selectedTeacher, setSelectedTeacher] = useState('')
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const students = [
     { id: '1', name: 'Emma Johnson', grade: '10th Grade', class: 'A', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100' },
@@ -85,72 +88,150 @@ export default function GuardianPortalPage() {
     return (totalScore / academicPerformance.length).toFixed(1)
   }
 
+  const sidebarItems = [
+    { id: 'overview', label: 'Overview', icon: Home },
+    { id: 'academics', label: 'Academics', icon: GraduationCap },
+    { id: 'attendance', label: 'Attendance', icon: Calendar },
+    { id: 'behaviour', label: 'Behaviour', icon: Users },
+    { id: 'payments', label: 'Payments', icon: CreditCard },
+    { id: 'messages', label: 'Messages', icon: MessageSquare },
+    { id: 'settings', label: 'Settings', icon: Settings }
+  ]
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-[#011F5B]">Guardian Portal</h1>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <User size={16} />
-                <span>Parent Dashboard</span>
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <div className={`${isSidebarOpen ? 'w-64' : 'w-20'} bg-[#011F5B] text-white transition-all duration-300 flex flex-col`}>
+        {/* Sidebar Header */}
+        <div className="p-4 border-b border-blue-800">
+          <div className="flex items-center justify-between">
+            {isSidebarOpen && (
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] rounded-lg flex items-center justify-center">
+                  <Users size={20} className="text-white" />
+                </div>
+                <div>
+                  <h2 className="font-bold text-lg">EduConnect</h2>
+                  <p className="text-xs text-blue-200">Guardian Portal</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
-                <Bell size={20} />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
-              <div className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
-                <User size={20} />
-              </div>
-            </div>
+            )}
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 hover:bg-blue-800 rounded-lg transition-colors"
+            >
+              {isSidebarOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
-      </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-
-        <div className="mb-6">
-          <div className="bg-white rounded-xl shadow-sm p-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Select Student</label>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {students.map(student => (
+        {/* Navigation */}
+        <nav className="flex-1 p-4">
+          <div className="space-y-2">
+            {sidebarItems.map((item) => {
+              const Icon = item.icon
+              return (
                 <button
-                  key={student.id}
-                  onClick={() => setSelectedStudent(student.id)}
-                  className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-colors ${
-                    selectedStudent === student.id 
-                      ? 'border-blue-500 bg-blue-50' 
-                      : 'border-gray-200 hover:border-gray-300'
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
+                    activeTab === item.id
+                      ? 'bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white shadow-lg'
+                      : 'text-blue-100 hover:bg-blue-800 hover:text-white'
                   }`}
                 >
-                  <img src={student.avatar} alt={student.name} className="w-12 h-12 rounded-full" />
-                  <div className="text-left">
-                    <h3 className="font-semibold text-gray-900">{student.name}</h3>
-                    <p className="text-sm text-gray-600">{student.grade} - Class {student.class}</p>
-                  </div>
+                  <Icon size={20} />
+                  {isSidebarOpen && <span className="font-medium">{item.label}</span>}
                 </button>
-              ))}
+              )
+            })}
+          </div>
+        </nav>
+
+        {/* User Profile Section */}
+        <div className="p-4 border-t border-blue-800">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] rounded-full flex items-center justify-center">
+              <User size={20} className="text-white" />
             </div>
+            {isSidebarOpen && (
+              <div className="flex-1">
+                <p className="font-medium">Parent User</p>
+                <p className="text-xs text-blue-200">Guardian ID: GRD001</p>
+              </div>
+            )}
+            {isSidebarOpen && (
+              <button className="p-2 hover:bg-blue-800 rounded-lg transition-colors">
+                <LogOut size={18} />
+              </button>
+            )}
           </div>
         </div>
+      </div>
 
-        <div className="mb-6">
-          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-            {['overview', 'academics', 'attendance', 'behaviour', 'payments', 'messages'].map(tab => (
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Top Header */}
+        <header className="bg-white shadow-sm border-b">
+          <div className="px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <h1 className="text-2xl font-bold text-[#011F5B] capitalize">
+                  {activeTab === 'overview' ? 'Dashboard Overview' : 
+                   activeTab === 'academics' ? 'Academic Performance' :
+                   activeTab === 'attendance' ? 'Attendance Records' :
+                   activeTab === 'behaviour' ? 'Behaviour Reports' :
+                   activeTab === 'payments' ? 'Payment Management' :
+                   activeTab === 'messages' ? 'Messages' : 'Settings'}
+                </h1>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <User size={16} />
+                  <span>Parent Dashboard</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                {/* Search Bar */}
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                  />
+                </div>
+                <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                  <Bell size={20} />
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                  <User size={20} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Student Selection */}
+        <div className="p-6 bg-white border-b">
+          <label className="block text-sm font-medium text-gray-700 mb-3">Select Student</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {students.map(student => (
               <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 px-4 py-2 rounded-md font-medium transition-all ${
-                  activeTab === tab 
-                    ? 'bg-white text-[#011F5B] shadow-sm' 
-                    : 'text-gray-600 hover:text-gray-900'
+                key={student.id}
+                onClick={() => setSelectedStudent(student.id)}
+                className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-colors ${
+                  selectedStudent === student.id 
+                    ? 'border-[#FF6B35] bg-orange-50' 
+                    : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                <img src={student.avatar} alt={student.name} className="w-12 h-12 rounded-full" />
+                <div className="text-left">
+                  <h3 className="font-semibold text-gray-900">{student.name}</h3>
+                  <p className="text-sm text-gray-600">{student.grade} - Class {student.class}</p>
+                </div>
               </button>
             ))}
           </div>
