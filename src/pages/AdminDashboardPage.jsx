@@ -18,10 +18,66 @@ import {
   BarChart3,
   Shield,
   Database,
+  Info,
+  AlertTriangle,
+  X,
+  Search,
+  Filter,
+  Plus,
+  Edit,
+  Trash2,
+  ChevronDown,
+  Mail,
+  Phone,
+  Clock,
+  GraduationCap,
+  Eye,
+  Download,
+  Upload,
+  MessageSquare,
+  Lock,
+  Unlock,
+  RefreshCw,
+  MoreVertical,
   Activity,
   Bot,
   Accessibility,
-  Sparkles
+  Sparkles,
+  Timer,
+  Home,
+  PieChart,
+  Globe,
+  MapPin,
+  Building,
+  CreditCard,
+  ShoppingCart,
+  Package,
+  Archive,
+  Star,
+  Flag,
+  Bookmark,
+  Hash,
+  AtSign,
+  Zap,
+  Monitor,
+  Server,
+  Wifi,
+  HardDrive,
+  Cpu,
+  MemoryStick,
+  Cloud,
+  ShieldCheck,
+  Key,
+  UserCheck,
+  UserX,
+  UsersRound,
+  UserPlus,
+  UserMinus,
+  Briefcase,
+  School,
+  Library,
+  Wrench,
+  Settings2
 } from 'lucide-react'
 import AICompanion from '../components/ai/AICompanion'
 import AccessibilityPanel from '../components/accessibility/AccessibilityPanel'
@@ -148,38 +204,189 @@ function AdminDashboard() {
               <button 
                 onClick={() => setShowAccessibility(true)}
                 className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
-                title="Accessibility Settings"
+                title="Accessibility"
               >
                 <Accessibility size={20} />
               </button>
-              <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
-                <Bell size={20} />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              <button 
+                onClick={() => setShowDocumentGenerator(true)}
+                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
+                title="Document Generator"
+              >
+                <FileText size={20} />
               </button>
-              <Link to="/profile" className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
-                <User size={20} />
-              </Link>
+              <button 
+                onClick={() => setShowAnalytics(true)}
+                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
+                title="Analytics Dashboard"
+              >
+                <BarChart3 size={20} />
+              </button>
+              <div className="relative">
+                <button className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                  <Bell size={20} />
+                </button>
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container-custom py-6">
-        {/* Navigation Tabs */}
-        <div className="flex gap-1 bg-gray-100 p-1 rounded-lg mb-6">
-          {['overview', 'users', 'courses', 'analytics', 'system', 'documents', 'alerts'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-2 px-4 rounded-md font-medium transition-all ${
-                activeTab === tab
-                  ? 'bg-white text-[#011F5B] shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+      <div className="container-custom py-6 flex gap-6">
+        {/* Sidebar */}
+        <div className="w-64 flex-shrink-0">
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <h3 className="font-semibold text-gray-900 mb-4">Admin Tools</h3>
+            
+            {/* System Management Section */}
+            <div className="mb-6">
+              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">System Management</h4>
+              <div className="space-y-2">
+                <button 
+                  onClick={() => setActiveTab('overview')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'overview' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Home className="w-4 h-4" />
+                  <span className="text-sm">Overview</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('users')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'users' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Users className="w-4 h-4" />
+                  <span className="text-sm">User Management</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('analytics')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'analytics' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  <span className="text-sm">Analytics</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('financial')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'financial' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <DollarSign className="w-4 h-4" />
+                  <span className="text-sm">Financial</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Academic Management Section */}
+            <div className="mb-6">
+              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Academic Management</h4>
+              <div className="space-y-2">
+                <button 
+                  onClick={() => setActiveTab('courses')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'courses' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span className="text-sm">Courses</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('instructors')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'instructors' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <GraduationCap className="w-4 h-4" />
+                  <span className="text-sm">Instructors</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('exams')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'exams' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <AlertCircle className="w-4 h-4" />
+                  <span className="text-sm">Exams</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('grades')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'grades' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Award className="w-4 h-4" />
+                  <span className="text-sm">Grades</span>
+                </button>
+              </div>
+            </div>
+
+            {/* System Administration Section */}
+            <div className="mb-6">
+              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">System Administration</h4>
+              <div className="space-y-2">
+                <button 
+                  onClick={() => setActiveTab('security')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'security' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  <span className="text-sm">Security</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('settings')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'settings' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Settings2 className="w-4 h-4" />
+                  <span className="text-sm">Settings</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('logs')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'logs' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <FileText className="w-4 h-4" />
+                  <span className="text-sm">System Logs</span>
+                </button>
+                <button 
+                  onClick={() => setActiveTab('backups')}
+                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                    activeTab === 'backups' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Archive className="w-4 h-4" />
+                  <span className="text-sm">Backups</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Actions Section */}
+            <div>
+              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Quick Actions</h4>
+              <div className="space-y-2">
+                <button className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700">
+                  <UserPlus className="w-4 h-4" />
+                  <span className="text-sm">Add User</span>
+                </button>
+                <button className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700">
+                  <RefreshCw className="w-4 h-4" />
+                  <span className="text-sm">System Refresh</span>
+                </button>
+                <button className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700">
+                  <Download className="w-4 h-4" />
+                  <span className="text-sm">Export Data</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Overview Tab */}

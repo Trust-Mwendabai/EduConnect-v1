@@ -31,7 +31,42 @@ import {
   Phone,
   RefreshCw,
   ArrowRight,
-  Info
+  Info,
+  Bell,
+  AlertTriangle,
+  ChevronDown,
+  Wallet,
+  PiggyBank,
+  Target,
+  Zap,
+  Star,
+  MessageSquare,
+  HelpCircle,
+  Settings,
+  LogOut,
+  Eye,
+  EyeOff,
+  Copy,
+  Share2,
+  Archive,
+  Trash2,
+  Edit3,
+  MoreVertical,
+  ChevronRight,
+  ChevronLeft,
+  BarChart3,
+  PieChart,
+  Activity,
+  Users,
+  MapPin,
+  Globe,
+  Lock,
+  Unlock,
+  Key,
+  SmartphoneNfc,
+  QrCode,
+  Banknote,
+  Building2
 } from 'lucide-react'
 
 function PaymentPage() {
@@ -45,6 +80,16 @@ function PaymentPage() {
   const [showReceiptModal, setShowReceiptModal] = useState(false)
   const [selectedReceipt, setSelectedReceipt] = useState(null)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
+  const [showPaymentSettings, setShowPaymentSettings] = useState(false)
+  const [savedPaymentMethods, setSavedPaymentMethods] = useState([
+    { id: 1, type: 'mobile_money', provider: 'MTN', number: '0977123456', isDefault: true },
+    { id: 2, type: 'mobile_money', provider: 'Airtel', number: '0976987654', isDefault: false },
+    { id: 3, type: 'card', last4: '1234', brand: 'Visa', isDefault: false }
+  ])
+  const [notifications, setNotifications] = useState([
+    { id: 1, type: 'payment_due', message: 'Tuition payment due in 3 days', date: '2024-01-17', read: false },
+    { id: 2, type: 'payment_success', message: 'Payment of ZMW 500 received', date: '2024-01-15', read: true }
+  ])
 
   const [paymentHistory] = useState([
     {
@@ -56,7 +101,9 @@ function PaymentPage() {
       method: 'mobile_money',
       status: 'completed',
       transactionId: 'TXN001234567',
-      receiptUrl: '/receipts/TXN001234567.pdf'
+      receiptUrl: '/receipts/TXN001234567.pdf',
+      category: 'academic',
+      semester: 'Spring 2024'
     },
     {
       id: 2,
@@ -67,7 +114,9 @@ function PaymentPage() {
       method: 'card',
       status: 'completed',
       transactionId: 'TXN001234568',
-      receiptUrl: '/receipts/TXN001234568.pdf'
+      receiptUrl: '/receipts/TXN001234568.pdf',
+      category: 'fees',
+      semester: 'Spring 2024'
     },
     {
       id: 3,
@@ -78,7 +127,9 @@ function PaymentPage() {
       method: 'mobile_money',
       status: 'completed',
       transactionId: 'TXN001234569',
-      receiptUrl: '/receipts/TXN001234569.pdf'
+      receiptUrl: '/receipts/TXN001234569.pdf',
+      category: 'accommodation',
+      semester: 'Spring 2024'
     },
     {
       id: 4,
@@ -89,7 +140,22 @@ function PaymentPage() {
       method: 'mobile_money',
       status: 'completed',
       transactionId: 'TXN001234570',
-      receiptUrl: '/receipts/TXN001234570.pdf'
+      receiptUrl: '/receipts/TXN001234570.pdf',
+      category: 'fees',
+      semester: 'Spring 2024'
+    },
+    {
+      id: 5,
+      type: 'course',
+      description: 'Advanced React Development',
+      amount: 299,
+      date: '2024-01-12',
+      method: 'card',
+      status: 'completed',
+      transactionId: 'TXN001234571',
+      receiptUrl: '/receipts/TXN001234571.pdf',
+      category: 'courses',
+      semester: 'Spring 2024'
     }
   ])
 
@@ -101,7 +167,9 @@ function PaymentPage() {
       amount: 1500,
       dueDate: '2024-01-20',
       priority: 'high',
-      installment: '2 of 4'
+      installment: '2 of 4',
+      category: 'academic',
+      lateFee: 50
     },
     {
       id: 2,
@@ -110,7 +178,9 @@ function PaymentPage() {
       amount: 200,
       dueDate: '2024-01-25',
       priority: 'medium',
-      installment: '1 of 2'
+      installment: '1 of 2',
+      category: 'fees',
+      lateFee: 20
     },
     {
       id: 3,
@@ -119,9 +189,33 @@ function PaymentPage() {
       amount: 50,
       dueDate: '2024-01-30',
       priority: 'low',
-      installment: '1 of 1'
+      installment: '1 of 1',
+      category: 'activities',
+      lateFee: 10
+    },
+    {
+      id: 4,
+      type: 'course',
+      description: 'Database Management Course',
+      amount: 199,
+      dueDate: '2024-01-22',
+      priority: 'medium',
+      installment: '1 of 1',
+      category: 'courses',
+      lateFee: 15
     }
   ])
+
+  const [paymentStats] = useState({
+    totalPaid: 3424,
+    totalPending: 1949,
+    thisMonth: 500,
+    lastMonth: 1200,
+    averagePayment: 428,
+    paymentFrequency: 8,
+    nextPaymentDue: 1500,
+    clearanceProgress: 75
+  })
 
   const [clearanceStatus] = useState({
     library: {

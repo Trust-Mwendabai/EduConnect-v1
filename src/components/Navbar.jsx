@@ -50,7 +50,7 @@ function Navbar() {
               {isDropdownOpen && (
                 <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
                   <Link 
-                    to="/lms" 
+                    to="/dashboard" 
                     className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-[#011F5B] transition-colors"
                     onClick={() => setIsDropdownOpen(false)}
                   >
@@ -62,6 +62,20 @@ function Navbar() {
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     Guardian Portal
+                  </Link>
+                  <Link 
+                    to="/vendor" 
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-[#011F5B] transition-colors"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Vendor Dashboard
+                  </Link>
+                  <Link 
+                    to="/admin" 
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-[#011F5B] transition-colors"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Admin Portal
                   </Link>
                   <Link 
                     to="/marketplace" 

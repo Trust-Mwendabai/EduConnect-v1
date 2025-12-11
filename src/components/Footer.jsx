@@ -55,7 +55,7 @@ function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <ul className="space-y-3">
-              <li className="text-white/80">Email: pusarionitsoutions@gmail.com</li>
+              <li className="text-white/80">Email: pulsarionitsolutions@gmail.com</li>
               <li className="text-white/80">Phone: +260 777 342 846</li>
               <li className="text-white/80">Company: Pulsarion IT Solutions Limited</li>
             </ul>

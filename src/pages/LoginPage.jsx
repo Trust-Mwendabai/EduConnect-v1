@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Mail, Lock, ArrowLeft, AlertCircle, CheckCircle } from 'lucide-react'
+import { GradientButton, gradients } from '../components/common/GradientStyles'
 
 function LoginPage() {
   const [formData, setFormData] = useState({

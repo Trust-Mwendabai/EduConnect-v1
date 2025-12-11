@@ -2,25 +2,32 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock } from 'lucide-react'
+import { ContactForm } from '../components/forms/StyledForms'
 
 const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: 'pusarionitsoutions@gmail.com',
+    details: 'pulsarionitsolutions@gmail.com',
     subdetails: 'We reply within 24 hours'
   },
   {
     icon: Phone,
     title: 'Call Us',
     details: '+260 777 342 846',
-    subdetails: 'Mon-Fri, 9AM-6PM CAT'
+    subdetails: 'Mon-Fri, 8AM-5PM CAT (Zambia Time)'
   },
   {
     icon: MapPin,
-    title: 'Company',
-    details: 'Pulsarion IT Solutions Limited',
-    subdetails: 'Educational Technology Solutions Provider'
+    title: 'Visit Us',
+    details: 'Lusaka, Zambia',
+    subdetails: 'By appointment only'
+  },
+  {
+    icon: Clock,
+    title: 'Business Hours',
+    details: 'Monday - Friday: 8AM - 5PM',
+    subdetails: 'Saturday: 9AM - 1PM (CAT)'
   }
 ]
 
@@ -129,79 +136,10 @@ function ContactPage() {
                 </p>
               </div>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[--color-warm-orange] focus:border-transparent transition-all duration-300"
-                    placeholder="John Doe"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[--color-warm-orange] focus:border-transparent transition-all duration-300"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[--color-warm-orange] focus:border-transparent transition-all duration-300"
-                    placeholder="How can we help?"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="6"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[--color-warm-orange] focus:border-transparent transition-all duration-300 resize-none"
-                    placeholder="Tell us more about your inquiry..."
-                  ></textarea>
-                </div>
-                
-                <button
-                  type="submit"
-                  className="w-full px-8 py-4 bg-gradient-to-r from-[--color-warm-orange] to-[--color-warm-orange-light] text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <Send className="w-5 h-5" />
-                  Send Message
-                </button>
-              </form>
+              <ContactForm onSubmit={(data) => {
+                console.log('Contact form submitted:', data)
+                alert('Thank you for contacting us! We\'ll get back to you soon.')
+              }} />
             </div>
             
             {/* Map & Additional Info */}

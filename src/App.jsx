@@ -13,6 +13,17 @@ import ContactPage from './pages/ContactPage'
 import MarketplacePage from './pages/MarketplacePage'
 import GuardianPortalPage from './pages/GuardianPortalPage'
 import LMSDashboardPage from './pages/LMSDashboardPage'
+import AdminDashboardPage from './pages/AdminDashboardPage'
+import VendorDashboardPage from './pages/VendorDashboardPage'
+import VendorUploadPage from './pages/VendorUploadPage'
+import VirtualClassroomPage from './pages/VirtualClassroomPage'
+import TimetablePage from './pages/TimetablePage'
+import OnlineExamsPage from './pages/OnlineExamsPage'
+import CourseOutlinePage from './pages/CourseOutlinePage'
+import StudyMaterialsPage from './pages/StudyMaterialsPage'
+import OnlineStudyRoomPage from './pages/OnlineStudyRoomPage'
+import NotificationsPage from './pages/NotificationsPage'
+import MessagesPage from './pages/MessagesPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 import CookiePolicyPage from './pages/CookiePolicyPage'
@@ -42,6 +53,18 @@ function App() {
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/guardian" element={<GuardianPortalPage />} />
         <Route path="/lms" element={<LMSDashboardPage />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/vendor" element={<VendorDashboardPage />} />
+        <Route path="/vendor/upload" element={<VendorUploadPage />} />
+        <Route path="/classroom/:id" element={<VirtualClassroomPage />} />
+        <Route path="/timetable" element={<TimetablePage />} />
+        <Route path="/exams" element={<OnlineExamsPage />} />
+        <Route path="/exams/:examId" element={<OnlineExamsPage />} />
+        <Route path="/course-outline" element={<CourseOutlinePage />} />
+        <Route path="/study-materials" element={<StudyMaterialsPage />} />
+        <Route path="/study-room/:roomId?" element={<OnlineStudyRoomPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/messages" element={<MessagesPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/cookies" element={<CookiePolicyPage />} />
