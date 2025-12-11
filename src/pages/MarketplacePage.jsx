@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Search, ShoppingCart, Star, User, Clock, BookOpen, Filter, X, Plus, Minus, CreditCard, Package, History, ChevronRight, Heart, Eye, Download, CheckCircle, Bell } from 'lucide-react'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default function MarketplacePage() {
   const [activeTab, setActiveTab] = useState('browse')
@@ -156,7 +158,7 @@ export default function MarketplacePage() {
   }
 
   const CourseCard = ({ course }) => (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1">
       <div className="relative">
         <img src={course.image} alt={course.title} className="w-full h-48 object-cover" />
         <button 
@@ -170,13 +172,13 @@ export default function MarketplacePage() {
         </span>
       </div>
       
-      <div className="p-4">
-        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{course.title}</h3>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{course.description}</p>
+      <div className="p-5">
+        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2" style={{ fontFamily: 'var(--font-heading)' }}>{course.title}</h3>
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'var(--font-body)' }}>{course.description}</p>
         
         <div className="flex items-center gap-2 mb-3">
-          <img src={course.instructorProfile.avatar} alt={course.instructor} className="w-6 h-6 rounded-full" />
-          <span className="text-sm text-gray-700">{course.instructor}</span>
+          <img src={course.instructorProfile.avatar} alt={course.instructor} className="w-7 h-7 rounded-full border-2 border-gray-100" />
+          <span className="text-sm text-gray-700" style={{ fontFamily: 'var(--font-body)' }}>{course.instructor}</span>
         </div>
         
         <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
@@ -195,14 +197,15 @@ export default function MarketplacePage() {
           </div>
         </div>
         
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-gray-900">${course.price}</span>
+        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+          <span className="text-2xl font-bold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>${course.price}</span>
           <button 
             onClick={() => addToCart(course)}
-            className="px-4 py-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"
+            className="px-5 py-2.5 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 font-medium"
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <ShoppingCart className="w-4 h-4" />
-            Add to Cart
+            <span className="hidden sm:inline">Add to Cart</span>
           </button>
         </div>
       </div>
@@ -210,29 +213,32 @@ export default function MarketplacePage() {
   )
 
   const CartSidebar = () => (
-    <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300">
-      <div className="p-6 border-b">
+    <div className="fixed right-0 top-0 h-full w-full md:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300">
+      <div className="p-6 border-b bg-gradient-to-r from-[#011F5B] to-[#00416A]">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Shopping Cart ({cart.length})</h2>
-          <button onClick={() => setShowCheckout(false)} className="p-2 hover:bg-gray-100 rounded-lg">
-            <X className="w-5 h-5" />
+          <h2 className="text-xl font-semibold text-white" style={{ fontFamily: 'var(--font-heading)' }}>Shopping Cart ({cart.length})</h2>
+          <button onClick={() => setShowCheckout(false)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+            <X className="w-5 h-5 text-white" />
           </button>
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-6" style={{ maxHeight: 'calc(100vh - 200px)' }}>
         {cart.length === 0 ? (
-          <p className="text-gray-500 text-center">Your cart is empty</p>
+          <div className="flex flex-col items-center justify-center h-full text-center">
+            <ShoppingCart className="w-16 h-16 text-gray-300 mb-4" />
+            <p className="text-gray-500" style={{ fontFamily: 'var(--font-body)' }}>Your cart is empty</p>
+          </div>
         ) : (
           <div className="space-y-4">
             {cart.map(item => (
-              <div key={item.id} className="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                <img src={item.image} alt={item.title} className="w-20 h-20 object-cover rounded-lg" />
+              <div key={item.id} className="flex gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                <img src={item.image} alt={item.title} className="w-20 h-20 object-cover rounded-lg shadow-sm" />
                 <div className="flex-1">
-                  <h4 className="font-medium text-gray-900">{item.title}</h4>
-                  <p className="text-sm text-gray-600">{item.instructor}</p>
+                  <h4 className="font-medium text-gray-900 line-clamp-2" style={{ fontFamily: 'var(--font-heading)' }}>{item.title}</h4>
+                  <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>{item.instructor}</p>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="font-semibold">${item.price}</span>
+                    <span className="font-semibold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>${item.price}</span>
                     <button 
                       onClick={() => removeFromCart(item.id)}
                       className="text-red-500 hover:text-red-700"
@@ -248,12 +254,12 @@ export default function MarketplacePage() {
       </div>
       
       {cart.length > 0 && (
-        <div className="border-t p-6">
+        <div className="border-t p-6 bg-gray-50">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-lg font-semibold">Total:</span>
-            <span className="text-2xl font-bold">${getTotalPrice()}</span>
+            <span className="text-lg font-semibold text-gray-700" style={{ fontFamily: 'var(--font-heading)' }}>Total:</span>
+            <span className="text-3xl font-bold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>${getTotalPrice()}</span>
           </div>
-          <button className="w-full py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+          <button className="w-full py-4 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 font-semibold" style={{ fontFamily: 'var(--font-heading)' }}>
             <CreditCard className="w-5 h-5" />
             Proceed to Checkout
           </button>
@@ -286,78 +292,76 @@ export default function MarketplacePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-[#011F5B]">Marketplace</h1>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <ShoppingCart size={16} />
-                <span>Digital Store</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
-                <Bell size={20} />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
-              <div className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
-                <User size={20} />
-              </div>
-            </div>
+      <Navbar />
+      
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-[#011F5B] to-[#00416A] pt-24 pb-16">
+        <div className="container-custom">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+              Course Marketplace
+            </h1>
+            <p className="text-lg text-white/90 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-body)' }}>
+              Discover and purchase premium courses from expert instructors. Expand your skills and advance your career.
+            </p>
           </div>
         </div>
-      </header>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-
-        <div className="flex items-center gap-4 mb-8">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+      <div className="container-custom py-8">
+        {/* Search and Filter Bar */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 mb-8 -mt-8 relative z-10">
+          <div className="flex-1 relative bg-white rounded-xl shadow-md">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search courses, instructors..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-12 pr-4 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+              style={{ fontFamily: 'var(--font-body)' }}
             />
           </div>
           <button 
             onClick={() => setShowFilters(!showFilters)}
-            className="px-4 py-3 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center gap-2"
+            className="px-6 py-4 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-center gap-2 shadow-md transition-all duration-300"
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <Filter className="w-5 h-5" />
-            Filters
+            <span className="hidden md:inline">Filters</span>
           </button>
           <button 
             onClick={() => setShowCheckout(true)}
-            className="px-4 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 relative"
+            className="px-6 py-4 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 relative shadow-md"
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <ShoppingCart className="w-5 h-5" />
-            Cart
+            <span className="hidden md:inline">Cart</span>
             {cart.length > 0 && (
-              <span className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 w-6 h-6 bg-white text-[#FF6B35] rounded-full text-xs flex items-center justify-center font-bold shadow-md">
                 {cart.length}
               </span>
             )}
           </button>
         </div>
 
-        <div className="flex gap-8">
-          <div className="w-64 flex-shrink-0">
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
+        {/* Main Content */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar */}
+          <div className="w-full lg:w-64 flex-shrink-0">
+            <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
+              <h3 className="font-semibold text-gray-900 mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Categories</h3>
               <div className="space-y-2">
                 {categories.map(category => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    className={`w-full text-left px-4 py-2.5 rounded-lg transition-all duration-300 ${
                       selectedCategory === category 
-                        ? 'bg-[#011F5B] text-white font-medium' 
+                        ? 'bg-gradient-to-r from-[#011F5B] to-[#00416A] text-white font-medium shadow-md' 
                         : 'text-gray-600 hover:bg-gray-50'
                     }`}
+                    style={{ fontFamily: 'var(--font-body)' }}
                   >
                     {category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ')}
                   </button>
@@ -366,13 +370,14 @@ export default function MarketplacePage() {
             </div>
           </div>
 
+          {/* Course Grid */}
           <div className="flex-1">
             <div className="mb-6">
-              <div className="flex items-center justify-between">
-                <p className="text-gray-600">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <p className="text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
                   Showing {filteredCourses.length} of {courses.length} courses
                 </p>
-                <select className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white" style={{ fontFamily: 'var(--font-body)' }}>
                   <option className="text-gray-700">Most Popular</option>
                   <option className="text-gray-700">Price: Low to High</option>
                   <option className="text-gray-700">Price: High to Low</option>
@@ -382,7 +387,7 @@ export default function MarketplacePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCourses.map(course => (
                 <CourseCard key={course.id} course={course} />
               ))}
@@ -392,6 +397,8 @@ export default function MarketplacePage() {
 
         {showCheckout && <CartSidebar />}
       </div>
+      
+      <Footer />
     </div>
   )
 }

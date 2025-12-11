@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Users, TrendingUp, Calendar, DollarSign, Bell, Award, AlertCircle, CheckCircle, MessageSquare, FileText, Target, Brain, BarChart3, Clock, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, GraduationCap, Settings, LogOut, Menu, ChevronLeft, Search, BookOpen, Video, Mail, Phone, MapPin, Download, Eye } from 'lucide-react'
+import { Users, TrendingUp, Calendar, DollarSign, Bell, Award, AlertCircle, CheckCircle, MessageSquare, FileText, Target, Brain, BarChart3, Clock, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, GraduationCap, Settings, LogOut, Menu, ChevronLeft, Search, BookOpen, Video, Mail, Phone, MapPin, Download, Eye, Send } from 'lucide-react'
 
 export default function GuardianPortalPage() {
   const [selectedStudent, setSelectedStudent] = useState('john')
@@ -89,7 +89,8 @@ export default function GuardianPortalPage() {
   }
 
   const sidebarItems = [
-    { id: 'overview', label: 'Overview', icon: Home },
+    { id: 'home', label: 'Back to Home', icon: Home },
+    { id: 'overview', label: 'Overview', icon: BarChart3 },
     { id: 'academics', label: 'Academics', icon: GraduationCap },
     { id: 'attendance', label: 'Attendance', icon: Calendar },
     { id: 'behaviour', label: 'Behaviour', icon: Users },
@@ -133,9 +134,17 @@ export default function GuardianPortalPage() {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() => {
+                    if (item.id === 'home') {
+                      window.location.href = '/'
+                    } else {
+                      setActiveTab(item.id)
+                    }
+                  }}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
-                    activeTab === item.id
+                    item.id === 'home'
+                      ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                      : activeTab === item.id
                       ? 'bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white shadow-lg'
                       : 'text-blue-100 hover:bg-blue-800 hover:text-white'
                   }`}

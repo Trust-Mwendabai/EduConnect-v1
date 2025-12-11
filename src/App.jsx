@@ -13,6 +13,16 @@ import ContactPage from './pages/ContactPage'
 import MarketplacePage from './pages/MarketplacePage'
 import GuardianPortalPage from './pages/GuardianPortalPage'
 import LMSDashboardPage from './pages/LMSDashboardPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
+import CookiePolicyPage from './pages/CookiePolicyPage'
+import HelpPage from './pages/HelpPage'
+import BlogPage from './pages/BlogPage'
+import FAQPage from './pages/FAQPage'
+import CareersPage from './pages/CareersPage'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
+import EmailVerificationPage from './pages/EmailVerificationPage'
 
 function App() {
   return (
@@ -31,6 +41,16 @@ function App() {
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/guardian" element={<GuardianPortalPage />} />
         <Route path="/lms" element={<LMSDashboardPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/cookies" element={<CookiePolicyPage />} />
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/verify-email" element={<EmailVerificationPage />} />
       </Routes>
     </Router>
   )
