@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BookOpen, Calendar, Clock, DollarSign, Bell, TrendingUp, Award, AlertCircle, CheckCircle, PlayCircle, FileText, Target, Brain, Lightbulb, BarChart3, Users, Video, Download, Star, ChevronRight, X, Info, CreditCard, Check } from 'lucide-react'
+import { BookOpen, Calendar, Clock, DollarSign, Bell, TrendingUp, Award, AlertCircle, CheckCircle, PlayCircle, FileText, Target, Brain, Lightbulb, BarChart3, Users, Video, Download, Star, ChevronRight, X, Info, CreditCard, Check, User } from 'lucide-react'
 
 export default function LMSDashboardPage() {
   const [activeSection, setActiveSection] = useState('overview')
@@ -276,26 +276,31 @@ export default function LMSDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Student Dashboard</h1>
-            <p className="text-gray-600">Welcome back! Here's your learning overview</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-            >
-              <Bell className="w-6 h-6 text-gray-600" />
-              {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center">
-                  {unreadCount}
-                </span>
-              )}
-            </button>
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold text-[#011F5B]">Student Dashboard</h1>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <User size={16} />
+                <span>Learning Overview</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                <Bell size={20} />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+              <div className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                <User size={20} />
+              </div>
+            </div>
           </div>
         </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow-sm p-6">
@@ -305,7 +310,7 @@ export default function LMSDashboardPage() {
               </div>
               <span className="text-sm text-blue-600 font-medium">Active</span>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">{activeCourses.length}</h3>
+            <h3 className="text-2xl font-bold text-[#011F5B]">{activeCourses.length}</h3>
             <p className="text-gray-600 text-sm">Courses</p>
           </div>
 
@@ -316,7 +321,7 @@ export default function LMSDashboardPage() {
               </div>
               <span className="text-sm text-green-600 font-medium">This Week</span>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">{upcomingAssignments.filter(a => new Date(a.dueDate) <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)).length}</h3>
+            <h3 className="text-2xl font-bold text-[#011F5B]">{upcomingAssignments.filter(a => new Date(a.dueDate) <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)).length}</h3>
             <p className="text-gray-600 text-sm">Assignments Due</p>
           </div>
 
@@ -327,7 +332,7 @@ export default function LMSDashboardPage() {
               </div>
               <span className="text-sm text-green-600 font-medium">+5%</span>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">{attendanceData.overall}%</h3>
+            <h3 className="text-2xl font-bold text-[#011F5B]">{attendanceData.overall}%</h3>
             <p className="text-gray-600 text-sm">Attendance Rate</p>
           </div>
 
@@ -342,7 +347,7 @@ export default function LMSDashboardPage() {
                 {financialStatus.clearanceStatus}
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">${financialStatus.tuitionBalance}</h3>
+            <h3 className="text-2xl font-bold text-[#011F5B]">${financialStatus.tuitionBalance}</h3>
             <p className="text-gray-600 text-sm">Balance Due</p>
           </div>
         </div>
@@ -377,8 +382,8 @@ export default function LMSDashboardPage() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div 
-                          className={`${getCourseColor(course.color)} h-2 rounded-full transition-all duration-300`}
-                          style={{ width: `${course.progress}%` }}
+                          className={getCourseColor(course.color) + " h-2 rounded-full transition-all duration-300"}
+                          style={{ width: course.progress + "%" }}
                         ></div>
                       </div>
                     </div>
@@ -426,7 +431,7 @@ export default function LMSDashboardPage() {
                     <div className="text-right">
                       <p className="font-medium text-gray-900">{assignment.dueDate}</p>
                       <p className="text-sm text-gray-600">{assignment.dueTime}</p>
-                      <button className="mt-2 text-blue-600 text-sm font-medium hover:text-blue-700">
+                      <button className="mt-2 px-3 py-1 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white text-sm rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                         Start Assignment
                       </button>
                     </div>
@@ -453,7 +458,7 @@ export default function LMSDashboardPage() {
                     <div className="text-right">
                       <p className="font-medium text-gray-900">{class_.time}</p>
                       <p className="text-sm text-gray-600">{class_.room}</p>
-                      <button className="mt-2 px-3 py-1 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700">
+                      <button className="mt-2 px-3 py-1 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white text-sm rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                         Join Class
                       </button>
                     </div>
@@ -498,8 +503,8 @@ export default function LMSDashboardPage() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-green-500 h-2 rounded-full"
-                    style={{ width: `${attendanceData.overall}%` }}
+                    className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] h-2 rounded-full transition-all duration-300"
+                    style={{ width: attendanceData.overall + "%" }}
                   ></div>
                 </div>
               </div>
@@ -532,7 +537,7 @@ export default function LMSDashboardPage() {
                     {financialStatus.clearanceStatus}
                   </span>
                 </div>
-                <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <button className="w-full py-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                   Make Payment
                 </button>
               </div>

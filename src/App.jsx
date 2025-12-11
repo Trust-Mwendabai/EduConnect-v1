@@ -13,6 +13,7 @@ import ContactPage from './pages/ContactPage'
 import MarketplacePage from './pages/MarketplacePage'
 import GuardianPortalPage from './pages/GuardianPortalPage'
 import LMSDashboardPage from './pages/LMSDashboardPage'
+import VirtualClassroomPage from './pages/VirtualClassroomPage'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/guardian" element={<GuardianPortalPage />} />
         <Route path="/lms" element={<LMSDashboardPage />} />
+        <Route path="/classroom/:id" element={<VirtualClassroomPage />} />
       </Routes>
     </Router>
   )

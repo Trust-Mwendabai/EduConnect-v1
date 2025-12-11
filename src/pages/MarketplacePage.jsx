@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Search, ShoppingCart, Star, User, Clock, BookOpen, Filter, X, Plus, Minus, CreditCard, Package, History, ChevronRight, Heart, Eye, Download, CheckCircle } from 'lucide-react'
+import { Search, ShoppingCart, Star, User, Clock, BookOpen, Filter, X, Plus, Minus, CreditCard, Package, History, ChevronRight, Heart, Eye, Download, CheckCircle, Bell } from 'lucide-react'
 
 export default function MarketplacePage() {
   const [activeTab, setActiveTab] = useState('browse')
@@ -199,7 +199,7 @@ export default function MarketplacePage() {
           <span className="text-2xl font-bold text-gray-900">${course.price}</span>
           <button 
             onClick={() => addToCart(course)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"
           >
             <ShoppingCart className="w-4 h-4" />
             Add to Cart
@@ -253,7 +253,7 @@ export default function MarketplacePage() {
             <span className="text-lg font-semibold">Total:</span>
             <span className="text-2xl font-bold">${getTotalPrice()}</span>
           </div>
-          <button className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+          <button className="w-full py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
             <CreditCard className="w-5 h-5" />
             Proceed to Checkout
           </button>
@@ -286,11 +286,31 @@ export default function MarketplacePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Marketplace</h1>
-          <p className="text-gray-600">Discover premium courses and learning materials</p>
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold text-[#011F5B]">Marketplace</h1>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <ShoppingCart size={16} />
+                <span>Digital Store</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <button className="relative p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                <Bell size={20} />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+              <div className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                <User size={20} />
+              </div>
+            </div>
+          </div>
         </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
 
         <div className="flex items-center gap-4 mb-8">
           <div className="flex-1 relative">
@@ -312,7 +332,7 @@ export default function MarketplacePage() {
           </button>
           <button 
             onClick={() => setShowCheckout(true)}
-            className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2 relative"
+            className="px-4 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 relative"
           >
             <ShoppingCart className="w-5 h-5" />
             Cart
@@ -335,7 +355,7 @@ export default function MarketplacePage() {
                     onClick={() => setSelectedCategory(category)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                       selectedCategory === category 
-                        ? 'bg-blue-50 text-blue-600 font-medium' 
+                        ? 'bg-[#011F5B] text-white font-medium' 
                         : 'text-gray-600 hover:bg-gray-50'
                     }`}
                   >
@@ -353,11 +373,11 @@ export default function MarketplacePage() {
                   Showing {filteredCourses.length} of {courses.length} courses
                 </p>
                 <select className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <option>Most Popular</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Highest Rated</option>
-                  <option>Newest</option>
+                  <option className="text-gray-700">Most Popular</option>
+                  <option className="text-gray-700">Price: Low to High</option>
+                  <option className="text-gray-700">Price: High to Low</option>
+                  <option className="text-gray-700">Highest Rated</option>
+                  <option className="text-gray-700">Newest</option>
                 </select>
               </div>
             </div>

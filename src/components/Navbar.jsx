@@ -41,8 +41,6 @@ function Navbar() {
                 className="text-white font-medium hover:text-[#FF6B35] transition-colors duration-200 relative group flex items-center gap-1"
                 style={{ fontFamily: 'var(--font-heading)' }}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                onMouseEnter={() => setIsDropdownOpen(true)}
-                onMouseLeave={() => setIsDropdownOpen(false)}
               >
                 Portals
                 <ChevronDown size={16} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -50,11 +48,7 @@ function Navbar() {
               </button>
               
               {isDropdownOpen && (
-                <div 
-                  className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"
-                  onMouseEnter={() => setIsDropdownOpen(true)}
-                  onMouseLeave={() => setIsDropdownOpen(false)}
-                >
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
                   <Link 
                     to="/lms" 
                     className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-[#011F5B] transition-colors"
