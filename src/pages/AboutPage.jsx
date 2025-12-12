@@ -35,28 +35,28 @@ const values = [
 
 const team = [
   {
-    name: 'Sarah Mitchell',
-    role: 'CEO & Co-Founder',
-    image: 'sarah-mitchell',
-    bio: 'Former educator with 15 years of experience in online learning'
+    name: 'Trust Muhau Mwendabai',
+    role: 'CEO',
+    image: 'team-template',
+    bio: 'Visionary leader with expertise in educational technology and business strategy'
   },
   {
-    name: 'David Chen',
-    role: 'CTO & Co-Founder',
-    image: 'david-chen',
-    bio: 'Tech innovator passionate about making education accessible'
+    name: 'Ngubu Kambanja',
+    role: 'COO',
+    image: 'team-template',
+    bio: 'Operations expert ensuring smooth delivery of educational services'
   },
   {
-    name: 'Emily Rodriguez',
-    role: 'Head of Content',
-    image: 'emily-rodriguez',
-    bio: 'Curriculum designer with expertise in instructional design'
+    name: 'Brian Mungalu',
+    role: 'Chief Educational Researcher',
+    image: 'team-template',
+    bio: 'Chief Educational Researcher managing stakeholder partnerships'
   },
   {
-    name: 'Michael Johnson',
-    role: 'Head of Community',
-    image: 'michael-johnson',
-    bio: 'Community builder dedicated to student success'
+    name: 'Mirriam Mwale',
+    role: 'Secretary',
+    image: 'team-template',
+    bio: 'Female administrative professional keeping operations organized'
   }
 ]
 

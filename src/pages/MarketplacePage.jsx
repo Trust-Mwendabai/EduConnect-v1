@@ -41,7 +41,7 @@ export default function MarketplacePage() {
       price: 69.99,
       rating: 4.6,
       reviews: 189,
-      image: 'https://images.unsplash.com/photo-1559028006-44a26f562c38?w=400',
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&auto=format&fit=crop',
       category: 'design',
       duration: '8 weeks',
       level: 'Beginner',
@@ -308,6 +308,102 @@ export default function MarketplacePage() {
         </div>
       </div>
 
+      {/* Marketplace Introduction */}
+      <div className="py-16 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#011F5B] mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+              What is the EduConnect Marketplace?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-body)' }}>
+              The EduConnect Marketplace is your premier destination for high-quality educational content. 
+              Connect with expert instructors, access premium courses, and transform your learning journey.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#FF6B35] to-[#FF8C61] rounded-full flex items-center justify-center">
+                <BookOpen className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#011F5B] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                Premium Courses
+              </h3>
+              <p className="text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Access carefully curated courses from industry experts and renowned institutions
+              </p>
+            </div>
+            
+            <div className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#FF6B35] to-[#FF8C61] rounded-full flex items-center justify-center">
+                <User className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#011F5B] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                Expert Instructors
+              </h3>
+              <p className="text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Learn from professionals with real-world experience and proven teaching expertise
+              </p>
+            </div>
+            
+            <div className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#FF6B35] to-[#FF8C61] rounded-full flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#011F5B] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                Quality Assurance
+              </h3>
+              <p className="text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Every course is reviewed for quality, relevance, and learning effectiveness
+              </p>
+            </div>
+          </div>
+          
+          {/* Marketplace Benefits */}
+          <div className="bg-gradient-to-r from-[#011F5B] to-[#00416A] rounded-2xl p-8 text-white">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                  Why Choose EduConnect Marketplace?
+                </h3>
+                <ul className="space-y-3" style={{ fontFamily: 'var(--font-body)' }}>
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-5 h-5 text-[#FF6B35] mt-0.5 flex-shrink-0" />
+                    <span>Lifetime access to purchased courses with free updates</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-5 h-5 text-[#FF6B35] mt-0.5 flex-shrink-0" />
+                    <span>Certificates of completion to boost your resume</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-5 h-5 text-[#FF6B35] mt-0.5 flex-shrink-0" />
+                    <span>30-day money-back guarantee on all courses</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-5 h-5 text-[#FF6B35] mt-0.5 flex-shrink-0" />
+                    <span>Learn at your own pace with flexible scheduling</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-5 h-5 text-[#FF6B35] mt-0.5 flex-shrink-0" />
+                    <span>Join a community of 50,000+ learners worldwide</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="text-center">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="text-4xl font-bold mb-2">50,000+</div>
+                  <div className="text-lg mb-4">Active Learners</div>
+                  <div className="text-4xl font-bold mb-2">1,000+</div>
+                  <div className="text-lg mb-4">Expert Instructors</div>
+                  <div className="text-4xl font-bold mb-2">98%</div>
+                  <div className="text-lg">Satisfaction Rate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container-custom py-8">
         {/* Search and Filter Bar */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 mb-8 -mt-8 relative z-10">
@@ -343,6 +439,68 @@ export default function MarketplacePage() {
               </span>
             )}
           </button>
+        </div>
+
+        {/* How It Works */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-[#011F5B] mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+              How the Marketplace Works
+            </h3>
+            <p className="text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+              Simple steps to start your learning journey
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-[#FF6B35] text-white rounded-full flex items-center justify-center font-bold">
+                1
+              </div>
+              <h4 className="font-semibold text-[#011F5B] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                Browse Courses
+              </h4>
+              <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Explore our extensive catalog of premium courses
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-[#FF6B35] text-white rounded-full flex items-center justify-center font-bold">
+                2
+              </div>
+              <h4 className="font-semibold text-[#011F5B] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                Choose & Purchase
+              </h4>
+              <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Select courses that match your goals and budget
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-[#FF6B35] text-white rounded-full flex items-center justify-center font-bold">
+                3
+              </div>
+              <h4 className="font-semibold text-[#011F5B] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                Start Learning
+              </h4>
+              <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Get instant access and begin your educational journey
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-[#FF6B35] text-white rounded-full flex items-center justify-center font-bold">
+                4
+              </div>
+              <h4 className="font-semibold text-[#011F5B] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                Get Certified
+              </h4>
+              <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
+                Complete courses and earn recognized certificates
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Main Content */}

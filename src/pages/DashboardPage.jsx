@@ -36,7 +36,8 @@ import {
   Megaphone,
   AlertTriangle,
   Eye,
-  Trash2
+  Trash2,
+  Settings
 } from 'lucide-react'
 import AICompanion from '../components/ai/AICompanion'
 import AccessibilityPanel from '../components/accessibility/AccessibilityPanel'

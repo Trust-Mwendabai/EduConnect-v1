@@ -1,5 +1,5 @@
 import React from 'react'
-import { Target, Users, Smartphone, Award, MessageCircle, TrendingUp } from 'lucide-react'
+import { Target, Users, Smartphone, Award, MessageCircle, TrendingUp, ShoppingCart } from 'lucide-react'
 
 const featuresData = [
   {
@@ -16,24 +16,30 @@ const featuresData = [
   },
   {
     id: 3,
+    icon: ShoppingCart,
+    title: 'Course Marketplace',
+    description: 'Browse and purchase premium courses from expert instructors. Access high-quality content with lifetime access and certificates.'
+  },
+  {
+    id: 4,
     icon: Smartphone,
     title: 'Learn Anywhere',
     description: 'Access your courses on any device - desktop, tablet, or mobile. Learn at your own pace, anytime, anywhere.'
   },
   {
-    id: 4,
+    id: 5,
     icon: Award,
     title: 'Certificates',
     description: 'Earn recognized certificates upon course completion to showcase your skills and boost your career prospects.'
   },
   {
-    id: 5,
+    id: 6,
     icon: MessageCircle,
     title: 'Community Support',
     description: 'Join a vibrant community of learners. Collaborate, discuss, and grow together with peers worldwide.'
   },
   {
-    id: 6,
+    id: 7,
     icon: TrendingUp,
     title: 'Track Progress',
     description: 'Monitor your learning journey with detailed analytics and insights. Stay motivated with achievement badges.'

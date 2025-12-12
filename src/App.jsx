@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage'
 import DashboardPage from './pages/DashboardPage'
 import AssignmentsPage from './pages/AssignmentsPage'
 import PaymentPage from './pages/PaymentPage'
+import PricingPage from './pages/PricingPage'
 import CoursesPage from './pages/CoursesPage'
 import FeaturesPage from './pages/FeaturesPage'
 import AboutPage from './pages/AboutPage'
@@ -43,7 +44,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<AdminDashboardPage />} />
         <Route path="/assignments" element={<AssignmentsPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/courses" element={<CoursesPage />} />
@@ -69,6 +70,7 @@ function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/cookies" element={<CookiePolicyPage />} />
         <Route path="/help" element={<HelpPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/careers" element={<CareersPage />} />

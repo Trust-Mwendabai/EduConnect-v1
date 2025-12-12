@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
 import { 
   Users, 
   BookOpen, 
@@ -10,80 +9,95 @@ import {
   Settings,
   CheckCircle,
   AlertCircle,
-  User,
   Award,
   Target,
   Brain,
   FileText,
   BarChart3,
   Shield,
-  Database,
-  Info,
-  AlertTriangle,
-  X,
-  Search,
-  Filter,
-  Plus,
-  Edit,
-  Trash2,
-  ChevronDown,
-  Mail,
-  Phone,
-  Clock,
-  GraduationCap,
-  Eye,
-  Download,
-  Upload,
-  MessageSquare,
-  Lock,
-  Unlock,
-  RefreshCw,
-  MoreVertical,
   Activity,
   Bot,
   Accessibility,
-  Sparkles,
-  Timer,
+  Clock,
+  GraduationCap,
+  Download,
+  RefreshCw,
   Home,
-  PieChart,
-  Globe,
-  MapPin,
-  Building,
-  CreditCard,
-  ShoppingCart,
-  Package,
-  Archive,
   Star,
-  Flag,
-  Bookmark,
-  Hash,
-  AtSign,
-  Zap,
+  Archive,
   Monitor,
-  Server,
-  Wifi,
-  HardDrive,
-  Cpu,
-  MemoryStick,
-  Cloud,
   ShieldCheck,
-  Key,
-  UserCheck,
-  UserX,
-  UsersRound,
   UserPlus,
-  UserMinus,
-  Briefcase,
-  School,
-  Library,
-  Wrench,
-  Settings2
+  Settings2,
+  Tag,
+  Plus
 } from 'lucide-react'
-import AICompanion from '../components/ai/AICompanion'
-import AccessibilityPanel from '../components/accessibility/AccessibilityPanel'
-import AnalyticsDashboard from '../components/analytics/AnalyticsDashboard'
-import DocumentGenerator from '../components/documents/DocumentGenerator'
-import { NotificationProvider, useNotifications } from '../components/notifications/NotificationSystem'
+
+// Mock components
+const AICompanion = ({ isOpen, onClose }) => {
+  if (!isOpen) return null
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg p-6 max-w-md w-full">
+        <h3 className="text-lg font-bold mb-4">AI Companion</h3>
+        <button onClick={onClose} className="px-4 py-2 bg-[#011F5B] text-white rounded">Close</button>
+      </div>
+    </div>
+  )
+}
+
+const AccessibilityPanel = ({ isOpen, onClose }) => {
+  if (!isOpen) return null
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg p-6 max-w-md w-full">
+        <h3 className="text-lg font-bold mb-4">Accessibility Panel</h3>
+        <button onClick={onClose} className="px-4 py-2 bg-[#011F5B] text-white rounded">Close</button>
+      </div>
+    </div>
+  )
+}
+
+const AnalyticsDashboard = ({ isOpen, onClose, userRole }) => {
+  if (!isOpen) return null
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg p-6 max-w-4xl w-full">
+        <h3 className="text-lg font-bold mb-4">Analytics Dashboard ({userRole})</h3>
+        <button onClick={onClose} className="px-4 py-2 bg-[#011F5B] text-white rounded">Close</button>
+      </div>
+    </div>
+  )
+}
+
+const DocumentGenerator = ({ isOpen, onClose }) => {
+  if (!isOpen) return null
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg p-6 max-w-md w-full">
+        <h3 className="text-lg font-bold mb-4">Document Generator</h3>
+        <button onClick={onClose} className="px-4 py-2 bg-[#011F5B] text-white rounded">Close</button>
+      </div>
+    </div>
+  )
+}
+
+const NotificationContext = React.createContext()
+
+const NotificationProvider = ({ children }) => {
+  const showSuccess = (message) => console.log('Success:', message)
+  const showError = (message) => console.log('Error:', message)
+  const showWarning = (message) => console.log('Warning:', message)
+  const showInfo = (message) => console.log('Info:', message)
+
+  return (
+    <NotificationContext.Provider value={{ showSuccess, showError, showWarning, showInfo }}>
+      {children}
+    </NotificationContext.Provider>
+  )
+}
+
+const useNotifications = () => React.useContext(NotificationContext)
 
 function AdminDashboard() {
   const { showSuccess, showError, showWarning, showInfo } = useNotifications()
@@ -92,17 +106,78 @@ function AdminDashboard() {
   const [showAccessibility, setShowAccessibility] = useState(false)
   const [showDocumentGenerator, setShowDocumentGenerator] = useState(false)
   const [showAnalytics, setShowAnalytics] = useState(false)
+  const [userRole] = useState('student')
+  
+  const [studentData] = useState({
+    activeCourses: 3,
+    avgProgress: 60,
+    pendingAssignments: 5,
+    overallGrade: 'B+',
+    attendanceRate: 85,
+    studyHours: 120
+  })
+  
+  const [activeCourses] = useState([
+    {
+      id: 1,
+      title: 'Web Development Fundamentals',
+      instructor: 'Dr. Sarah Johnson',
+      progress: 75,
+      nextClass: 'Today, 2:00 PM',
+      grade: 'A-'
+    },
+    {
+      id: 2,
+      title: 'Data Structures & Algorithms',
+      instructor: 'Prof. Michael Chen',
+      progress: 60,
+      nextClass: 'Tomorrow, 10:00 AM',
+      grade: 'B+'
+    },
+    {
+      id: 3,
+      title: 'Database Management',
+      instructor: 'Dr. Emily Rodriguez',
+      progress: 45,
+      nextClass: 'Friday, 3:00 PM',
+      grade: 'B'
+    }
+  ])
+  
+  const [upcomingAssignments] = useState([
+    {
+      id: 1,
+      title: 'React Project Submission',
+      course: 'Web Development Fundamentals',
+      dueDate: '2024-01-15',
+      dueTime: '11:59 PM',
+      priority: 'high'
+    },
+    {
+      id: 2,
+      title: 'Algorithm Analysis Paper',
+      course: 'Data Structures & Algorithms',
+      dueDate: '2024-01-18',
+      dueTime: '5:00 PM',
+      priority: 'medium'
+    },
+    {
+      id: 3,
+      title: 'Database Schema Design',
+      course: 'Database Management',
+      dueDate: '2024-01-20',
+      dueTime: '11:59 PM',
+      priority: 'low'
+    }
+  ])
 
-  // Admin-specific data
   const [systemStats] = useState({
     totalUsers: 2456,
     activeStudents: 1834,
     totalCourses: 48,
     totalInstructors: 67,
     systemUptime: '99.8%',
-    storageUsed: '67%',
-    pendingApprovals: 12,
-    systemHealth: 'Excellent'
+    pendingApprovals: 12
   })
 
   const [revenueData] = useState({
@@ -130,648 +205,323 @@ function AdminDashboard() {
       riskScore: 65,
       factors: ['Recent grade drop', 'Late submissions'],
       recommendation: 'Schedule academic counseling'
-    },
-    { 
-      id: 3, 
-      studentName: 'Mike Johnson', 
-      riskLevel: 'low', 
-      riskScore: 25,
-      factors: ['Consistent performance', 'Good engagement'],
-      recommendation: 'Monitor progress'
     }
-  ])
-
-  const [recentActivity] = useState([
-    { id: 1, type: 'user', message: 'New student registration: John Doe', time: '2 mins ago', severity: 'info' },
-    { id: 2, type: 'system', message: 'System backup completed successfully', time: '15 mins ago', severity: 'success' },
-    { id: 3, type: 'security', message: 'Failed login attempt detected', time: '1 hour ago', severity: 'warning' },
-    { id: 4, type: 'course', message: 'New course submitted for approval', time: '2 hours ago', severity: 'info' }
   ])
 
   const [userManagement] = useState([
     { id: 1, name: 'John Doe', email: 'john@example.com', role: 'student', status: 'active', lastLogin: '2 hours ago' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'instructor', status: 'active', lastLogin: '1 day ago' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'student', status: 'suspended', lastLogin: '3 days ago' },
-    { id: 4, name: 'Sarah Wilson', email: 'sarah@example.com', role: 'admin', status: 'active', lastLogin: '30 mins ago' }
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'instructor', status: 'active', lastLogin: '1 day ago' }
   ])
 
-  const [systemAlerts] = useState([
-    { id: 1, type: 'critical', title: 'High Server Load', message: 'CPU usage at 85%', time: '5 mins ago' },
-    { id: 2, type: 'warning', title: 'Storage Warning', message: 'Disk space at 80% capacity', time: '1 hour ago' },
-    { id: 3, type: 'info', title: 'Update Available', message: 'System update v2.1.0 ready', time: '3 hours ago' }
+  const [topCourses] = useState([
+    { id: 1, name: 'Web Development Fundamentals', instructor: 'Dr. Sarah Johnson', students: 234, rating: 4.8 },
+    { id: 2, name: 'Data Structures & Algorithms', instructor: 'Prof. Michael Chen', students: 189, rating: 4.7 }
   ])
 
-  const getSeverityColor = (severity) => {
-    switch(severity) {
-      case 'critical': return 'text-red-600 bg-red-100'
-      case 'warning': return 'text-yellow-600 bg-yellow-100'
-      case 'success': return 'text-green-600 bg-green-100'
-      case 'info': return 'text-blue-600 bg-blue-100'
-      default: return 'text-gray-600 bg-gray-100'
-    }
-  }
+  const [systemPerformance] = useState({
+    cpu: 45,
+    memory: 67,
+    storage: 82,
+    network: 23
+  })
 
   const getStatusColor = (status) => {
     switch(status) {
       case 'active': return 'text-green-600 bg-green-100'
       case 'suspended': return 'text-red-600 bg-red-100'
-      case 'pending': return 'text-yellow-600 bg-yellow-100'
       default: return 'text-gray-600 bg-gray-100'
     }
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container-custom">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-[#011F5B]">Admin Dashboard</h1>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Shield size={16} />
-                <span>System Administrator</span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <header className="bg-white shadow-lg border-b border-gray-200/50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between py-6">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#011F5B] via-[#00416A] to-[#011F5B] rounded-xl flex items-center justify-center shadow-lg">
+                  <Shield className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold text-[#011F5B] tracking-tight">
+                    {userRole === 'admin' ? 'Admin Dashboard' : 'Student Dashboard'}
+                  </h1>
+                  <p className="text-sm text-gray-600 font-medium">
+                    {userRole === 'admin' ? 'EduConnect System Administration' : 'EduConnect Learning Portal'}
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <button 
-                onClick={() => setShowAICompanion(true)}
-                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
-                title="AI Assistant"
-              >
+            <div className="flex items-center gap-3">
+              <button onClick={() => setShowAICompanion(true)} className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
                 <Bot size={20} />
               </button>
-              <button 
-                onClick={() => setShowAccessibility(true)}
-                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
-                title="Accessibility"
-              >
+              <button onClick={() => setShowAccessibility(true)} className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
                 <Accessibility size={20} />
               </button>
-              <button 
-                onClick={() => setShowDocumentGenerator(true)}
-                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
-                title="Document Generator"
-              >
+              <button onClick={() => setShowDocumentGenerator(true)} className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
                 <FileText size={20} />
               </button>
-              <button 
-                onClick={() => setShowAnalytics(true)}
-                className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors"
-                title="Analytics Dashboard"
-              >
+              <button onClick={() => setShowAnalytics(true)} className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
                 <BarChart3 size={20} />
               </button>
               <div className="relative">
-                <button className="p-2 text-gray-600 hover:text-[#011F5B] transition-colors">
+                <button className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
                   <Bell size={20} />
                 </button>
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                <span className="absolute top-2 right-2 w-3 h-3 bg-[#FF6B35] rounded-full animate-pulse"></span>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container-custom py-6 flex gap-6">
-        {/* Sidebar */}
-        <div className="w-64 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-sm p-4">
-            <h3 className="font-semibold text-gray-900 mb-4">Admin Tools</h3>
-            
-            {/* System Management Section */}
-            <div className="mb-6">
-              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">System Management</h4>
-              <div className="space-y-2">
-                <button 
-                  onClick={() => setActiveTab('overview')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'overview' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Home className="w-4 h-4" />
-                  <span className="text-sm">Overview</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('users')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'users' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Users className="w-4 h-4" />
-                  <span className="text-sm">User Management</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('analytics')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'analytics' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <BarChart3 className="w-4 h-4" />
-                  <span className="text-sm">Analytics</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('financial')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'financial' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <DollarSign className="w-4 h-4" />
-                  <span className="text-sm">Financial</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Academic Management Section */}
-            <div className="mb-6">
-              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Academic Management</h4>
-              <div className="space-y-2">
-                <button 
-                  onClick={() => setActiveTab('courses')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'courses' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span className="text-sm">Courses</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('instructors')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'instructors' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <GraduationCap className="w-4 h-4" />
-                  <span className="text-sm">Instructors</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('exams')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'exams' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <AlertCircle className="w-4 h-4" />
-                  <span className="text-sm">Exams</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('grades')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'grades' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Award className="w-4 h-4" />
-                  <span className="text-sm">Grades</span>
-                </button>
-              </div>
-            </div>
-
-            {/* System Administration Section */}
-            <div className="mb-6">
-              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">System Administration</h4>
-              <div className="space-y-2">
-                <button 
-                  onClick={() => setActiveTab('security')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'security' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span className="text-sm">Security</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('settings')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'settings' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Settings2 className="w-4 h-4" />
-                  <span className="text-sm">Settings</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('logs')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'logs' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <FileText className="w-4 h-4" />
-                  <span className="text-sm">System Logs</span>
-                </button>
-                <button 
-                  onClick={() => setActiveTab('backups')}
-                  className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
-                    activeTab === 'backups' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Archive className="w-4 h-4" />
-                  <span className="text-sm">Backups</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Quick Actions Section */}
-            <div>
-              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Quick Actions</h4>
-              <div className="space-y-2">
-                <button className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700">
-                  <UserPlus className="w-4 h-4" />
-                  <span className="text-sm">Add User</span>
-                </button>
-                <button className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700">
-                  <RefreshCw className="w-4 h-4" />
-                  <span className="text-sm">System Refresh</span>
-                </button>
-                <button className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700">
-                  <Download className="w-4 h-4" />
-                  <span className="text-sm">Export Data</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Overview Tab */}
-        {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* User Statistics */}
-            <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <div className="flex items-center gap-2 text-[#FF6B35] mb-2">
-                  <Users size={20} />
-                  <span className="text-sm font-medium">Total Users</span>
-                </div>
-                <div className="text-2xl font-bold text-[#011F5B]">{systemStats.totalUsers}</div>
-                <p className="text-xs text-gray-500 mt-1">+12% this month</p>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <div className="flex items-center gap-2 text-[#FF6B35] mb-2">
-                  <BookOpen size={20} />
-                  <span className="text-sm font-medium">Active Students</span>
-                </div>
-                <div className="text-2xl font-bold text-[#011F5B]">{systemStats.activeStudents}</div>
-                <p className="text-xs text-gray-500 mt-1">85% retention</p>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <div className="flex items-center gap-2 text-[#FF6B35] mb-2">
-                  <DollarSign size={20} />
-                  <span className="text-sm font-medium">Revenue</span>
-                </div>
-                <div className="text-2xl font-bold text-[#011F5B]">${revenueData.totalRevenue.toLocaleString()}</div>
-                <p className="text-xs text-green-600 mt-1">{revenueData.growthRate}</p>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <div className="flex items-center gap-2 text-[#FF6B35] mb-2">
-                  <Activity size={20} />
-                  <span className="text-sm font-medium">Uptime</span>
-                </div>
-                <div className="text-2xl font-bold text-[#011F5B]">{systemStats.systemUptime}</div>
-                <p className="text-xs text-gray-500 mt-1">Last 30 days</p>
-              </div>
-            </div>
-
-            {/* Revenue Analytics */}
-            <div className="bg-white rounded-lg shadow-sm">
-              <div className="p-4 border-b">
-                <h3 className="font-semibold text-[#011F5B] flex items-center gap-2">
-                  <DollarSign size={18} />
-                  Revenue Analytics
-                </h3>
-              </div>
-              <div className="p-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Monthly Revenue</span>
-                    <span className="font-semibold">${revenueData.monthlyRevenue.toLocaleString()}</span>
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <aside className="w-full lg:w-72 flex-shrink-0">
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-200/50 overflow-hidden">
+              <div className="p-6 bg-gradient-to-r from-[#011F5B] to-[#00416A] text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                    {userRole === 'admin' ? <Shield className="w-5 h-5 text-white" /> : <GraduationCap className="w-5 h-5 text-white" />}
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Pending Payments</span>
-                    <span className="font-semibold text-yellow-600">${revenueData.pendingPayments.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Avg Transaction</span>
-                    <span className="font-semibold">${revenueData.avgTransactionValue}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Growth Rate</span>
-                    <span className="font-semibold text-green-600">{revenueData.growthRate}</span>
-                  </div>
+                  <h3 className="font-bold text-lg">{userRole === 'admin' ? 'Admin Tools' : 'Student Tools'}</h3>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <div className="space-y-2">
+                  <button onClick={() => setActiveTab('overview')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'overview' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <Home className="w-5 h-5" />
+                    <span className="text-sm font-semibold">Overview</span>
+                  </button>
+                  <button onClick={() => setActiveTab('courses')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'courses' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <BookOpen className="w-5 h-5" />
+                    <span className="text-sm font-semibold">Courses</span>
+                  </button>
+                  <button onClick={() => setActiveTab('users')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'users' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <Users className="w-5 h-5" />
+                    <span className="text-sm font-semibold">Users</span>
+                  </button>
+                  <button onClick={() => setActiveTab('analytics')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'analytics' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <BarChart3 className="w-5 h-5" />
+                    <span className="text-sm font-semibold">Analytics</span>
+                  </button>
                 </div>
               </div>
             </div>
+          </aside>
 
-            {/* AI Risk Predictions */}
-            <div className="lg:col-span-2 bg-white rounded-lg shadow-sm">
-              <div className="p-4 border-b">
-                <h3 className="font-semibold text-[#011F5B] flex items-center gap-2">
-                  <Brain size={18} />
-                  AI Risk Predictions
-                </h3>
-              </div>
-              <div className="p-4 space-y-3">
-                {aiPredictions.map((prediction) => (
-                  <div key={prediction.id} className="border rounded-lg p-4">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h4 className="font-semibold text-[#011F5B]">{prediction.studentName}</h4>
-                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            prediction.riskLevel === 'high' ? 'bg-red-100 text-red-600' :
-                            prediction.riskLevel === 'medium' ? 'bg-yellow-100 text-yellow-600' :
-                            'bg-green-100 text-green-600'
-                          }`}>
-                            {prediction.riskLevel} Risk ({prediction.riskScore}%)
-                          </span>
+          <main className="flex-1 min-w-0">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200/50 p-6">
+              {activeTab === 'overview' && (
+                <div className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="p-6 rounded-2xl shadow-lg border border-gray-200/50 bg-gradient-to-br from-gray-50 to-white">
+                      <div className="flex items-center gap-3 text-[#FF6B35] mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#FF6B35]/20 to-[#FF6B35]/10 rounded-xl flex items-center justify-center">
+                          <BookOpen size={24} />
                         </div>
-                        <div className="mb-2">
-                          <p className="text-sm text-gray-600 mb-1">Risk Factors:</p>
-                          <ul className="text-xs text-gray-500 list-disc list-inside">
-                            {prediction.factors.map((factor, idx) => (
-                              <li key={idx}>{factor}</li>
-                            ))}
-                          </ul>
+                        <span className="text-sm font-semibold">Active Courses</span>
+                      </div>
+                      <div className="text-3xl font-bold text-[#011F5B] mb-2">{studentData.activeCourses}</div>
+                      <p className="text-sm text-blue-600 font-medium">On track</p>
+                    </div>
+                    
+                    <div className="p-6 rounded-2xl shadow-lg border border-gray-200/50 bg-white">
+                      <div className="flex items-center gap-3 text-[#FF6B35] mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#FF6B35]/20 to-[#FF6B35]/10 rounded-xl flex items-center justify-center">
+                          <Target size={24} />
                         </div>
-                        <p className="text-sm text-blue-600 font-medium">{prediction.recommendation}</p>
+                        <span className="text-sm font-semibold">Avg Progress</span>
                       </div>
-                      <div className="flex gap-2">
-                        <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
-                          View Profile
-                        </button>
-                        <button className="px-3 py-1 border border-gray-300 text-gray-700 text-sm rounded-lg hover:bg-gray-50">
-                          Take Action
-                        </button>
+                      <div className="text-3xl font-bold text-[#011F5B] mb-2">{studentData.avgProgress}%</div>
+                      <p className="text-sm text-green-600 font-medium">Above average</p>
+                    </div>
+                    
+                    <div className="p-6 rounded-2xl shadow-lg border border-gray-200/50 bg-white">
+                      <div className="flex items-center gap-3 text-[#FF6B35] mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#FF6B35]/20 to-[#FF6B35]/10 rounded-xl flex items-center justify-center">
+                          <Clock size={24} />
+                        </div>
+                        <span className="text-sm font-semibold">Pending</span>
                       </div>
+                      <div className="text-3xl font-bold text-[#011F5B] mb-2">{studentData.pendingAssignments}</div>
+                      <p className="text-sm text-yellow-600 font-medium">Need attention</p>
+                    </div>
+                    
+                    <div className="p-6 rounded-2xl shadow-lg border border-gray-200/50 bg-white">
+                      <div className="flex items-center gap-3 text-[#FF6B35] mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#FF6B35]/20 to-[#FF6B35]/10 rounded-xl flex items-center justify-center">
+                          <Award size={24} />
+                        </div>
+                        <span className="text-sm font-semibold">Overall Grade</span>
+                      </div>
+                      <div className="text-3xl font-bold text-[#011F5B] mb-2">{studentData.overallGrade}</div>
+                      <p className="text-sm text-green-600 font-medium">Good standing</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* System Notifications */}
-            <div className="bg-white rounded-lg shadow-sm">
-              <div className="p-4 border-b">
-                <h3 className="font-semibold text-[#011F5B] flex items-center gap-2">
-                  <Bell size={18} />
-                  System Notifications
-                </h3>
-              </div>
-              <div className="p-4 space-y-3">
-                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <AlertCircle size={16} className="text-red-600" />
-                    <span className="font-medium text-red-800">Critical</span>
-                  </div>
-                  <p className="text-sm text-red-700">5 high-risk students require immediate attention</p>
-                </div>
-                <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <AlertCircle size={16} className="text-yellow-600" />
-                    <span className="font-medium text-yellow-800">Warning</span>
-                  </div>
-                  <p className="text-sm text-yellow-700">12 course approvals pending</p>
-                </div>
-                <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Info size={16} className="text-blue-600" />
-                    <span className="font-medium text-blue-800">Info</span>
-                  </div>
-                  <p className="text-sm text-blue-700">Monthly report ready for review</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Users Tab */}
-        {activeTab === 'users' && (
-          <div className="bg-white rounded-lg shadow-sm">
-            <div className="p-4 border-b">
-              <h3 className="font-semibold text-[#011F5B] flex items-center gap-2">
-                <Users size={18} />
-                User Management
-              </h3>
-            </div>
-            <div className="p-4">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Name</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Email</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Role</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Status</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Last Login</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {userManagement.map((user) => (
-                      <tr key={user.id} className="border-b hover:bg-gray-50">
-                        <td className="py-3 px-4 text-sm">{user.name}</td>
-                        <td className="py-3 px-4 text-sm">{user.email}</td>
-                        <td className="py-3 px-4 text-sm capitalize">{user.role}</td>
-                        <td className="py-3 px-4">
-                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(user.status)}`}>
-                            {user.status}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 text-sm text-gray-600">{user.lastLogin}</td>
-                        <td className="py-3 px-4">
-                          <div className="flex gap-2">
-                            <button className="text-blue-600 hover:text-blue-800 text-sm">Edit</button>
-                            <button className="text-red-600 hover:text-red-800 text-sm">Suspend</button>
+                  
+                  <div className="bg-white rounded-2xl shadow-xl border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 border-b">
+                      <h3 className="font-bold text-[#011F5B] text-lg">My Active Courses</h3>
+                    </div>
+                    <div className="p-6">
+                      <div className="space-y-4">
+                        {activeCourses.map((course) => (
+                          <div key={course.id} className="border border-gray-200 rounded-xl p-4">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="w-12 h-12 bg-gradient-to-br from-[#011F5B]/20 to-[#00416A]/20 rounded-lg flex items-center justify-center">
+                                <BookOpen className="w-6 h-6 text-[#011F5B]" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-gray-900 text-sm">{course.title}</h4>
+                                <p className="text-xs text-gray-600">{course.instructor}</p>
+                              </div>
+                            </div>
+                            <div className="mb-3">
+                              <div className="flex justify-between text-xs mb-1">
+                                <span className="text-gray-600">Progress</span>
+                                <span className="font-medium text-[#011F5B]">{course.progress}%</span>
+                              </div>
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-gradient-to-r from-[#011F5B] to-[#00416A] h-2 rounded-full" style={{width: `${course.progress}%`}}></div>
+                              </div>
+                            </div>
+                            <div className="flex justify-between text-xs">
+                              <span className="text-gray-600">Grade: <span className="font-medium text-green-600">{course.grade}</span></span>
+                              <span className="text-gray-600">{course.nextClass}</span>
+                            </div>
                           </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Courses Tab */}
-        {activeTab === 'courses' && (
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="font-semibold text-[#011F5B] mb-4">Course Management</h3>
-            <p className="text-gray-600 mb-4">Manage courses, instructors, and curriculum.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-gray-900 mb-2">Total Courses</h4>
-                <p className="text-2xl font-bold text-[#011F5B]">{systemStats.totalCourses}</p>
-                <p className="text-sm text-gray-600">Active courses in system</p>
-              </div>
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-gray-900 mb-2">Pending Approval</h4>
-                <p className="text-2xl font-bold text-[#FF6B35]">{systemStats.pendingApprovals}</p>
-                <p className="text-sm text-gray-600">Courses awaiting review</p>
-              </div>
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-medium text-gray-900 mb-2">Total Instructors</h4>
-                <p className="text-2xl font-bold text-[#011F5B]">{systemStats.totalInstructors}</p>
-                <p className="text-sm text-gray-600">Active instructors</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Analytics Tab */}
-        {activeTab === 'analytics' && (
-          <div>
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-[#011F5B]">System Analytics</h2>
-              <div className="flex gap-3">
-                <button 
-                  onClick={() => setShowAnalytics(true)}
-                  className="px-4 py-2 bg-[#011F5B] text-white rounded-lg hover:bg-[#003262] transition-colors"
-                >
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Open Analytics
-                </button>
-              </div>
-            </div>
-            <AnalyticsDashboard userRole="admin" />
-          </div>
-        )}
-
-        {/* System Tab */}
-        {activeTab === 'system' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="font-semibold text-[#011F5B] mb-4">System Information</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Version</span>
-                  <span className="font-medium">EduConnect v2.0.1</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Environment</span>
-                  <span className="font-medium">Production</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Last Backup</span>
-                  <span className="font-medium">2 hours ago</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Database Size</span>
-                  <span className="font-medium">2.4 GB</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="font-semibold text-[#011F5B] mb-4">Performance Metrics</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Response Time</span>
-                  <span className="font-medium text-green-600">120ms</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Error Rate</span>
-                  <span className="font-medium text-green-600">0.1%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Active Connections</span>
-                  <span className="font-medium">1,234</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Cache Hit Rate</span>
-                  <span className="font-medium text-green-600">94%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Documents Tab */}
-        {activeTab === 'documents' && (
-          <div>
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-[#011F5B]">Document Management</h2>
-              <div className="flex gap-3">
-                <button 
-                  onClick={() => setShowDocumentGenerator(true)}
-                  className="px-4 py-2 bg-[#011F5B] text-white rounded-lg hover:bg-[#003262] transition-colors"
-                >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Generate Documents
-                </button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <DocumentGenerator documentType="report" />
-              <DocumentGenerator documentType="certificate" />
-            </div>
-          </div>
-        )}
-
-        {/* Alerts Tab */}
-        {activeTab === 'alerts' && (
-          <div className="bg-white rounded-lg shadow-sm">
-            <div className="p-4 border-b">
-              <h3 className="font-semibold text-[#011F5B] flex items-center gap-2">
-                <AlertCircle size={18} />
-                System Alerts
-              </h3>
-            </div>
-            <div className="p-4 space-y-4">
-              {systemAlerts.map((alert) => (
-                <div key={alert.id} className="border rounded-lg p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-semibold text-[#011F5B]">{alert.title}</h4>
-                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${getSeverityColor(alert.type)}`}>
-                          {alert.type}
-                        </span>
+                        ))}
                       </div>
-                      <p className="text-sm text-gray-600 mb-2">{alert.message}</p>
-                      <p className="text-xs text-gray-500">{alert.time}</p>
                     </div>
-                    <div className="flex gap-2">
-                      <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
-                        View Details
-                      </button>
-                      <button className="px-3 py-1 border border-gray-300 text-gray-700 text-sm rounded-lg hover:bg-gray-50">
-                        Dismiss
-                      </button>
+                  </div>
+                  
+                  <div className="bg-white rounded-2xl shadow-xl border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 border-b">
+                      <h3 className="font-bold text-[#011F5B] text-lg">Upcoming Assignments</h3>
+                    </div>
+                    <div className="p-6">
+                      <div className="space-y-3">
+                        {upcomingAssignments.map((assignment) => (
+                          <div key={assignment.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                            <div className="flex items-center gap-4">
+                              <div className={`w-3 h-3 rounded-full ${assignment.priority === 'high' ? 'bg-red-500' : assignment.priority === 'medium' ? 'bg-yellow-500' : 'bg-green-500'}`}></div>
+                              <div>
+                                <h4 className="font-semibold text-gray-900">{assignment.title}</h4>
+                                <p className="text-sm text-gray-600">{assignment.course}</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-sm font-medium text-gray-900">{assignment.dueDate}</p>
+                              <p className="text-xs text-gray-600">{assignment.dueTime}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
+              )}
+
+              {activeTab === 'users' && (
+                <div>
+                  <h3 className="font-semibold text-[#011F5B] mb-4">User Management</h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-gray-200">
+                          <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Name</th>
+                          <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Email</th>
+                          <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Role</th>
+                          <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {userManagement.map((user) => (
+                          <tr key={user.id} className="border-b border-gray-100">
+                            <td className="py-3 px-4 text-sm">{user.name}</td>
+                            <td className="py-3 px-4 text-sm">{user.email}</td>
+                            <td className="py-3 px-4 text-sm">{user.role}</td>
+                            <td className="py-3 px-4">
+                              <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(user.status)}`}>
+                                {user.status}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'courses' && (
+                <div>
+                  <h3 className="font-semibold text-[#011F5B] mb-4">Course Management</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {topCourses.map((course) => (
+                      <div key={course.id} className="border border-gray-200 rounded-lg p-4">
+                        <h4 className="font-semibold text-gray-900">{course.name}</h4>
+                        <p className="text-sm text-gray-600">{course.instructor}</p>
+                        <div className="flex items-center gap-4 mt-2">
+                          <span className="text-sm text-gray-600">{course.students} students</span>
+                          <div className="flex items-center gap-1">
+                            <Star size={14} className="text-yellow-500" />
+                            <span className="text-sm">{course.rating}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'analytics' && (
+                <div>
+                  <h3 className="font-semibold text-[#011F5B] mb-4">Analytics Dashboard</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-4 border border-gray-200 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-4">System Performance</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm text-gray-600">CPU Usage</span>
+                            <span className="text-sm font-medium">{systemPerformance.cpu}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="bg-green-500 h-2 rounded-full" style={{width: `${systemPerformance.cpu}%`}}></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm text-gray-600">Memory</span>
+                            <span className="text-sm font-medium">{systemPerformance.memory}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="bg-yellow-500 h-2 rounded-full" style={{width: `${systemPerformance.memory}%`}}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          </main>
+        </div>
       </div>
 
-      {/* AI Companion */}
-      <AICompanion
-        isOpen={showAICompanion}
-        onClose={() => setShowAICompanion(false)}
-      />
-
-      {/* Accessibility Panel */}
-      <AccessibilityPanel
-        isOpen={showAccessibility}
-        onClose={() => setShowAccessibility(false)}
-      />
-
-      {/* Analytics Dashboard */}
-      <AnalyticsDashboard
-        isOpen={showAnalytics}
-        onClose={() => setShowAnalytics(false)}
-        userRole="admin"
-      />
-
-      {/* Document Generator */}
-      <DocumentGenerator
-        isOpen={showDocumentGenerator}
-        onClose={() => setShowDocumentGenerator(false)}
-      />
+      <AICompanion isOpen={showAICompanion} onClose={() => setShowAICompanion(false)} />
+      <AccessibilityPanel isOpen={showAccessibility} onClose={() => setShowAccessibility(false)} />
+      <AnalyticsDashboard isOpen={showAnalytics} onClose={() => setShowAnalytics(false)} userRole={userRole} />
+      <DocumentGenerator isOpen={showDocumentGenerator} onClose={() => setShowDocumentGenerator(false)} />
     </div>
   )
 }
 
-// Wrapper component with NotificationProvider
 const AdminDashboardWrapper = () => (
   <NotificationProvider>
     <AdminDashboard />
