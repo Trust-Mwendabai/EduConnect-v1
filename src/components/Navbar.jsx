@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import NotificationDropdown from './notifications/NotificationDropdown'
+import { useNotifications } from './notifications/NotificationContext'
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const navigate = useNavigate()
+  
+  const { notifications, markAsRead, deleteNotification } = useNotifications()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +23,10 @@ function Navbar() {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const handleViewAllNotifications = () => {
+    navigate('/notifications')
   }
 
   return (
@@ -107,6 +116,12 @@ function Navbar() {
           </div>
 
           <div className="hidden md:flex gap-4 items-center">
+            <NotificationDropdown 
+              notifications={notifications}
+              onMarkAsRead={markAsRead}
+              onDelete={deleteNotification}
+              onViewAll={handleViewAllNotifications}
+            />
             <Link to="/login" className="text-white font-medium hover:text-[#FF6B35] transition-colors duration-200" style={{ fontFamily: 'var(--font-heading)' }}>
               Login
             </Link>

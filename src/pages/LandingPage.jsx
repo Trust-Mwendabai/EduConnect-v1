@@ -1,7 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-import Features from '../components/Features'
+import SystemOverview from '../components/SystemOverview'
+import VendorPartners from '../components/VendorPartners'
+import LearningJourney from '../components/LearningJourney'
+import PlatformFeatures from '../components/PlatformFeatures'
 import Testimonials from '../components/Testimonials'
 import Footer from '../components/Footer'
 
@@ -10,7 +13,10 @@ function LandingPage() {
     <div className="landing-page">
       <Navbar />
       <Hero />
-      <Features />
+      <SystemOverview />
+      <LearningJourney />
+      <VendorPartners />
+      <PlatformFeatures />
       <Testimonials />
       <Footer />
     </div>

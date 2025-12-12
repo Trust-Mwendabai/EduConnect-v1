@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { NotificationProvider } from './components/notifications/NotificationContext'
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
@@ -39,47 +40,49 @@ import FeaturesDemoPage from './pages/FeaturesDemoPage'
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/dashboard" element={<AdminDashboardPage />} />
-        <Route path="/assignments" element={<AssignmentsPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/courses" element={<CoursesPage />} />
-        <Route path="/features" element={<FeaturesPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/marketplace" element={<MarketplacePage />} />
-        <Route path="/guardian" element={<GuardianPortalPage />} />
-        <Route path="/lms" element={<LMSDashboardPage />} />
-        <Route path="/admin" element={<AdminDashboardPage />} />
-        <Route path="/vendor" element={<VendorDashboardPage />} />
-        <Route path="/vendor/upload" element={<VendorUploadPage />} />
-        <Route path="/classroom/:id" element={<VirtualClassroomPage />} />
-        <Route path="/timetable" element={<TimetablePage />} />
-        <Route path="/exams" element={<OnlineExamsPage />} />
-        <Route path="/exams/:examId" element={<OnlineExamsPage />} />
-        <Route path="/course-outline" element={<CourseOutlinePage />} />
-        <Route path="/study-materials" element={<StudyMaterialsPage />} />
-        <Route path="/study-room/:roomId?" element={<OnlineStudyRoomPage />} />
-        <Route path="/notifications" element={<NotificationsPage />} />
-        <Route path="/messages" element={<MessagesPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/cookies" element={<CookiePolicyPage />} />
-        <Route path="/help" element={<HelpPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/careers" element={<CareersPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/verify-email" element={<EmailVerificationPage />} />
-        <Route path="/demo" element={<FeaturesDemoPage />} />
-      </Routes>
-    </Router>
+    <NotificationProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/dashboard" element={<AdminDashboardPage />} />
+          <Route path="/assignments" element={<AssignmentsPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/marketplace" element={<MarketplacePage />} />
+          <Route path="/guardian" element={<GuardianPortalPage />} />
+          <Route path="/lms" element={<LMSDashboardPage />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/vendor" element={<VendorDashboardPage />} />
+          <Route path="/vendor/upload" element={<VendorUploadPage />} />
+          <Route path="/classroom/:id" element={<VirtualClassroomPage />} />
+          <Route path="/timetable" element={<TimetablePage />} />
+          <Route path="/exams" element={<OnlineExamsPage />} />
+          <Route path="/exams/:examId" element={<OnlineExamsPage />} />
+          <Route path="/course-outline" element={<CourseOutlinePage />} />
+          <Route path="/study-materials" element={<StudyMaterialsPage />} />
+          <Route path="/study-room/:roomId?" element={<OnlineStudyRoomPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/cookies" element={<CookiePolicyPage />} />
+          <Route path="/help" element={<HelpPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/verify-email" element={<EmailVerificationPage />} />
+          <Route path="/demo" element={<FeaturesDemoPage />} />
+        </Routes>
+      </Router>
+    </NotificationProvider>
   )
 }
 

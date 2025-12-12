@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Features from '../components/Features'
 import { Target, Users, Smartphone, Award, MessageCircle, TrendingUp, Video, FileText, Globe, Shield, Zap, Heart } from 'lucide-react'
 
 const mainFeatures = [
@@ -105,6 +106,9 @@ function FeaturesPage() {
           </div>
         </div>
       </section>
+
+      {/* Core Features Component */}
+      <Features />
 
       {/* Additional Features */}
       <section className="section-padding bg-[--color-light-blue]">
