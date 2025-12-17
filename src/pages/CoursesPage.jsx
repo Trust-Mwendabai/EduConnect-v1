@@ -14,7 +14,7 @@ const coursesData = [
     students: 45000,
     rating: 4.8,
     price: 89.99,
-    image: 'https://picsum.photos/400/300?random=10'
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop&auto=format'
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const coursesData = [
     students: 38000,
     rating: 4.9,
     price: 94.99,
-    image: 'https://picsum.photos/400/300?random=11'
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=300&fit=crop&auto=format'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const coursesData = [
     students: 28000,
     rating: 4.7,
     price: 79.99,
-    image: 'https://picsum.photos/400/300?random=12'
+    image: 'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400&h=300&fit=crop&auto=format'
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const coursesData = [
     students: 52000,
     rating: 4.8,
     price: 84.99,
-    image: 'https://picsum.photos/400/300?random=13'
+    image: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=300&fit=crop&auto=format'
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ const coursesData = [
     students: 31000,
     rating: 4.6,
     price: 74.99,
-    image: 'https://picsum.photos/400/300?random=14'
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop&auto=format'
   },
   {
     id: 6,
@@ -74,7 +74,7 @@ const coursesData = [
     students: 42000,
     rating: 4.9,
     price: 89.99,
-    image: 'https://picsum.photos/400/300?random=15'
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop&auto=format'
   }
 ]
 

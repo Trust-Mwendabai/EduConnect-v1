@@ -37,6 +37,11 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import EmailVerificationPage from './pages/EmailVerificationPage'
 import FeaturesDemoPage from './pages/FeaturesDemoPage'
+import LecturerDashboardPage from './pages/LecturerDashboardPage'
+import LecturerCourseManagementPage from './pages/LecturerCourseManagementPage'
+import LecturerAssignmentCreationPage from './pages/LecturerAssignmentCreationPage'
+import LecturerMarkingFeedbackPage from './pages/LecturerMarkingFeedbackPage'
+import LecturerAttendancePage from './pages/LecturerAttendancePage'
 
 function App() {
   return (
@@ -80,6 +85,11 @@ function App() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/verify-email" element={<EmailVerificationPage />} />
           <Route path="/demo" element={<FeaturesDemoPage />} />
+          <Route path="/lecturer/dashboard" element={<LecturerDashboardPage />} />
+          <Route path="/lecturer/courses" element={<LecturerCourseManagementPage />} />
+          <Route path="/lecturer/assignments" element={<LecturerAssignmentCreationPage />} />
+          <Route path="/lecturer/grading" element={<LecturerMarkingFeedbackPage />} />
+          <Route path="/lecturer/attendance" element={<LecturerAttendancePage />} />
         </Routes>
       </Router>
     </NotificationProvider>

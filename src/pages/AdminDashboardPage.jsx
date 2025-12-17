@@ -42,7 +42,100 @@ import {
   UserPlus,
   Settings2,
   Tag,
-  ArrowLeft
+  ArrowLeft,
+  Zap,
+  Database,
+  Globe,
+  Lock,
+  Mail,
+  Phone,
+  MapPin,
+  Search,
+  ChevronDown,
+  MoreVertical,
+  Cpu,
+  HardDrive,
+  Wifi,
+  Server,
+  Terminal,
+  Key,
+  Fingerprint,
+  ShieldAlert,
+  FileSearch,
+  PieChart,
+  LineChart,
+  TrendingDown,
+  UserMinus,
+  Ban,
+  AlertOctagon,
+  Clock4,
+  CalendarDays,
+  FileSpreadsheet,
+  Printer,
+  Share2,
+  Link,
+  ExternalLink,
+  Copy,
+  MailOpen,
+  MessageSquare,
+  Send,
+  Paperclip,
+  Smile,
+  Reply,
+  Forward,
+  Bookmark,
+  Flag,
+  ThumbsUp,
+  ThumbsDown,
+  Heart,
+  SortAsc,
+  SortDesc,
+  Grid,
+  List,
+  Maximize2,
+  Minimize2,
+  RotateCcw,
+  Save,
+  Undo,
+  Redo,
+  Scissors,
+  Clipboard,
+  CheckSquare,
+  Square,
+  Radio,
+  ToggleLeft,
+  ToggleRight,
+  Volume2,
+  VolumeX,
+  WifiOff,
+  Battery,
+  BatteryLow,
+  BatteryCharging,
+  Thermometer,
+  Wind,
+  Droplets,
+  Sun,
+  Moon,
+  Cloud,
+  CloudRain,
+  CloudSnow,
+  ZapOff,
+  Power,
+  PowerOff,
+  LogOut,
+  LogIn,
+  User,
+  UserCircle,
+  Users2,
+  ShieldOff,
+  Unlock,
+  EyeOff,
+  Info,
+  MoreHorizontal,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  Menu
 } from 'lucide-react'
 
 // Mock components
@@ -121,6 +214,101 @@ function AdminDashboard() {
   const [userRole] = useState('student')
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   
+  // Advanced Analytics Data
+  const [advancedAnalytics] = useState({
+    learningPatterns: {
+      averageCompletionTime: 45,
+      peakLearningHours: '2:00 PM - 4:00 PM',
+      mostActiveDay: 'Tuesday',
+      averageSessionDuration: 67,
+      courseEngagementScore: 78,
+      dropoutRiskFactors: ['Low forum participation', 'Irregular login patterns'],
+      learningPathEfficiency: 85
+    },
+    performanceMetrics: {
+      averageGradePoint: 3.4,
+      courseCompletionRate: 87,
+      studentSatisfactionScore: 4.2,
+      instructorEffectivenessScore: 88,
+      platformUptime: 99.9,
+      averageResponseTime: 2.3,
+      ticketResolutionRate: 94
+    },
+    predictiveAnalytics: {
+      nextSemesterEnrollment: 15600,
+      projectedRevenue: 3250000,
+      courseDemandForecast: [
+        { course: 'AI & Machine Learning', demand: 'High', projectedStudents: 450 },
+        { course: 'Data Science', demand: 'Very High', projectedStudents: 620 },
+        { course: 'Web Development', demand: 'High', projectedStudents: 380 }
+      ],
+      resourceUtilization: {
+        serverCapacity: 78,
+        storageUsage: 65,
+        bandwidthUtilization: 45,
+        instructorAvailability: 82
+      }
+    }
+  })
+
+  // System Health Monitoring
+  const [systemHealth] = useState({
+    servers: [
+      { id: 'SRV-001', name: 'Main Application Server', status: 'healthy', cpu: 45, memory: 67, disk: 82, uptime: '45 days', lastReboot: '2024-04-01' },
+      { id: 'SRV-002', name: 'Database Server', status: 'healthy', cpu: 32, memory: 78, disk: 91, uptime: '67 days', lastReboot: '2024-03-10' },
+      { id: 'SRV-003', name: 'Media Storage Server', status: 'warning', cpu: 78, memory: 89, disk: 95, uptime: '12 days', lastReboot: '2024-05-03' },
+      { id: 'SRV-004', name: 'Backup Server', status: 'healthy', cpu: 15, memory: 34, disk: 67, uptime: '123 days', lastReboot: '2024-01-15' }
+    ],
+    network: {
+      bandwidth: '1 Gbps',
+      currentUsage: 450,
+      peakUsage: 780,
+      latency: 12,
+      packetLoss: 0.01,
+      connections: 8234,
+      ddosProtection: 'Active'
+    },
+    databases: [
+      { name: 'Primary DB', status: 'healthy', connections: 234, queryTime: 45, size: '2.3 TB', backups: 'Current' },
+      { name: 'Analytics DB', status: 'healthy', connections: 89, queryTime: 23, size: '890 GB', backups: 'Current' },
+      { name: 'Cache DB', status: 'healthy', connections: 567, queryTime: 12, size: '45 GB', backups: 'Current' }
+    ],
+    security: {
+      firewallStatus: 'Active',
+      intrusionAttempts: 23,
+      blockedIPs: 156,
+      sslCertificates: 'Valid',
+      lastSecurityScan: '2024-05-14',
+      vulnerabilities: 2,
+      patchLevel: 'Current'
+    }
+  })
+
+  // Security & Audit Data
+  const [securityAudit] = useState({
+    accessLogs: [
+      { id: 1, user: 'Admin User', action: 'Login', ip: '192.168.1.100', timestamp: '2024-05-15 14:23:45', status: 'Success', location: 'New York, US' },
+      { id: 2, user: 'John Doe', action: 'File Download', ip: '192.168.1.101', timestamp: '2024-05-15 14:22:30', status: 'Success', location: 'London, UK' },
+      { id: 3, user: 'Jane Smith', action: 'Failed Login', ip: '192.168.1.102', timestamp: '2024-05-15 14:21:15', status: 'Failed', location: 'Unknown', attempts: 3 },
+      { id: 4, user: 'Unknown', action: 'SQL Injection Attempt', ip: '203.0.113.45', timestamp: '2024-05-15 14:20:00', status: 'Blocked', location: 'China', blocked: true }
+    ],
+    permissions: [
+      { role: 'Super Admin', users: 3, permissions: ['Full System Access', 'User Management', 'Financial Data', 'System Configuration'] },
+      { role: 'Admin', users: 12, permissions: ['User Management', 'Course Management', 'Reporting', 'Moderation'] },
+      { role: 'Instructor', users: 1850, permissions: ['Course Content', 'Student Grades', 'Communication', 'Analytics'] },
+      { role: 'Student', users: 12450, permissions: ['Course Access', 'Personal Data', 'Communication', 'Resources'] }
+    ],
+    compliance: {
+      gdprCompliance: 98,
+      dataRetentionPolicy: 'Compliant',
+      auditTrail: 'Complete',
+      lastAudit: '2024-05-01',
+      nextAudit: '2024-08-01',
+      criticalFindings: 0,
+      recommendations: 2
+    }
+  })
+
   const [studentData] = useState({
     activeCourses: 3,
     avgProgress: 60,
@@ -478,7 +666,7 @@ function AdminDashboard() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button className="px-4 py-2 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-50 text-gray-700">
+              <button onClick={() => window.location.href = '/'} className="px-4 py-2 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-50 text-gray-700">
                 <Home size={16} />
                 Back to Home
               </button>
@@ -547,6 +735,22 @@ function AdminDashboard() {
                   <button onClick={() => setActiveTab('analytics')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'analytics' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
                     <BarChart3 className="w-5 h-5" />
                     {isSidebarOpen && <span className="text-sm font-semibold">Analytics</span>}
+                  </button>
+                  <button onClick={() => setActiveTab('systemHealth')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'systemHealth' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <Monitor className="w-5 h-5" />
+                    {isSidebarOpen && <span className="text-sm font-semibold">System Health</span>}
+                  </button>
+                  <button onClick={() => setActiveTab('securityAudit')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'securityAudit' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <ShieldAlert className="w-5 h-5" />
+                    {isSidebarOpen && <span className="text-sm font-semibold">Security & Audit</span>}
+                  </button>
+                  <button onClick={() => setActiveTab('reporting')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'reporting' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <FileSpreadsheet className="w-5 h-5" />
+                    {isSidebarOpen && <span className="text-sm font-semibold">Reporting</span>}
+                  </button>
+                  <button onClick={() => setActiveTab('communications')} className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all ${activeTab === 'communications' ? 'bg-gradient-to-r from-[#011F5B]/10 to-[#00416A]/10 text-[#011F5B]' : 'text-gray-700 hover:bg-gray-50'}`}>
+                    <MessageSquare className="w-5 h-5" />
+                    {isSidebarOpen && <span className="text-sm font-semibold">Communications</span>}
                   </button>
                 </div>
               </div>
@@ -1459,32 +1663,339 @@ function AdminDashboard() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Compliance Status */}
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-green-500/10 to-green-600/5 border-b">
+                      <h4 className="font-semibold text-[#011F5B] flex items-center gap-2">
+                        <ShieldCheck className="w-5 h-5 text-green-600" />
+                        Compliance & Audit Status
+                      </h4>
+                    </div>
+                    <div className="p-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="text-center p-4 bg-green-50 rounded-lg">
+                          <div className="text-2xl font-bold text-green-600 mb-2">{securityAudit.compliance.gdprCompliance}%</div>
+                          <p className="text-sm text-gray-600">GDPR Compliance</p>
+                        </div>
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                          <div className="text-2xl font-bold text-blue-600 mb-2">{securityAudit.compliance.criticalFindings}</div>
+                          <p className="text-sm text-gray-600">Critical Findings</p>
+                        </div>
+                        <div className="text-center p-4 bg-purple-50 rounded-lg">
+                          <div className="text-2xl font-bold text-purple-600 mb-2">{securityAudit.compliance.recommendations}</div>
+                          <p className="text-sm text-gray-600">Recommendations</p>
+                        </div>
+                      </div>
+                      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-3 bg-gray-50 rounded-lg flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Last Audit</span>
+                          <span className="font-medium text-[#011F5B]">{securityAudit.compliance.lastAudit}</span>
+                        </div>
+                        <div className="p-3 bg-gray-50 rounded-lg flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Next Audit</span>
+                          <span className="font-medium text-[#011F5B]">{securityAudit.compliance.nextAudit}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
-              {activeTab === 'analytics' && (
-                <div>
-                  <h3 className="font-semibold text-[#011F5B] mb-4">Analytics Dashboard</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-4 border border-gray-200 rounded-lg">
-                      <h4 className="font-medium text-gray-900 mb-4">System Performance</h4>
-                      <div className="space-y-4">
-                        <div>
-                          <div className="flex justify-between mb-2">
-                            <span className="text-sm text-gray-600">CPU Usage</span>
-                            <span className="text-sm font-medium">{systemPerformance.cpu}%</span>
+              {activeTab === 'reporting' && (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-bold text-[#011F5B] text-lg">Advanced Reporting Center</h3>
+                    <div className="flex gap-3">
+                      <button className="px-4 py-2 bg-[#011F5B] text-white rounded-lg flex items-center gap-2 hover:bg-[#00416A]">
+                        <Plus size={16} />
+                        Create Report
+                      </button>
+                      <button className="px-4 py-2 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-50">
+                        <Calendar size={16} />
+                        Schedule
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Report Templates */}
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-blue-500/10 to-blue-600/5 border-b">
+                      <h4 className="font-semibold text-[#011F5B] flex items-center gap-2">
+                        <FileSpreadsheet className="w-5 h-5 text-blue-600" />
+                        Report Templates & Quick Actions
+                      </h4>
+                    </div>
+                    <div className="p-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 text-left">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                              <Users className="w-5 h-5 text-blue-600" />
+                            </div>
+                            <span className="font-medium text-gray-900">User Analytics</span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-green-500 h-2 rounded-full" style={{width: `${systemPerformance.cpu}%`}}></div>
+                          <p className="text-sm text-gray-600">Comprehensive user behavior and engagement analysis</p>
+                        </button>
+                        <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 text-left">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                              <DollarSign className="w-5 h-5 text-green-600" />
+                            </div>
+                            <span className="font-medium text-gray-900">Financial Reports</span>
+                          </div>
+                          <p className="text-sm text-gray-600">Revenue, payments, and financial performance metrics</p>
+                        </button>
+                        <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 text-left">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                              <BookOpen className="w-5 h-5 text-purple-600" />
+                            </div>
+                            <span className="font-medium text-gray-900">Academic Performance</span>
+                          </div>
+                          <p className="text-sm text-gray-600">Student grades, completion rates, and learning outcomes</p>
+                        </button>
+                        <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 text-left">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                              <Activity className="w-5 h-5 text-orange-600" />
+                            </div>
+                            <span className="font-medium text-gray-900">System Usage</span>
+                          </div>
+                          <p className="text-sm text-gray-600">Platform performance, traffic, and resource utilization</p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Scheduled Reports */}
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-green-500/10 to-green-600/5 border-b">
+                      <h4 className="font-semibold text-[#011F5B] flex items-center gap-2">
+                        <CalendarDays className="w-5 h-5 text-green-600" />
+                        Scheduled Reports
+                      </h4>
+                    </div>
+                    <div className="p-6">
+                      <div className="space-y-4">
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center justify-between mb-2">
+                            <h5 className="font-medium text-gray-900">Weekly Performance Summary</h5>
+                            <div className="flex gap-2">
+                              <button className="p-1 text-blue-600 hover:bg-blue-50 rounded">
+                                <Edit size={14} />
+                              </button>
+                              <button className="p-1 text-red-600 hover:bg-red-50 rounded">
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4 text-sm text-gray-600">
+                            <span className="flex items-center gap-1">
+                              <Calendar size={14} />
+                              Every Monday
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Mail size={14} />
+                              Sent to 5 recipients
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <CheckCircle size={14} />
+                              Active
+                            </span>
                           </div>
                         </div>
-                        <div>
-                          <div className="flex justify-between mb-2">
-                            <span className="text-sm text-gray-600">Memory</span>
-                            <span className="text-sm font-medium">{systemPerformance.memory}%</span>
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center justify-between mb-2">
+                            <h5 className="font-medium text-gray-900">Monthly Financial Report</h5>
+                            <div className="flex gap-2">
+                              <button className="p-1 text-blue-600 hover:bg-blue-50 rounded">
+                                <Edit size={14} />
+                              </button>
+                              <button className="p-1 text-red-600 hover:bg-red-50 rounded">
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-yellow-500 h-2 rounded-full" style={{width: `${systemPerformance.memory}%`}}></div>
+                          <div className="flex items-center gap-4 text-sm text-gray-600">
+                            <span className="flex items-center gap-1">
+                              <Calendar size={14} />
+                              1st of each month
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Mail size={14} />
+                              Sent to 3 recipients
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <CheckCircle size={14} />
+                              Active
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'communications' && (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-bold text-[#011F5B] text-lg">Communications Center</h3>
+                    <div className="flex gap-3">
+                      <button className="px-4 py-2 bg-[#011F5B] text-white rounded-lg flex items-center gap-2 hover:bg-[#00416A]">
+                        <Send size={16} />
+                        Send Message
+                      </button>
+                      <button className="px-4 py-2 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-50">
+                        <Users size={16} />
+                        Manage Groups
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Communication Channels */}
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-blue-500/10 to-blue-600/5 border-b">
+                      <h4 className="font-semibold text-[#011F5B] flex items-center gap-2">
+                        <MessageSquare className="w-5 h-5 text-blue-600" />
+                        Communication Channels
+                      </h4>
+                    </div>
+                    <div className="p-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                              <Mail className="w-5 h-5 text-blue-600" />
+                            </div>
+                            <div>
+                              <h5 className="font-medium text-gray-900">Email Campaigns</h5>
+                              <p className="text-sm text-gray-600">2,341 active campaigns</p>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Open Rate</span>
+                              <span className="font-medium text-green-600">68%</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Click Rate</span>
+                              <span className="font-medium text-blue-600">12%</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                              <Bell className="w-5 h-5 text-green-600" />
+                            </div>
+                            <div>
+                              <h5 className="font-medium text-gray-900">Push Notifications</h5>
+                              <p className="text-sm text-gray-600">45,234 sent today</p>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Delivery Rate</span>
+                              <span className="font-medium text-green-600">94%</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Engagement</span>
+                              <span className="font-medium text-blue-600">23%</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                              <MessageSquare className="w-5 h-5 text-purple-600" />
+                            </div>
+                            <div>
+                              <h5 className="font-medium text-gray-900">In-App Messages</h5>
+                              <p className="text-sm text-gray-600">8,921 active conversations</p>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Response Time</span>
+                              <span className="font-medium text-green-600">2.3 min</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Satisfaction</span>
+                              <span className="font-medium text-blue-600">4.6/5</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                              <Phone className="w-5 h-5 text-orange-600" />
+                            </div>
+                            <div>
+                              <h5 className="font-medium text-gray-900">SMS Alerts</h5>
+                              <p className="text-sm text-gray-600">1,234 sent this week</p>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Delivery Rate</span>
+                              <span className="font-medium text-green-600">97%</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-600">Opt-out Rate</span>
+                              <span className="font-medium text-red-600">2.1%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Message Templates */}
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-200/50">
+                    <div className="p-6 bg-gradient-to-r from-purple-500/10 to-purple-600/5 border-b">
+                      <h4 className="font-semibold text-[#011F5B] flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-purple-600" />
+                        Message Templates
+                      </h4>
+                    </div>
+                    <div className="p-6">
+                      <div className="space-y-4">
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center justify-between mb-2">
+                            <h5 className="font-medium text-gray-900">Welcome Email Template</h5>
+                            <div className="flex gap-2">
+                              <button className="p-1 text-blue-600 hover:bg-blue-50 rounded">
+                                <Edit size={14} />
+                              </button>
+                              <button className="p-1 text-green-600 hover:bg-green-50 rounded">
+                                <Copy size={14} />
+                              </button>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">Used for new student onboarding</p>
+                          <div className="flex items-center gap-4 text-sm text-gray-500">
+                            <span>Used 1,234 times</span>
+                            <span>• Last updated 2 days ago</span>
+                          </div>
+                        </div>
+                        <div className="p-4 border border-gray-200 rounded-lg">
+                          <div className="flex items-center justify-between mb-2">
+                            <h5 className="font-medium text-gray-900">Payment Reminder</h5>
+                            <div className="flex gap-2">
+                              <button className="p-1 text-blue-600 hover:bg-blue-50 rounded">
+                                <Edit size={14} />
+                              </button>
+                              <button className="p-1 text-green-600 hover:bg-green-50 rounded">
+                                <Copy size={14} />
+                              </button>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">Automated payment due notifications</p>
+                          <div className="flex items-center gap-4 text-sm text-gray-500">
+                            <span>Used 567 times</span>
+                            <span>• Last updated 1 week ago</span>
                           </div>
                         </div>
                       </div>

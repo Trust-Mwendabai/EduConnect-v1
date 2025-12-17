@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Users, TrendingUp, Calendar, DollarSign, Bell, Award, AlertCircle, CheckCircle, MessageSquare, FileText, Target, Brain, BarChart3, Clock, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, GraduationCap, Settings, LogOut, Menu, ChevronLeft, Search, BookOpen, Video, Mail, Phone, MapPin, Download, Eye, Send } from 'lucide-react'
+import { Users, TrendingUp, Calendar, DollarSign, Bell, Award, AlertCircle, CheckCircle, MessageSquare, FileText, Target, Brain, BarChart3, Clock, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, GraduationCap, Settings, LogOut, Menu, ChevronLeft, Search, BookOpen, Video, Mail, Phone, MapPin, Download, Eye, Send, Plus, Reply, Paperclip, Smile } from 'lucide-react'
 
 export default function GuardianPortalPage() {
   const [selectedStudent, setSelectedStudent] = useState('john')
@@ -11,17 +11,17 @@ export default function GuardianPortalPage() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const students = [
-    { id: '1', name: 'Emma Johnson', grade: '10th Grade', class: 'A', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100' },
-    { id: '2', name: 'Michael Johnson', grade: '7th Grade', class: 'B', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100' }
+    { id: '1', name: 'Emma Johnson', year: '2nd Year', program: 'Computer Science', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face' },
+    { id: '2', name: 'Michael Johnson', year: '1st Year', program: 'Business Administration', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face' }
   ]
 
   const academicPerformance = [
-    { subject: 'Mathematics', grade: 'A', score: 92, trend: 'up', change: '+5%', lastUpdated: '2024-05-15', assignments: 8, completed: 8, nextTest: '2024-05-20' },
-    { subject: 'Science', grade: 'B+', score: 87, trend: 'up', change: '+3%', lastUpdated: '2024-05-14', assignments: 6, completed: 5, nextTest: '2024-05-22' },
-    { subject: 'English', grade: 'A-', score: 90, trend: 'stable', change: '0%', lastUpdated: '2024-05-13', assignments: 10, completed: 9, nextTest: '2024-05-18' },
-    { subject: 'History', grade: 'B', score: 82, trend: 'down', change: '-2%', lastUpdated: '2024-05-12', assignments: 4, completed: 4, nextTest: '2024-05-25' },
-    { subject: 'Art', grade: 'A', score: 95, trend: 'up', change: '+8%', lastUpdated: '2024-05-11', assignments: 3, completed: 3, nextTest: 'N/A' },
-    { subject: 'Physical Education', grade: 'A+', score: 98, trend: 'up', change: '+2%', lastUpdated: '2024-05-10', assignments: 2, completed: 2, nextTest: 'N/A' }
+    { subject: 'Mathematics', grade: 'A', score: 92, trend: 'up', change: '+5%', lastUpdated: '2024-05-15', assignments: 8, completed: 8, nextExam: '2024-05-20' },
+    { subject: 'Science', grade: 'B+', score: 87, trend: 'up', change: '+3%', lastUpdated: '2024-05-14', assignments: 6, completed: 5, nextExam: '2024-05-22' },
+    { subject: 'English', grade: 'A-', score: 90, trend: 'stable', change: '0%', lastUpdated: '2024-05-13', assignments: 10, completed: 9, nextExam: '2024-05-18' },
+    { subject: 'History', grade: 'B', score: 82, trend: 'down', change: '-2%', lastUpdated: '2024-05-12', assignments: 4, completed: 4, nextExam: '2024-05-25' },
+    { subject: 'Art', grade: 'A', score: 95, trend: 'up', change: '+8%', lastUpdated: '2024-05-11', assignments: 3, completed: 3, nextExam: 'N/A' },
+    { subject: 'Physical Education', grade: 'A+', score: 98, trend: 'up', change: '+2%', lastUpdated: '2024-05-10', assignments: 2, completed: 2, nextExam: 'N/A' }
   ]
 
   const attendanceData = [
@@ -34,13 +34,13 @@ export default function GuardianPortalPage() {
   ]
 
   const behaviourLogs = [
-    { date: '2024-05-15', type: 'positive', description: 'Excellent participation in class discussion', teacher: 'Ms. Smith', category: 'Academic', points: 5 },
-    { date: '2024-05-14', type: 'positive', description: 'Helped classmate with assignment', teacher: 'Mr. Davis', category: 'Social', points: 3 },
-    { date: '2024-05-10', type: 'concern', description: 'Late submission of homework', teacher: 'Ms. Wilson', category: 'Academic', points: -2 },
+    { date: '2024-05-15', type: 'positive', description: 'Excellent participation in lecture discussion', teacher: 'Prof. Smith', category: 'Academic', points: 5 },
+    { date: '2024-05-14', type: 'positive', description: 'Helped peer with course assignment', teacher: 'Dr. Davis', category: 'Social', points: 3 },
+    { date: '2024-05-10', type: 'concern', description: 'Late submission of coursework', teacher: 'Prof. Wilson', category: 'Academic', points: -2 },
     { date: '2024-05-08', type: 'positive', description: 'Outstanding presentation skills', teacher: 'Dr. Brown', category: 'Academic', points: 8 },
-    { date: '2024-05-05', type: 'neutral', description: 'Standard classroom behavior', teacher: 'Ms. Garcia', category: 'General', points: 0 },
-    { date: '2024-05-03', type: 'positive', description: 'Volunteered for school cleanup', teacher: 'Mr. Johnson', category: 'Community', points: 4 },
-    { date: '2024-05-01', type: 'positive', description: 'Perfect attendance this week', teacher: 'Office', category: 'Attendance', points: 2 }
+    { date: '2024-05-05', type: 'neutral', description: 'Standard lecture behavior', teacher: 'Prof. Garcia', category: 'General', points: 0 },
+    { date: '2024-05-03', type: 'positive', description: 'Volunteered for campus cleanup', teacher: 'Student Affairs', category: 'Community', points: 4 },
+    { date: '2024-05-01', type: 'positive', description: 'Perfect attendance this week', teacher: 'Registrar Office', category: 'Attendance', points: 2 }
   ]
 
   const paymentHistory = [
@@ -58,14 +58,14 @@ export default function GuardianPortalPage() {
   ]
 
   const teachers = [
-    { id: '1', name: 'Ms. Sarah Smith', subject: 'Mathematics', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100', status: 'online' },
-    { id: '2', name: 'Mr. John Davis', subject: 'Science', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100', status: 'offline' },
+    { id: '1', name: 'Prof. Sarah Smith', subject: 'Mathematics', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100', status: 'online' },
+    { id: '2', name: 'Dr. John Davis', subject: 'Science', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100', status: 'offline' },
     { id: '3', name: 'Dr. Emily Wilson', subject: 'English', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100', status: 'online' }
   ]
 
   const messages = [
-    { id: '1', teacher: 'Ms. Sarah Smith', subject: 'Mathematics', message: 'Emma is doing excellent in algebra. Keep up the great work!', date: '2024-05-15', time: '2:30 PM', unread: true },
-    { id: '2', teacher: 'Mr. John Davis', subject: 'Science', message: 'Please ensure Emma completes her science project by Friday.', date: '2024-05-14', time: '10:15 AM', unread: false },
+    { id: '1', teacher: 'Prof. Sarah Smith', subject: 'Mathematics', message: 'Emma is doing excellent in algebra. Keep up the great work!', date: '2024-05-15', time: '2:30 PM', unread: true },
+    { id: '2', teacher: 'Dr. John Davis', subject: 'Science', message: 'Please ensure Emma completes her science project by Friday.', date: '2024-05-14', time: '10:15 AM', unread: false },
     { id: '3', teacher: 'Dr. Emily Wilson', subject: 'English', message: 'Emma\'s essay writing has improved significantly this term.', date: '2024-05-13', time: '3:45 PM', unread: false }
   ]
 
@@ -227,24 +227,57 @@ export default function GuardianPortalPage() {
         </header>
 
         {/* Student Selection */}
-        <div className="p-6 bg-white border-b">
-          <label className="block text-sm font-medium text-gray-700 mb-3">Select Student</label>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-6 bg-gradient-to-r from-[#011F5B] to-[#00416A] border-b">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+                <Users className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-white">Select Student</h2>
+                <p className="text-sm text-blue-100">Choose which student's information to view</p>
+              </div>
+            </div>
+            <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium backdrop-blur-sm">
+              <span className="flex items-center gap-2">
+                <Plus className="w-4 h-4" />
+                Add Student
+              </span>
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {students.map(student => (
               <button
                 key={student.id}
                 onClick={() => setSelectedStudent(student.id)}
-                className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-colors ${
+                className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
                   selectedStudent === student.id 
-                    ? 'border-[#FF6B35] bg-orange-50' 
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-white bg-white/20 backdrop-blur-sm shadow-xl' 
+                    : 'border-white/20 bg-white/10 hover:bg-white/15 hover:border-white/30'
                 }`}
               >
-                <img src={student.avatar} alt={student.name} className="w-12 h-12 rounded-full" />
-                <div className="text-left">
-                  <h3 className="font-semibold text-gray-900">{student.name}</h3>
-                  <p className="text-sm text-gray-600">{student.grade} - Class {student.class}</p>
+                <div className="relative">
+                  <img src={student.avatar} alt={student.name} className="w-14 h-14 rounded-full border-2 border-white/50" />
+                  {selectedStudent === student.id && (
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 rounded-full flex items-center justify-center border-2 border-white">
+                      <Check className="w-3 h-3 text-white" />
+                    </div>
+                  )}
                 </div>
+                <div className="text-left flex-1">
+                  <h3 className="font-semibold text-white">{student.name}</h3>
+                  <p className="text-sm text-blue-100">{student.year} • {student.program}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-400/20 text-green-100 rounded-full text-xs font-medium">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                      Active
+                    </span>
+                    <span className="text-xs text-blue-200">ID: {student.id.padStart(4, '0')}</span>
+                  </div>
+                </div>
+                {selectedStudent === student.id && (
+                  <ChevronRight className="w-5 h-5 text-white/70" />
+                )}
               </button>
             ))}
           </div>
@@ -262,7 +295,7 @@ export default function GuardianPortalPage() {
                   <span className="text-sm text-green-600 font-medium">+5%</span>
                 </div>
                 <h3 className="text-2xl font-bold text-[#011F5B]">{getAverageGrade()}%</h3>
-                <p className="text-gray-600 text-sm">Average Grade</p>
+                <p className="text-gray-600 text-sm">Average Grade Point</p>
                 <div className="mt-2 text-xs text-gray-500">Updated: Today</div>
               </div>
 
@@ -298,7 +331,7 @@ export default function GuardianPortalPage() {
                   <span className="text-sm text-purple-600 font-medium">1 New</span>
                 </div>
                 <h3 className="text-2xl font-bold text-[#011F5B]">{messages.filter(m => m.unread).length}</h3>
-                <p className="text-gray-600 text-sm">Unread Messages</p>
+                <p className="text-gray-600 text-sm">This Term</p>
                 <div className="mt-2 text-xs text-gray-500">Last: 2:30 PM</div>
               </div>
             </div>
@@ -316,7 +349,7 @@ export default function GuardianPortalPage() {
                     <div className="flex-1">
                       <h3 className="font-medium text-gray-900">Academic Achievement</h3>
                       <p className="text-sm text-gray-600">Emma earned an 'A' in Mathematics with 92% score</p>
-                      <p className="text-xs text-gray-500 mt-1">2 hours ago • Ms. Sarah Smith</p>
+                      <p className="text-xs text-gray-500 mt-1">2 hours ago • Prof. Sarah Smith</p>
                     </div>
                   </div>
                   
@@ -327,7 +360,7 @@ export default function GuardianPortalPage() {
                     <div className="flex-1">
                       <h3 className="font-medium text-gray-900">Perfect Attendance</h3>
                       <p className="text-sm text-gray-600">No absences or tardiness this week</p>
-                      <p className="text-xs text-gray-500 mt-1">Yesterday • School Office</p>
+                      <p className="text-xs text-gray-500 mt-1">Yesterday • University Office</p>
                     </div>
                   </div>
 
@@ -337,8 +370,8 @@ export default function GuardianPortalPage() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-medium text-gray-900">Assignment Reminder</h3>
-                      <p className="text-sm text-gray-600">Science project due this Friday</p>
-                      <p className="text-xs text-gray-500 mt-1">2 days ago • Mr. John Davis</p>
+                      <p className="text-sm text-gray-600">Coursework due this Friday</p>
+                      <p className="text-xs text-gray-500 mt-1">2 days ago • Dr. John Davis</p>
                     </div>
                   </div>
                 </div>
@@ -382,13 +415,13 @@ export default function GuardianPortalPage() {
                   </div>
                   <h3 className="font-medium text-gray-900">Science Project</h3>
                   <p className="text-sm text-gray-600">May 22, 2024</p>
-                  <p className="text-xs text-gray-500 mt-1">Mr. John Davis</p>
+                  <p className="text-xs text-gray-500 mt-1">Dr. John Davis</p>
                 </div>
                 
                 <div className="p-4 border border-blue-200 bg-blue-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <Calendar className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm font-medium text-blue-600">Test</span>
+                    <span className="text-sm font-medium text-blue-600">Exam</span>
                   </div>
                   <h3 className="font-medium text-gray-900">English Literature</h3>
                   <p className="text-sm text-gray-600">May 18, 2024</p>
@@ -452,7 +485,7 @@ export default function GuardianPortalPage() {
                         <span className="font-medium">{subject.completed}/{subject.assignments}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Next Test:</span>
+                        <span className="text-gray-600">Next Exam:</span>
                         <span className="font-medium">{subject.nextTest}</span>
                       </div>
                       <div className="flex justify-between">
@@ -509,10 +542,10 @@ export default function GuardianPortalPage() {
               <h2 className="text-xl font-semibold text-[#011F5B] mb-6">Recent Teacher Notes</h2>
               <div className="space-y-4">
                 <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg">
-                  <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100" alt="Ms. Smith" className="w-10 h-10 rounded-full" />
+                  <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100" alt="Prof. Smith" className="w-10 h-10 rounded-full" />
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-gray-900">Ms. Sarah Smith - Mathematics</h3>
+                      <h3 className="font-medium text-gray-900">Prof. Sarah Smith - Mathematics</h3>
                       <span className="text-sm text-gray-500">May 15, 2024</span>
                     </div>
                     <p className="text-sm text-gray-600">Emma shows exceptional problem-solving skills in algebra. Her analytical thinking has improved significantly this term. Keep encouraging her mathematical curiosity.</p>
@@ -520,10 +553,10 @@ export default function GuardianPortalPage() {
                 </div>
                 
                 <div className="flex items-start gap-4 p-4 bg-green-50 rounded-lg">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Mr. Davis" className="w-10 h-10 rounded-full" />
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Dr. Davis" className="w-10 h-10 rounded-full" />
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-gray-900">Mr. John Davis - Science</h3>
+                      <h3 className="font-medium text-gray-900">Dr. John Davis - Science</h3>
                       <span className="text-sm text-gray-500">May 14, 2024</span>
                     </div>
                     <p className="text-sm text-gray-600">Excellent participation in lab experiments. Emma demonstrates strong observational skills and follows safety protocols perfectly.</p>
@@ -646,100 +679,213 @@ export default function GuardianPortalPage() {
         )}
 
         {activeTab === 'messages' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Messages</h2>
-                <div className="space-y-4">
-                  {messages.map((message, index) => (
-                    <div key={index} className={`p-4 rounded-lg border ${
-                      message.unread ? 'bg-blue-50 border-blue-200' : 'bg-gray-50 border-gray-200'
-                    }`}>
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex items-center gap-3">
-                          <img src={teachers.find(t => t.name === message.teacher)?.avatar} alt={message.teacher} className="w-10 h-10 rounded-full" />
-                          <div>
-                            <h3 className="font-medium text-gray-900">{message.teacher}</h3>
-                            <p className="text-sm text-gray-600">{message.subject}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm text-gray-500">{message.date}</p>
-                          <p className="text-xs text-gray-400">{message.time}</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-700">{message.message}</p>
-                      {message.unread && (
-                        <button className="mt-2 text-blue-600 text-sm font-medium hover:text-blue-700">
-                          Mark as read
-                        </button>
-                      )}
-                    </div>
-                  ))}
+          <div className="p-6 space-y-6">
+            {/* Messages Header */}
+            <div className="bg-gradient-to-r from-[#011F5B] to-[#00416A] rounded-xl p-6 text-white">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+                    <MessageSquare className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold">Messages</h2>
+                    <p className="text-blue-100">Communicate with teachers and staff</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <p className="text-2xl font-bold">{messages.filter(m => m.unread).length}</p>
+                    <p className="text-sm text-blue-100">Unread Messages</p>
+                  </div>
+                  <button className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm font-medium backdrop-blur-sm">
+                    Mark All as Read
+                  </button>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Send Message</h2>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Select Teacher</label>
-                    <select 
-                      value={selectedTeacher}
-                      onChange={(e) => setSelectedTeacher(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-xl shadow-sm p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-lg font-semibold text-[#011F5B]">Recent Messages</h3>
+                    <div className="flex items-center gap-2">
+                      <button className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                        All
+                      </button>
+                      <button className="px-3 py-1 text-sm bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors">
+                        Unread
+                      </button>
+                      <button className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                        Important
+                      </button>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    {messages.map((message, index) => (
+                      <div key={index} className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md cursor-pointer ${
+                        message.unread ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200' : 'bg-gray-50 border-gray-200 hover:border-gray-300'
+                      }`}>
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <div className="relative">
+                              <img src={teachers.find(t => t.name === message.teacher)?.avatar} alt={message.teacher} className="w-12 h-12 rounded-full border-2 border-white shadow-sm" />
+                              <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${
+                                teachers.find(t => t.name === message.teacher)?.status === 'online' ? 'bg-green-500' : 'bg-gray-300'
+                              }`}></div>
+                            </div>
+                            <div>
+                              <h3 className="font-semibold text-gray-900">{message.teacher}</h3>
+                              <p className="text-sm text-gray-600">{message.subject}</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-sm font-medium text-gray-900">{message.date}</p>
+                            <p className="text-xs text-gray-500">{message.time}</p>
+                            {message.unread && (
+                              <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full">
+                                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                                New
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <p className="text-gray-700 leading-relaxed">{message.message}</p>
+                        <div className="flex items-center justify-between mt-4">
+                          <div className="flex items-center gap-3">
+                            <button className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium">
+                              <Reply className="w-4 h-4" />
+                              Reply
+                            </button>
+                            <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-700">
+                              <Eye className="w-4 h-4" />
+                              View Details
+                            </button>
+                          </div>
+                          {message.unread && (
+                            <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                              Mark as read
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-1 space-y-6">
+                {/* Send Message Section */}
+                <div className="bg-white rounded-xl shadow-sm p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] rounded-lg">
+                      <Send className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#011F5B]">Send Message</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Select Teacher</label>
+                      <div className="relative">
+                        <select 
+                          value={selectedTeacher}
+                          onChange={(e) => setSelectedTeacher(e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent appearance-none bg-white"
+                        >
+                          <option value="">Choose a teacher...</option>
+                          {teachers.map(teacher => (
+                            <option key={teacher.id} value={teacher.id}>
+                              {teacher.name} - {teacher.subject}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronRight className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 rotate-90 pointer-events-none" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                      <textarea
+                        value={messageText}
+                        onChange={(e) => setMessageText(e.target.value)}
+                        placeholder="Type your message here..."
+                        rows={4}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent resize-none"
+                      ></textarea>
+                      <div className="flex items-center justify-between mt-2">
+                        <span className="text-xs text-gray-500">{messageText.length}/500 characters</span>
+                        <div className="flex items-center gap-2">
+                          <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <Paperclip className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <Smile className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <button 
+                      onClick={sendMessage}
+                      disabled={!messageText.trim() || !selectedTeacher}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-semibold"
                     >
-                      <option value="">Choose a teacher...</option>
-                      {teachers.map(teacher => (
-                        <option key={teacher.id} value={teacher.id}>
-                          {teacher.name} - {teacher.subject}
-                        </option>
-                      ))}
-                    </select>
+                      <Send className="w-4 h-4" />
+                      Send Message
+                    </button>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                    <textarea
-                      value={messageText}
-                      onChange={(e) => setMessageText(e.target.value)}
-                      placeholder="Type your message here..."
-                      rows={4}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    ></textarea>
-                  </div>
-                  <button 
-                    onClick={sendMessage}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2"
-                  >
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </button>
                 </div>
 
-                <div className="mt-6">
-                  <h3 className="font-medium text-gray-900 mb-4">Teacher Availability</h3>
+                {/* Teacher Availability */}
+                <div className="bg-white rounded-xl shadow-sm p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-gradient-to-r from-green-500 to-green-600 rounded-lg">
+                      <Users className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#011F5B]">Teacher Availability</h3>
+                  </div>
                   <div className="space-y-3">
                     {teachers.map(teacher => (
-                      <div key={teacher.id} className="flex items-center justify-between">
+                      <div key={teacher.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
                         <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${
-                            teacher.status === 'online' ? 'bg-green-500' : 'bg-gray-300'
-                          }`}></div>
-                          <img src={teacher.avatar} alt={teacher.name} className="w-8 h-8 rounded-full" />
+                          <div className="relative">
+                            <div className={`w-3 h-3 rounded-full ${
+                              teacher.status === 'online' ? 'bg-green-500' : 'bg-gray-300'
+                            }`}></div>
+                            {teacher.status === 'online' && (
+                              <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
+                            )}
+                          </div>
+                          <img src={teacher.avatar} alt={teacher.name} className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
                           <div>
-                            <p className="text-sm font-medium text-gray-900">{teacher.name}</p>
+                            <p className="text-sm font-semibold text-gray-900">{teacher.name}</p>
                             <p className="text-xs text-gray-600">{teacher.subject}</p>
                           </div>
                         </div>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
+                        <span className={`px-3 py-1 text-xs font-medium rounded-full ${
                           teacher.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
                         }`}>
-                          {teacher.status}
+                          {teacher.status === 'online' ? 'Available' : 'Offline'}
                         </span>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="bg-gradient-to-r from-[#011F5B] to-[#00416A] rounded-xl p-6 text-white">
+                  <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
+                  <div className="space-y-3">
+                    <button className="w-full flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-left">
+                      <Phone className="w-4 h-4" />
+                      <span className="text-sm">Request Phone Call</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-left">
+                      <Video className="w-4 h-4" />
+                      <span className="text-sm">Schedule Video Meeting</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-left">
+                      <Calendar className="w-4 h-4" />
+                      <span className="text-sm">Book Parent-Teacher Conference</span>
+                    </button>
                   </div>
                 </div>
               </div>
