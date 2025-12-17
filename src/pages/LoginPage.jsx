@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Mail, Lock, ArrowLeft, AlertCircle, CheckCircle } from 'lucide-react'
 import { GradientButton, gradients } from '../components/common/GradientStyles'
-
+import axios from 'axios'
 function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+  const BASE_URL = "http://192.168.74.234/educonnect/educonnect-backend/";
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
@@ -52,7 +53,7 @@ function LoginPage() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault()
     
     if (!validateForm()) {
@@ -62,17 +63,40 @@ function LoginPage() {
     setIsLoading(true)
     setMessage({ type: '', text: '' })
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      const res = await axios.post(`${BASE_URL}login.php`, formData);
       
-      // Simulate successful login
-      setMessage({ type: 'success', text: 'Login successful! Redirecting...' })
-      
-      setTimeout(() => {
-        navigate('/lms')
-      }, 1000)
-    }, 1500)
+      console.log(res.data)
+      if (res.data.success) {
+        // 1. Store user data in localStorage (or your preferred state management)
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+        
+        setMessage({ type: 'success', text: 'Login successful! Redirecting...' });
+
+        // 2. Redirect to dashboard after a short delay
+        setTimeout(() => {
+          navigate('/lms'); // or wherever your dashboard is
+        }, 1500);
+      }
+    } catch (err) {
+      setIsLoading(false);
+      if (err.response?.data?.not_verified) {
+        navigate('/verify-email', { 
+          state: { 
+            email: err.response.data.email,
+            message: 'Please verify your email to continue.' 
+          } 
+        });
+      } else {
+        setMessage({ 
+          type: 'error', 
+          text: err.response?.data?.error || 'An error occurred during login. Please try again.' 
+        });
+      }
+    } finally {
+      // We only stop loading if we didn't navigate away
+      // If success or not_verified, the navigation handles the UI change
+    }
   }
 
   return (

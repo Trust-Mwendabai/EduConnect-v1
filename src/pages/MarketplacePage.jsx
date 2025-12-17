@@ -17,7 +17,7 @@ export default function MarketplacePage() {
       id: 1,
       title: 'Advanced React Development',
       instructor: 'Sarah Johnson',
-      price: 450,
+      price: 89.99,
       rating: 4.8,
       reviews: 234,
       image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop&auto=format',
@@ -38,7 +38,7 @@ export default function MarketplacePage() {
       id: 2,
       title: 'UI/UX Design Fundamentals',
       instructor: 'Michael Chen',
-      price: 350,
+      price: 69.99,
       rating: 4.6,
       reviews: 189,
       image: 'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400&h=300&fit=crop&auto=format',
@@ -46,7 +46,7 @@ export default function MarketplacePage() {
       duration: '8 weeks',
       level: 'Beginner',
       students: 890,
-      description: 'Learn principles of great user interface and experience design',
+      description: 'Learn the principles of great user interface and experience design',
       materials: ['Design templates', 'Video tutorials', 'Case studies', 'Tools guide'],
       instructorProfile: {
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
@@ -59,7 +59,7 @@ export default function MarketplacePage() {
       id: 3,
       title: 'Data Science with Python',
       instructor: 'Dr. Emily Rodriguez',
-      price: 450,
+      price: 129.99,
       rating: 4.9,
       reviews: 412,
       image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=300&fit=crop&auto=format',
@@ -80,7 +80,7 @@ export default function MarketplacePage() {
       id: 4,
       title: 'Digital Marketing Mastery',
       instructor: 'Alex Thompson',
-      price: 300,
+      price: 79.99,
       rating: 4.5,
       reviews: 156,
       image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop&auto=format',
@@ -96,132 +96,6 @@ export default function MarketplacePage() {
         courses: 10,
         rating: 4.6
       }
-    },
-    {
-      id: 5,
-      title: 'Business Strategy & Leadership',
-      instructor: 'Prof. James Mitchell',
-      price: 400,
-      rating: 4.7,
-      reviews: 298,
-      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop&auto=format',
-      category: 'business',
-      duration: '14 weeks',
-      level: 'Advanced',
-      students: 1850,
-      description: 'Strategic business management and leadership principles',
-      materials: ['Business frameworks', 'Case studies', 'Leadership guides', 'Templates'],
-      instructorProfile: {
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
-        bio: 'Harvard Business School graduate, 20+ years executive experience',
-        courses: 18,
-        rating: 4.8
-      }
-    },
-    {
-      id: 6,
-      title: 'Mobile App Development with Flutter',
-      instructor: 'David Kim',
-      price: 450,
-      rating: 4.8,
-      reviews: 324,
-      image: 'https://images.unsplash.com/photo-1512941938449-5d1b5f8b8d4c?w=400&h=300&fit=crop&auto=format',
-      category: 'development',
-      duration: '12 weeks',
-      level: 'Intermediate',
-      students: 980,
-      description: 'Build cross-platform mobile applications with Flutter',
-      materials: ['Flutter SDK', 'Mobile UI kits', 'Project templates', 'Deployment guides'],
-      instructorProfile: {
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
-        bio: 'Google Developer Expert, Flutter specialist',
-        courses: 6,
-        rating: 4.9
-      }
-    },
-    {
-      id: 7,
-      title: 'Photography Masterclass',
-      instructor: 'Lisa Anderson',
-      price: 250,
-      rating: 4.6,
-      reviews: 187,
-      image: 'https://images.unsplash.com/photo-1542038784456-697184f077e0?w=400&h=300&fit=crop&auto=format',
-      category: 'creative',
-      duration: '6 weeks',
-      level: 'Beginner',
-      students: 1450,
-      description: 'Professional photography techniques and composition',
-      materials: ['Camera guides', 'Editing tutorials', 'Composition rules', 'Portfolio reviews'],
-      instructorProfile: {
-        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100',
-        bio: 'National Geographic photographer, 15+ years experience',
-        courses: 9,
-        rating: 4.7
-      }
-    },
-    {
-      id: 8,
-      title: 'Financial Accounting Fundamentals',
-      instructor: 'Dr. Robert Chen',
-      price: 350,
-      rating: 4.5,
-      reviews: 267,
-      image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=300&fit=crop&auto=format',
-      category: 'finance',
-      duration: '10 weeks',
-      level: 'Beginner',
-      students: 2100,
-      description: 'Complete accounting principles for business and finance',
-      materials: ['Accounting software', 'Financial templates', 'Practice exercises', 'Case studies'],
-      instructorProfile: {
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
-        bio: 'CPA with 15+ years in corporate finance',
-        courses: 12,
-        rating: 4.6
-      }
-    },
-    {
-      id: 9,
-      title: 'Health & Fitness Coaching',
-      instructor: 'Maria Johnson',
-      price: 200,
-      rating: 4.8,
-      reviews: 445,
-      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=300&fit=crop&auto=format',
-      category: 'health',
-      duration: '8 weeks',
-      level: 'All Levels',
-      students: 3200,
-      description: 'Complete fitness and nutrition program',
-      materials: ['Workout plans', 'Nutrition guides', 'Progress tracking', 'Community support'],
-      instructorProfile: {
-        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100',
-        bio: 'Certified personal trainer, nutrition specialist',
-        courses: 14,
-        rating: 4.9
-      }
-    },
-    {
-      id: 10,
-      title: 'Language Learning: Spanish A-Z',
-      instructor: 'Carlos Rodriguez',
-      price: 300,
-      rating: 4.7,
-      reviews: 523,
-      image: 'https://images.unsplash.com/photo-1517244995887-0b3d3b2e1e1f?w=400&h=300&fit=crop&auto=format',
-      category: 'languages',
-      duration: '16 weeks',
-      level: 'Beginner',
-      students: 4800,
-      description: 'Learn Spanish from basics to fluency',
-      materials: ['Audio lessons', 'Grammar guides', 'Conversation practice', 'Cultural notes'],
-      instructorProfile: {
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
-        bio: 'Native Spanish speaker, language teaching expert',
-        courses: 8,
-        rating: 4.8
-      }
     }
   ]
 
@@ -230,7 +104,7 @@ export default function MarketplacePage() {
       id: 1,
       date: '2024-01-15',
       item: 'Advanced React Development',
-      amount: 8999,
+      amount: 89.99,
       status: 'completed',
       instructor: 'Sarah Johnson'
     },
@@ -238,7 +112,7 @@ export default function MarketplacePage() {
       id: 2,
       date: '2024-01-10',
       item: 'UI/UX Design Fundamentals',
-      amount: 6999,
+      amount: 69.99,
       status: 'completed',
       instructor: 'Michael Chen'
     },
@@ -246,13 +120,13 @@ export default function MarketplacePage() {
       id: 3,
       date: '2024-01-05',
       item: 'JavaScript Basics',
-      amount: 4999,
+      amount: 49.99,
       status: 'refunded',
       instructor: 'John Doe'
     }
   ]
 
-  const categories = ['all', 'development', 'design', 'data-science', 'marketing', 'business', 'creative', 'finance', 'health', 'languages']
+  const categories = ['all', 'development', 'design', 'data-science', 'marketing', 'business']
 
   const filteredCourses = courses.filter(course => {
     const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory
@@ -324,7 +198,7 @@ export default function MarketplacePage() {
         </div>
         
         <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <span className="text-2xl font-bold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>ZMW {course.price}</span>
+          <span className="text-2xl font-bold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>${course.price}</span>
           <button 
             onClick={() => addToCart(course)}
             className="px-5 py-2.5 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 font-medium"
@@ -364,7 +238,7 @@ export default function MarketplacePage() {
                   <h4 className="font-medium text-gray-900 line-clamp-2" style={{ fontFamily: 'var(--font-heading)' }}>{item.title}</h4>
                   <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>{item.instructor}</p>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="font-semibold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>ZMW {item.price}</span>
+                    <span className="font-semibold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>${item.price}</span>
                     <button 
                       onClick={() => removeFromCart(item.id)}
                       className="text-red-500 hover:text-red-700"
@@ -383,7 +257,7 @@ export default function MarketplacePage() {
         <div className="border-t p-6 bg-gray-50">
           <div className="flex items-center justify-between mb-4">
             <span className="text-lg font-semibold text-gray-700" style={{ fontFamily: 'var(--font-heading)' }}>Total:</span>
-            <span className="text-3xl font-bold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>ZMW {getTotalPrice()}</span>
+            <span className="text-3xl font-bold text-[#011F5B]" style={{ fontFamily: 'var(--font-heading)' }}>${getTotalPrice()}</span>
           </div>
           <button className="w-full py-4 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 font-semibold" style={{ fontFamily: 'var(--font-heading)' }}>
             <CreditCard className="w-5 h-5" />

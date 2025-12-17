@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Search, Clock, Users, Star, BookOpen, Filter } from 'lucide-react'
@@ -14,7 +13,7 @@ const coursesData = [
     duration: '65 hours',
     students: 45000,
     rating: 4.8,
-    price: 450,
+    price: 89.99,
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop&auto=format'
   },
   {
@@ -26,7 +25,7 @@ const coursesData = [
     duration: '44 hours',
     students: 38000,
     rating: 4.9,
-    price: 450,
+    price: 94.99,
     image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=300&fit=crop&auto=format'
   },
   {
@@ -38,7 +37,7 @@ const coursesData = [
     duration: '32 hours',
     students: 28000,
     rating: 4.7,
-    price: 350,
+    price: 79.99,
     image: 'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400&h=300&fit=crop&auto=format'
   },
   {
@@ -50,8 +49,8 @@ const coursesData = [
     duration: '25 hours',
     students: 52000,
     rating: 4.8,
-    price: 400,
-    image: 'https://images.unsplash.com/photo-1517244995887-0b3d3b2e1e1f?w=400&h=300&fit=crop&auto=format'
+    price: 84.99,
+    image: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=300&fit=crop&auto=format'
   },
   {
     id: 5,
@@ -62,7 +61,7 @@ const coursesData = [
     duration: '23 hours',
     students: 31000,
     rating: 4.6,
-    price: 300,
+    price: 74.99,
     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop&auto=format'
   },
   {
@@ -74,7 +73,7 @@ const coursesData = [
     duration: '48 hours',
     students: 42000,
     rating: 4.9,
-    price: 450,
+    price: 89.99,
     image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop&auto=format'
   }
 ]
@@ -83,17 +82,9 @@ const categories = ['All', 'Web Development', 'Data Science', 'Design', 'Marketi
 const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced']
 
 function CoursesPage() {
-  const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedLevel, setSelectedLevel] = useState('All Levels')
   const [searchQuery, setSearchQuery] = useState('')
-
-  const handleEnroll = (course) => {
-    // Store course data for enrollment
-    localStorage.setItem('selectedCourse', JSON.stringify(course))
-    // Navigate to enrollment page
-    navigate('/enrollment')
-  }
 
   const filteredCourses = coursesData.filter(course => {
     const matchesCategory = selectedCategory === 'All' || course.category === selectedCategory
@@ -201,7 +192,7 @@ function CoursesPage() {
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute top-4 right-4 bg-[--color-warm-orange] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    ZMW {course.price}
+                    ${course.price}
                   </div>
                 </div>
                 
@@ -236,10 +227,7 @@ function CoursesPage() {
                     </div>
                   </div>
                   
-                  <button 
-                    onClick={() => handleEnroll(course)}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-[--color-warm-orange] to-[--color-warm-orange-light] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-                  >
+                  <button className="w-full px-6 py-3 bg-gradient-to-r from-[--color-warm-orange] to-[--color-warm-orange-light] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                     Enroll Now
                   </button>
                 </div>

@@ -5,8 +5,6 @@ import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import DashboardPage from './pages/DashboardPage'
-import StudentDashboardPage from './pages/StudentDashboardPage'
-import EnrollmentPage from './pages/EnrollmentPage'
 import AssignmentsPage from './pages/AssignmentsPage'
 import PaymentPage from './pages/PaymentPage'
 import PricingPage from './pages/PricingPage'
@@ -53,9 +51,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/dashboard" element={<StudentDashboardPage />} />
-          <Route path="/student-dashboard" element={<StudentDashboardPage />} />
-          <Route path="/enrollment" element={<EnrollmentPage />} />
+          <Route path="/dashboard" element={<AdminDashboardPage />} />
           <Route path="/assignments" element={<AssignmentsPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/courses" element={<CoursesPage />} />

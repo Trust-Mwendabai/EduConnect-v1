@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Check, GraduationCap, BookOpen, Shield, Users, Store, AlertCircle, CheckCircle } from 'lucide-react'
+import axios from 'axios';
+import { form } from 'framer-motion/m';
 
 function SignupPage() {
+  const BASE_URL = "http://192.168.74.234/educonnect/educonnect-backend/";
   const [step, setStep] = useState(1) // 1: Role Selection, 2: Form
   const [selectedRole, setSelectedRole] = useState('')
   const [formData, setFormData] = useState({
@@ -123,26 +126,45 @@ function SignupPage() {
     return Object.keys(newErrors).length === 0
   }
 
+  
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (!validateForm()) {
-      return
+      return;
     }
-    
-    setIsLoading(true)
-    setMessage({ type: '', text: '' })
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      setMessage({ type: 'success', text: 'Account created successfully! Redirecting to email verification...' })
+
+    setIsLoading(true);
+    setMessage({ type: '', text: '' });
+
+    // Create the payload matching PHP expected keys
+    const payload = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      password: formData.password,
+      role: selectedRole, // Critical: Backend requires this
+      phone: "" // Optional, but helps avoid undefined errors
+    };
+
+    try {
+      const res = await axios.post(`${BASE_URL}register.php`, payload);
       
-      setTimeout(() => {
-        navigate('/verify-email', { state: { email: formData.email } })
-      }, 1500)
-    }, 1500)
-  }
+      if (res.data.success) {
+        setMessage({ type: 'success', text: res.data.message });
+        setTimeout(() => {
+          navigate('/verify-email', { state: { email: formData.email } });
+        }, 1500);
+      }
+    } catch (err) {
+      console.error(err);
+      // Capture the error message sent by PHP
+      const errorMsg = err.response?.data?.error || "Registration failed. Please try again.";
+      setMessage({ type: 'error', text: errorMsg });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const passwordRequirements = [
     { text: 'At least 8 characters', met: formData.password.length >= 8 },

@@ -1,209 +1,176 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Mail, CheckCircle, AlertCircle, RefreshCw, ArrowRight } from 'lucide-react'
+import { Mail, CheckCircle, AlertCircle, RefreshCw, ArrowRight, ShieldCheck } from 'lucide-react'
+import axios from 'axios'
 
 function EmailVerificationPage() {
   const location = useLocation()
   const navigate = useNavigate()
+  
+  // States
   const email = location.state?.email || 'your email'
+  const [otp, setOtp] = useState(['', '', '', '', '', ''])
   const [isVerifying, setIsVerifying] = useState(false)
   const [isVerified, setIsVerified] = useState(false)
   const [isResending, setIsResending] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
 
-  // Simulate auto-verification check (in real app, this would check URL params)
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const token = urlParams.get('token')
-    
-    if (token) {
-      setIsVerifying(true)
-      // Simulate verification
-      setTimeout(() => {
-        setIsVerifying(false)
-        setIsVerified(true)
-        setMessage({ 
-          type: 'success', 
-          text: 'Your email has been verified successfully!' 
-        })
-      }, 2000)
-    }
-  }, [])
+  // Refs for auto-focusing inputs
+  const inputRefs = useRef([])
 
-  const handleResend = () => {
+  // Handle OTP Input change
+  const handleChange = (index, value) => {
+    if (isNaN(value)) return; // Only allow numbers
+
+    const newOtp = [...otp]
+    // Take only the last character entered
+    newOtp[index] = value.substring(value.length - 1)
+    setOtp(newOtp)
+
+    // Move to next input if value is entered
+    if (value && index < 5) {
+      inputRefs.current[index + 1].focus()
+    }
+  }
+
+  // Handle backspace to move focus back
+  const handleKeyDown = (index, e) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      inputRefs.current[index - 1].focus()
+    }
+  }
+
+  // Submit OTP to PHP Backend
+  const handleVerify = async (e) => {
+    e.preventDefault()
+    const finalCode = otp.join('')
+    
+    if (finalCode.length < 6) {
+      setMessage({ type: 'error', text: 'Please enter all 6 digits.' })
+      return
+    }
+
+    setIsVerifying(true)
+    setMessage({ type: '', text: '' })
+
+    try {
+      const response = await axios.post('http://192.168.74.234/educonnect/educonnect-backend/verify_code.php', {
+        email: email,
+        code: finalCode
+      })
+
+      console.log(response.data);
+      if (response.data.success) {
+        setIsVerified(true)
+        setMessage({ type: 'success', text: 'Account verified successfully!' })
+      }
+    } catch (error) {
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.error || 'Invalid verification code. Please try again.' 
+      })
+    } finally {
+      setIsVerifying(false)
+    }
+  }
+
+  const handleResend = async () => {
     setIsResending(true)
     setMessage({ type: '', text: '' })
     
-    setTimeout(() => {
+    try {
+      // Logic for resending goes here (calling your register or a resend script)
+      await axios.post('http://192.168.74.234/educonnect/educonnect-backend/resend_otp.php', { email })
+      setMessage({ type: 'success', text: 'A new code has been sent to your email.' })
+    } catch (err) {
+      setMessage({ type: 'error', text: 'Failed to resend code. Try again later.' })
+    } finally {
       setIsResending(false)
-      setMessage({ 
-        type: 'success', 
-        text: 'Verification email has been resent. Please check your inbox.' 
-      })
-    }, 1500)
-  }
-
-  const handleContinue = () => {
-    navigate('/lms')
+    }
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#011F5B] via-[#003262] to-[#00416A] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/20"></div>
       
-      <div className="relative z-10 w-full max-w-lg">
-        {/* Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
-          {isVerifying ? (
-            // Verifying State
-            <div className="text-center py-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">
-                <RefreshCw className="text-blue-600 animate-spin" size={40} />
-              </div>
-              <h1 className="text-3xl font-bold text-[#011F5B] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
-                Verifying Your Email
-              </h1>
-              <p className="text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
-                Please wait while we verify your email address...
-              </p>
-            </div>
-          ) : isVerified ? (
-            // Verified State
-            <div className="text-center">
+      <div className="relative z-10 w-full max-w-md">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 overflow-hidden">
+          
+          {isVerified ? (
+            /* --- SUCCESS STATE --- */
+            <div className="text-center animate-in fade-in zoom-in duration-300">
               <div className="inline-flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-6">
                 <CheckCircle className="text-green-600" size={56} />
               </div>
-              <h1 className="text-3xl font-bold text-[#011F5B] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
-                Email Verified!
-              </h1>
-              <p className="text-lg text-gray-600 mb-8" style={{ fontFamily: 'var(--font-body)' }}>
-                Your email has been successfully verified. You can now access all features of EduConnect.
+              <h1 className="text-3xl font-bold text-[#011F5B] mb-3">Verified!</h1>
+              <p className="text-gray-600 mb-8">
+                Your account is ready. You can now access the EduConnect Learning Management System.
               </p>
-
-              {message.text && (
-                <div className="mb-6 p-4 rounded-xl flex items-start gap-3 bg-green-50 border border-green-200">
-                  <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={20} />
-                  <p className="text-sm font-medium text-green-800" style={{ fontFamily: 'var(--font-body)' }}>
-                    {message.text}
-                  </p>
-                </div>
-              )}
-
               <button
-                onClick={handleContinue}
-                className="w-full py-4 px-4 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                onClick={() => navigate('/login')}
+                className="w-full py-4 px-4 bg-[#FF6B35] text-white font-bold rounded-xl shadow-lg hover:bg-[#E55A2B] transition-all flex items-center justify-center gap-2"
               >
-                Continue to Dashboard
-                <ArrowRight size={20} />
+                Go to Login <ArrowRight size={20} />
               </button>
             </div>
           ) : (
-            // Awaiting Verification State
+            /* --- OTP INPUT STATE --- */
             <>
               <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-[#011F5B] to-[#00416A] rounded-2xl mb-6">
-                  <Mail className="text-white" size={40} />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 text-[#011F5B] rounded-2xl mb-4">
+                  <ShieldCheck size={40} />
                 </div>
-                <h1 className="text-3xl font-bold text-[#011F5B] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
-                  Verify Your Email
-                </h1>
-                <p className="text-gray-600 mb-4" style={{ fontFamily: 'var(--font-body)' }}>
-                  We've sent a verification link to:
-                </p>
-                <p className="text-lg font-semibold text-[#011F5B] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {email}
-                </p>
-                <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
-                  Click the link in the email to verify your account and get started.
+                <h1 className="text-2xl font-bold text-[#011F5B]">Check Your Email</h1>
+                <p className="text-gray-500 mt-2">
+                  We've sent a 6-digit code to <br />
+                  <span className="font-semibold text-gray-800">{email}</span>
                 </p>
               </div>
 
-              {/* Message Display */}
-              {message.text && (
-                <div className={`mb-6 p-4 rounded-xl flex items-start gap-3 ${
-                  message.type === 'success' ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
-                }`}>
-                  {message.type === 'success' ? (
-                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={20} />
-                  ) : (
-                    <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
-                  )}
-                  <p className={`text-sm font-medium ${
-                    message.type === 'success' ? 'text-green-800' : 'text-red-800'
-                  }`} style={{ fontFamily: 'var(--font-body)' }}>
-                    {message.text}
-                  </p>
-                </div>
-              )}
-
-              {/* Instructions */}
-              <div className="space-y-4 mb-6">
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                  <h3 className="font-semibold text-blue-900 mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
-                    What to do next:
-                  </h3>
-                  <ul className="space-y-2 text-sm text-blue-800" style={{ fontFamily: 'var(--font-body)' }}>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-600 mt-0.5">1.</span>
-                      <span>Check your email inbox for a message from EduConnect</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-600 mt-0.5">2.</span>
-                      <span>Click the verification link in the email</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-600 mt-0.5">3.</span>
-                      <span>You'll be automatically redirected to your dashboard</span>
-                    </li>
-                  </ul>
+              <form onSubmit={handleVerify} className="space-y-6">
+                <div className="flex justify-between gap-2">
+                  {otp.map((digit, index) => (
+                    <input
+                      key={index}
+                      ref={(el) => (inputRefs.current[index] = el)}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleChange(index, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(index, e)}
+                      className="w-12 h-14 text-center text-2xl font-bold border-2 border-gray-200 rounded-xl focus:border-[#FF6B35] focus:ring-1 focus:ring-[#FF6B35] outline-none transition-all"
+                    />
+                  ))}
                 </div>
 
-                <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
-                  <p className="text-sm text-yellow-900" style={{ fontFamily: 'var(--font-body)' }}>
-                    <strong>Didn't receive the email?</strong> Check your spam or junk folder, or click the button below to resend.
-                  </p>
-                </div>
-              </div>
+                {message.text && (
+                  <div className={`p-4 rounded-xl flex items-start gap-3 ${
+                    message.type === 'success' ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'
+                  }`}>
+                    {message.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+                    <p className="text-sm font-medium">{message.text}</p>
+                  </div>
+                )}
 
-              {/* Actions */}
-              <div className="space-y-3">
+                <button
+                  type="submit"
+                  disabled={isVerifying || otp.includes('')}
+                  className="w-full py-4 bg-[#011F5B] text-white font-bold rounded-xl hover:bg-[#003262] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {isVerifying ? <RefreshCw className="animate-spin" /> : 'Verify Account'}
+                </button>
+              </form>
+
+              <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+                <p className="text-sm text-gray-600 mb-3">Didn't receive the code?</p>
                 <button
                   onClick={handleResend}
                   disabled={isResending}
-                  className="w-full py-3 px-4 border-2 border-[#FF6B35] text-[#FF6B35] font-semibold rounded-xl hover:bg-[#FF6B35] hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  style={{ fontFamily: 'var(--font-heading)' }}
+                  className="text-[#FF6B35] font-bold hover:underline disabled:opacity-50"
                 >
-                  {isResending ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
-                      Resending...
-                    </>
-                  ) : (
-                    <>
-                      <RefreshCw size={20} />
-                      Resend Verification Email
-                    </>
-                  )}
+                  {isResending ? 'Sending...' : 'Resend New Code'}
                 </button>
-
-                <Link
-                  to="/login"
-                  className="block w-full py-3 px-4 text-center text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-colors"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  Back to Login
-                </Link>
-              </div>
-
-              {/* Help Link */}
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-body)' }}>
-                  Having trouble?{' '}
-                  <Link to="/help" className="text-[#FF6B35] hover:text-[#E55A2B] font-medium transition-colors">
-                    Contact Support
-                  </Link>
-                </p>
               </div>
             </>
           )}
