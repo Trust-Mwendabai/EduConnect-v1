@@ -444,25 +444,25 @@ function AdminDashboard() {
   })
 
   const [revenueAnalytics] = useState({
-    totalRevenue: 2847500,
-    monthlyRevenue: 237291,
-    revenueGrowth: 18.3,
+    totalRevenue: 47500000, // ZMW 47,500,000
+    monthlyRevenue: 3958333, // ZMW 3,958,333
+    revenueGrowth: 12.5,
     revenueBySource: {
-      courseFees: 1847500,
-      subscriptions: 650000,
-      certifications: 250000,
-      other: 100000
+      courseFees: 28500000, // ZMW 28,500,000
+      subscriptions: 14250000, // ZMW 14,250,000
+      certifications: 4750000 // ZMW 4,750,000
     },
     monthlyTrend: [
-      { month: 'Jan', revenue: 198000 },
-      { month: 'Feb', revenue: 205000 },
-      { month: 'Mar', revenue: 212000 },
-      { month: 'Apr', revenue: 225000 },
-      { month: 'May', revenue: 237291 }
+      { month: 'Jan', revenue: 2372910 },
+      { month: 'Feb', revenue: 2560000 },
+      { month: 'Mar', revenue: 2700000 },
+      { month: 'Apr', revenue: 2850000 },
+      { month: 'May', revenue: 3958333 }
     ],
     topPayingCourses: [
-      { name: 'Web Development Bootcamp', revenue: 456000, students: 1234 },
-      { name: 'Data Science Masterclass', revenue: 389000, students: 987 },
+      { name: 'Computer Science', students: 1250, revenue: 11875000 }, // ZMW 11,875,000
+      { name: 'Business Administration', students: 980, revenue: 9310000 }, // ZMW 9,310,000
+      { name: 'Data Science', students: 750, revenue: 7125000 }, // ZMW 7,125,000
       { name: 'AI & Machine Learning', revenue: 312000, students: 756 }
     ]
   })
@@ -615,26 +615,42 @@ function AdminDashboard() {
   // Payments Panel Data
   const [paymentsData] = useState({
     reconciliation: [
-      { id: 1, date: '2024-05-15', transactionId: 'TXN001', amount: 1250.00, type: 'Tuition Fee', status: 'reconciled', method: 'Credit Card', student: 'John Doe' },
-      { id: 2, date: '2024-05-15', transactionId: 'TXN002', amount: 450.00, type: 'Course Material', status: 'pending', method: 'Bank Transfer', student: 'Jane Smith' },
-      { id: 3, date: '2024-05-14', transactionId: 'TXN003', amount: 890.00, type: 'Tuition Fee', status: 'reconciled', method: 'PayPal', student: 'Robert Johnson' },
-      { id: 4, date: '2024-05-14', transactionId: 'TXN004', amount: 320.00, type: 'Certification Fee', status: 'flagged', method: 'Credit Card', student: 'Emily Davis' }
+      { id: 1, date: '2024-05-15', transactionId: 'TXN001', amount: 12500.00, type: 'Tuition Fee', status: 'reconciled', method: 'Credit Card', student: 'John Doe' },
+      { id: 2, date: '2024-05-15', transactionId: 'TXN002', amount: 4500.00, type: 'Course Material', status: 'pending', method: 'Bank Transfer', student: 'Jane Smith' },
+      { id: 3, date: '2024-05-14', transactionId: 'TXN003', amount: 8900.00, type: 'Tuition Fee', status: 'reconciled', method: 'PayPal', student: 'Robert Johnson' },
+      { id: 4, date: '2024-05-14', transactionId: 'TXN004', amount: 3200.00, type: 'Certification Fee', status: 'flagged', method: 'Credit Card', student: 'Emily Davis' }
     ],
     summary: {
       totalTransactions: 1247,
-      reconciledAmount: 2847500,
-      pendingAmount: 45600,
-      flaggedAmount: 12300,
-      monthlyTotal: 237291
+      reconciledAmount: 28475000, // ZMW 28,475,000
+      pendingAmount: 4560000, // ZMW 4,560,000
+      flaggedAmount: 1230000, // ZMW 1,230,000
+      monthlyTotal: 2372910 // ZMW 2,372,910
     }
   })
 
   // Marketplace Moderation Data
   const [marketplaceContent] = useState([
-    { id: 1, vendor: 'TechEdu Solutions', title: 'Advanced JavaScript Course', type: 'Course', status: 'pending', submittedDate: '2024-05-15', rating: 4.5, price: 89.99, flagged: false },
-    { id: 2, vendor: 'LearnSmart Inc', title: 'Python Programming Guide', type: 'E-book', status: 'approved', submittedDate: '2024-05-14', rating: 4.2, price: 29.99, flagged: false },
-    { id: 3, vendor: 'EduTech Pro', title: 'Data Science Video Series', type: 'Video', status: 'flagged', submittedDate: '2024-05-13', rating: 3.8, price: 149.99, flagged: true, reason: 'Inappropriate content detected' },
-    { id: 4, vendor: 'SmartLearning Co', title: 'Machine Learning Toolkit', type: 'Software', status: 'pending', submittedDate: '2024-05-12', rating: 4.7, price: 199.99, flagged: false }
+    { id: 1, vendor: 'TechEdu Solutions', title: 'Advanced JavaScript Course', type: 'Course', status: 'pending', submittedDate: '2024-05-15', rating: 4.5, price: 8999, flagged: false },
+    { id: 2, vendor: 'LearnSmart Inc', title: 'Python Programming Guide', type: 'E-book', status: 'approved', submittedDate: '2024-05-14', rating: 4.2, price: 2999, flagged: false },
+    { id: 3, vendor: 'EduTech Pro', title: 'Data Science Video Series', type: 'Video', status: 'flagged', submittedDate: '2024-05-13', rating: 3.8, price: 14999, flagged: true, reason: 'Inappropriate content detected' },
+    { id: 4, vendor: 'SmartLearning Co', title: 'Machine Learning Toolkit', type: 'Software', status: 'pending', submittedDate: '2024-05-12', rating: 4.7, price: 19999, flagged: false },
+    { id: 5, vendor: 'Business Academy', title: 'Digital Marketing Fundamentals', type: 'Course', status: 'approved', submittedDate: '2024-05-11', rating: 4.6, price: 7499, flagged: false },
+    { id: 6, vendor: 'Creative Arts Institute', title: 'Graphic Design Masterclass', type: 'Course', status: 'pending', submittedDate: '2024-05-10', rating: 4.8, price: 12999, flagged: false },
+    { id: 7, vendor: 'Health Sciences Hub', title: 'Introduction to Public Health', type: 'Course', status: 'approved', submittedDate: '2024-05-09', rating: 4.3, price: 9999, flagged: false },
+    { id: 8, vendor: 'Language Learning Pro', title: 'Business English Communication', type: 'Course', status: 'pending', submittedDate: '2024-05-08', rating: 4.1, price: 5999, flagged: false },
+    { id: 9, vendor: 'Engineering Excellence', title: 'Civil Engineering Basics', type: 'Course', status: 'approved', submittedDate: '2024-05-07', rating: 4.4, price: 15999, flagged: false },
+    { id: 10, vendor: 'Finance Masters', title: 'Investment Portfolio Management', type: 'Course', status: 'pending', submittedDate: '2024-05-06', rating: 4.7, price: 18999, flagged: false },
+    { id: 11, vendor: 'Code Academy', title: 'Web Development Bootcamp', type: 'Course', status: 'approved', submittedDate: '2024-05-05', rating: 4.9, price: 21999, flagged: false },
+    { id: 12, vendor: 'Design School', title: 'UI/UX Design Principles', type: 'Course', status: 'pending', submittedDate: '2024-05-04', rating: 4.5, price: 8999, flagged: false },
+    { id: 13, vendor: 'Medical Education Plus', title: 'Medical Terminology Dictionary', type: 'E-book', status: 'approved', submittedDate: '2024-05-03', rating: 4.0, price: 3999, flagged: false },
+    { id: 14, vendor: 'Science Lab', title: 'Chemistry Lab Safety Protocols', type: 'Video', status: 'approved', submittedDate: '2024-05-02', rating: 4.2, price: 6999, flagged: false },
+    { id: 15, vendor: 'Business Tools Ltd', title: 'Project Management Software Suite', type: 'Software', status: 'pending', submittedDate: '2024-05-01', rating: 4.6, price: 24999, flagged: false },
+    { id: 16, vendor: 'Language Experts', title: 'Spanish for Beginners', type: 'Course', status: 'approved', submittedDate: '2024-04-30', rating: 4.3, price: 7499, flagged: false },
+    { id: 17, vendor: 'Mathematics Institute', title: 'Calculus Problem Solver', type: 'Software', status: 'approved', submittedDate: '2024-04-29', rating: 4.5, price: 11999, flagged: false },
+    { id: 18, vendor: 'Creative Writing Hub', title: 'Creative Writing Workshop', type: 'Course', status: 'pending', submittedDate: '2024-04-28', rating: 4.4, price: 9999, flagged: false },
+    { id: 19, vendor: 'Psychology Today', title: 'Introduction to Psychology', type: 'Course', status: 'approved', submittedDate: '2024-04-27', rating: 4.6, price: 10999, flagged: false },
+    { id: 20, vendor: 'Fitness Education', title: 'Sports Science Fundamentals', type: 'Course', status: 'pending', submittedDate: '2024-04-26', rating: 4.2, price: 8499, flagged: false }
   ])
 
   const getStatusColor = (status) => {
@@ -683,7 +699,7 @@ function AdminDashboard() {
                 <BarChart3 size={20} />
               </button>
               <div className="relative">
-                <button className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
+                <button onClick={() => alert('Notifications panel coming soon!')} className="p-3 text-gray-600 hover:text-[#011F5B] rounded-xl">
                   <Bell size={20} />
                 </button>
                 <span className="absolute top-2 right-2 w-3 h-3 bg-[#FF6B35] rounded-full animate-pulse"></span>
@@ -781,7 +797,7 @@ function AdminDashboard() {
                         </div>
                         <span className="text-sm font-semibold">Monthly Revenue</span>
                       </div>
-                      <div className="text-3xl font-bold text-[#011F5B] mb-2">${revenueAnalytics.monthlyRevenue.toLocaleString()}</div>
+                      <div className="text-3xl font-bold text-[#011F5B] mb-2">ZMW {revenueAnalytics.monthlyRevenue.toLocaleString()}</div>
                       <p className="text-sm text-green-600 font-medium">+{revenueAnalytics.revenueGrowth}% growth</p>
                     </div>
                     
@@ -860,7 +876,7 @@ function AdminDashboard() {
                           <div className="space-y-3">
                             <div className="flex justify-between items-center">
                               <span className="text-sm text-gray-600">Course Fees</span>
-                              <span className="font-medium text-[#011F5B]">${(revenueAnalytics.revenueBySource.courseFees / 1000).toFixed(0)}K</span>
+                              <span className="font-medium text-[#011F5B]">ZMW {(revenueAnalytics.revenueBySource.courseFees / 1000).toFixed(0)}K</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                               <div className="bg-green-600 h-2 rounded-full" style={{width: `${(revenueAnalytics.revenueBySource.courseFees / revenueAnalytics.totalRevenue) * 100}%`}}></div>
@@ -868,7 +884,7 @@ function AdminDashboard() {
                             
                             <div className="flex justify-between items-center">
                               <span className="text-sm text-gray-600">Subscriptions</span>
-                              <span className="font-medium text-[#011F5B]">${(revenueAnalytics.revenueBySource.subscriptions / 1000).toFixed(0)}K</span>
+                              <span className="font-medium text-[#011F5B]">ZMW {(revenueAnalytics.revenueBySource.subscriptions / 1000).toFixed(0)}K</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                               <div className="bg-blue-600 h-2 rounded-full" style={{width: `${(revenueAnalytics.revenueBySource.subscriptions / revenueAnalytics.totalRevenue) * 100}%`}}></div>
@@ -876,7 +892,7 @@ function AdminDashboard() {
                             
                             <div className="flex justify-between items-center">
                               <span className="text-sm text-gray-600">Certifications</span>
-                              <span className="font-medium text-[#011F5B]">${(revenueAnalytics.revenueBySource.certifications / 1000).toFixed(0)}K</span>
+                              <span className="font-medium text-[#011F5B]">ZMW {(revenueAnalytics.revenueBySource.certifications / 1000).toFixed(0)}K</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                               <div className="bg-purple-600 h-2 rounded-full" style={{width: `${(revenueAnalytics.revenueBySource.certifications / revenueAnalytics.totalRevenue) * 100}%`}}></div>
@@ -894,7 +910,7 @@ function AdminDashboard() {
                                     <h5 className="font-medium text-gray-900 text-sm">{course.name}</h5>
                                     <p className="text-xs text-gray-600">{course.students} students</p>
                                   </div>
-                                  <span className="font-medium text-green-600">${(course.revenue / 1000).toFixed(0)}K</span>
+                                  <span className="font-medium text-green-600">ZMW {(course.revenue / 1000).toFixed(0)}K</span>
                                 </div>
                               </div>
                             ))}
@@ -1455,21 +1471,21 @@ function AdminDashboard() {
                         <CheckCircle className="w-5 h-5" />
                         <span className="text-sm font-medium">Reconciled</span>
                       </div>
-                      <div className="text-2xl font-bold text-green-600">${paymentsData.summary.reconciledAmount.toLocaleString()}</div>
+                      <div className="text-2xl font-bold text-green-600">ZMW {paymentsData.summary.reconciledAmount.toLocaleString()}</div>
                     </div>
                     <div className="bg-white rounded-xl border border-gray-200 p-4">
                       <div className="flex items-center gap-3 text-yellow-600 mb-2">
                         <Clock className="w-5 h-5" />
                         <span className="text-sm font-medium">Pending</span>
                       </div>
-                      <div className="text-2xl font-bold text-yellow-600">${paymentsData.summary.pendingAmount.toLocaleString()}</div>
+                      <div className="text-2xl font-bold text-yellow-600">ZMW {paymentsData.summary.pendingAmount.toLocaleString()}</div>
                     </div>
                     <div className="bg-white rounded-xl border border-gray-200 p-4">
                       <div className="flex items-center gap-3 text-red-600 mb-2">
                         <AlertTriangle className="w-5 h-5" />
                         <span className="text-sm font-medium">Flagged</span>
                       </div>
-                      <div className="text-2xl font-bold text-red-600">${paymentsData.summary.flaggedAmount.toLocaleString()}</div>
+                      <div className="text-2xl font-bold text-red-600">ZMW {paymentsData.summary.flaggedAmount.toLocaleString()}</div>
                     </div>
                   </div>
 
@@ -1515,7 +1531,7 @@ function AdminDashboard() {
                                 <td className="px-4 py-3 text-sm font-medium text-gray-900">{payment.transactionId}</td>
                                 <td className="px-4 py-3 text-sm text-gray-900">{payment.student}</td>
                                 <td className="px-4 py-3 text-sm text-gray-600">{payment.type}</td>
-                                <td className="px-4 py-3 text-sm font-medium text-gray-900">${payment.amount.toFixed(2)}</td>
+                                <td className="px-4 py-3 text-sm font-medium text-gray-900">ZMW {payment.amount.toFixed(2)}</td>
                                 <td className="px-4 py-3 text-sm text-gray-600">{payment.method}</td>
                                 <td className="px-4 py-3">
                                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${
@@ -1605,7 +1621,7 @@ function AdminDashboard() {
                                   <p className="text-sm text-gray-600">{content.vendor} • {content.type}</p>
                                   <div className="flex items-center gap-4 mt-1">
                                     <span className="text-sm text-gray-500">Submitted: {content.submittedDate}</span>
-                                    <span className="text-sm font-medium text-gray-900">${content.price}</span>
+                                    <span className="text-sm font-medium text-gray-900">ZMW {content.price}</span>
                                     <div className="flex items-center gap-1">
                                       <Star className="w-4 h-4 text-yellow-500" />
                                       <span className="text-sm text-gray-600">{content.rating}</span>

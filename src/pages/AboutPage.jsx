@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { Target, Eye, Heart, Award, Users, Globe } from 'lucide-react'
+import { Target, Eye, Heart, Award, Users, Globe, MapPin } from 'lucide-react'
 
 const stats = [
   { icon: Users, value: '50,000+', label: 'Active Students' },
@@ -103,8 +103,8 @@ function AboutPage() {
                   or background.
                 </p>
                 <p className="text-gray-600 leading-relaxed mt-4">
-                  <strong>Pulsarion IT Solutions Limited</strong> is the driving force behind EduConnect, 
-                  bringing cutting-edge educational technology solutions to learners worldwide.
+                  <strong>Pulsar IT Solutions Limited</strong> is the driving force behind EduConnect, 
+                  bringing cutting-edge educational technology solutions to learners across Zambia and Africa.
                 </p>
               </div>
               
@@ -114,8 +114,8 @@ function AboutPage() {
                   <h2 className="text-3xl font-bold text-[--color-navy-blue]">Our Vision</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To become the world's most trusted and innovative online learning platform, 
-                  transforming lives through education and creating a global community of lifelong 
+                  To become Africa's most trusted and innovative online learning platform, 
+                  transforming lives through education and creating a regional community of lifelong 
                   learners who drive positive change in their communities.
                 </p>
               </div>
@@ -184,6 +184,74 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Location Section */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[--color-navy-blue] mb-4">
+              Based in Lusaka, Zambia
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Proudly serving learners across Africa and beyond from our headquarters in the heart of Zambia
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <MapPin className="w-6 h-6 text-[--color-warm-orange] mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-xl font-bold text-[--color-navy-blue] mb-2">Strategic Location</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Located in Lusaka, Zambia's vibrant capital city, we're positioned at the crossroads of African education and innovation.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <Globe className="w-6 h-6 text-[--color-warm-orange] mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-xl font-bold text-[--color-navy-blue] mb-2">Regional Impact</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Our Zambia headquarters enables us to serve learners across Southern Africa with localized content and support.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <Users className="w-6 h-6 text-[--color-warm-orange] mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-xl font-bold text-[--color-navy-blue] mb-2">Local Community</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Deeply rooted in Zambian educational values while maintaining global standards of excellence.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="bg-gradient-to-br from-[--color-navy-blue]/10 to-[--color-warm-orange]/10 rounded-2xl p-8 shadow-xl">
+                <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden relative">
+                  <iframe
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=27.8%2C-15.5%2C29.0%2C-15.2&layer=mapnik&marker=28.2877%2C-15.4337"
+                    className="w-full h-full border-0 rounded-xl"
+                    title="Map of Lusaka, Zambia"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent pointer-events-none"></div>
+                </div>
+                <div className="mt-6 text-center">
+                  <h4 className="text-xl font-bold text-[--color-navy-blue] mb-2">Lusaka, Zambia</h4>
+                  <p className="text-gray-600">
+                    The educational and innovation hub of Southern Africa
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team */}
       <section className="section-padding bg-[--color-light-blue]">
         <div className="container-custom">
@@ -234,7 +302,7 @@ function AboutPage() {
               Join Our Growing Community
             </h2>
             <p className="text-lg text-white/90">
-              Be part of a global movement that's transforming education
+              Be part of a regional movement that's transforming education across Africa
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <a href="/signup" className="px-8 py-4 bg-gradient-to-r from-[--color-warm-orange] to-[--color-warm-orange-light] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">

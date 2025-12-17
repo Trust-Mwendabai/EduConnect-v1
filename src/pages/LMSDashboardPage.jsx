@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, Calendar, Clock, DollarSign, Bell, TrendingUp, Award, AlertCircle, CheckCircle, PlayCircle, FileText, Target, Brain, Lightbulb, BarChart3, Users, Video, Download, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, ShoppingCart, GraduationCap, MessageSquare, Settings, LogOut, Menu, ChevronLeft, Search, Bot, Accessibility, Sparkles } from 'lucide-react'
+import { BookOpen, Calendar, Clock, DollarSign, Bell, TrendingUp, Award, AlertCircle, CheckCircle, PlayCircle, FileText, Target, Brain, Lightbulb, BarChart3, Users, Video, Download, Star, ChevronRight, X, Info, CreditCard, Check, User, Home, ShoppingCart, GraduationCap, MessageSquare, Settings, LogOut, Menu, ChevronLeft, Search, Bot, Accessibility, Sparkles, Send, Plus, Hash, UserPlus, MoreVertical } from 'lucide-react'
 import AICompanion from '../components/ai/AICompanion'
 import AccessibilityPanel from '../components/accessibility/AccessibilityPanel'
 import { NotificationProvider, useNotifications } from '../components/notifications/NotificationSystem'
@@ -12,6 +12,157 @@ function LMSDashboardPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showAICompanion, setShowAICompanion] = useState(false)
   const [showAccessibility, setShowAccessibility] = useState(false)
+  const [messageView, setMessageView] = useState('personal') // 'personal' or 'groups'
+  const [groupChats, setGroupChats] = useState([
+    {
+      id: 1,
+      name: 'React Study Group',
+      description: 'Advanced React Development students',
+      members: 12,
+      lastMessage: 'Anyone up for a study session tomorrow?',
+      lastMessageTime: '10 min ago',
+      unreadCount: 3,
+      course: 'Advanced React Development',
+      type: 'study'
+    },
+    {
+      id: 2,
+      name: 'Data Science Team',
+      description: 'Machine Learning project collaboration',
+      members: 8,
+      lastMessage: 'I uploaded the dataset to Google Drive',
+      lastMessageTime: '1 hour ago',
+      unreadCount: 0,
+      course: 'Data Science Fundamentals',
+      type: 'project'
+    },
+    {
+      id: 3,
+      name: 'UI/UX Designers',
+      description: 'Design feedback and resources sharing',
+      members: 15,
+      lastMessage: 'Check out this new Figma plugin!',
+      lastMessageTime: '2 hours ago',
+      unreadCount: 1,
+      course: 'UI/UX Design Principles',
+      type: 'discussion'
+    },
+    {
+      id: 4,
+      name: 'General Student Lounge',
+      description: 'All students general discussion',
+      members: 45,
+      lastMessage: 'Who\'s attending the workshop tomorrow?',
+      lastMessageTime: '3 hours ago',
+      unreadCount: 0,
+      course: 'General',
+      type: 'social'
+    }
+  ])
+  const [selectedGroup, setSelectedGroup] = useState(null)
+  const [groupMessages, setGroupMessages] = useState([
+    {
+      groupId: 1,
+      messages: [
+        {
+          id: 1,
+          sender: 'Alex Thompson',
+          message: 'Hey everyone! I\'m stuck on the Redux middleware concept. Can someone help?',
+          time: '2 hours ago',
+          isOwn: false
+        },
+        {
+          id: 2,
+          sender: 'Sarah Johnson',
+          message: 'I can help! Redux middleware is like a pipeline for actions. Think of it as processing steps.',
+          time: '1 hour 45 min ago',
+          isOwn: false
+        },
+        {
+          id: 3,
+          sender: 'You',
+          message: 'Thanks Sarah! That makes more sense now.',
+          time: '1 hour 30 min ago',
+          isOwn: true
+        },
+        {
+          id: 4,
+          sender: 'Mike Chen',
+          message: 'Anyone up for a study session tomorrow?',
+          time: '10 min ago',
+          isOwn: false
+        }
+      ]
+    }
+  ])
+  const [newGroupMessage, setNewGroupMessage] = useState('')
+  const [showCreateGroup, setShowCreateGroup] = useState(false)
+  const [newGroup, setNewGroup] = useState({
+    name: '',
+    description: '',
+    course: '',
+    type: 'study'
+  })
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      sender: 'Dr. Sarah Johnson',
+      subject: 'React Development - Module 3 Assignment',
+      message: 'Your latest assignment on advanced state management was excellent! Consider exploring Redux patterns for your next project.',
+      time: '1 hour ago',
+      unread: true,
+      course: 'Advanced React Development',
+      type: 'instructor'
+    },
+    {
+      id: 2,
+      sender: 'Teaching Assistant',
+      subject: 'Data Science Lab Session',
+      message: 'Reminder: Tomorrow\'s lab session on machine learning algorithms will be in Computer Lab 2 at 10 AM.',
+      time: '3 hours ago',
+      unread: true,
+      course: 'Data Science Fundamentals',
+      type: 'announcement'
+    },
+    {
+      id: 3,
+      sender: 'Michael Chen',
+      subject: 'UI/UX Design Feedback',
+      message: 'Great progress on your user research project! The wireframes look professional. Let\'s discuss the color scheme in our next session.',
+      time: '1 day ago',
+      unread: false,
+      course: 'UI/UX Design Principles',
+      type: 'instructor'
+    },
+    {
+      id: 4,
+      sender: 'LMS System',
+      subject: 'Course Material Update',
+      message: 'New video lectures for React hooks have been uploaded to your course materials section.',
+      time: '2 days ago',
+      unread: false,
+      course: 'Advanced React Development',
+      type: 'system'
+    },
+    {
+      id: 5,
+      sender: 'Academic Advisor',
+      subject: 'Progress Meeting',
+      message: 'Let\'s schedule a meeting to discuss your academic progress and upcoming course selections for next semester.',
+      time: '3 days ago',
+      unread: false,
+      course: 'General',
+      type: 'advisor'
+    }
+  ])
+  const [selectedMessage, setSelectedMessage] = useState(null)
+  const [replyText, setReplyText] = useState('')
+  const [showCompose, setShowCompose] = useState(false)
+  const [newMessage, setNewMessage] = useState({
+    recipient: '',
+    subject: '',
+    message: ''
+  })
 
   const activeCourses = [
     {
@@ -161,6 +312,133 @@ function LMSDashboardPage() {
       { date: '2024-04-01', amount: 850.00, status: 'completed' },
       { date: '2024-03-01', amount: 850.00, status: 'completed' }
     ]
+  }
+
+  const handleMessageClick = (message) => {
+    setSelectedMessage(message)
+    if (message.unread) {
+      setMessages(messages.map(m => 
+        m.id === message.id ? { ...m, unread: false } : m
+      ))
+    }
+  }
+
+  const handleReply = () => {
+    if (replyText.trim() && selectedMessage) {
+      const newReply = {
+        id: messages.length + 1,
+        sender: 'You',
+        subject: `Re: ${selectedMessage.subject}`,
+        message: replyText,
+        time: 'Just now',
+        unread: false,
+        course: selectedMessage.course,
+        type: 'reply'
+      }
+      setMessages([newReply, ...messages])
+      setReplyText('')
+      showSuccess('Reply sent successfully!')
+    }
+  }
+
+  const handleCompose = () => {
+    if (newMessage.recipient.trim() && newMessage.subject.trim() && newMessage.message.trim()) {
+      const composedMessage = {
+        id: messages.length + 1,
+        sender: 'You',
+        subject: newMessage.subject,
+        message: newMessage.message,
+        time: 'Just now',
+        unread: false,
+        course: 'General',
+        type: 'sent'
+      }
+      setMessages([composedMessage, ...messages])
+      setNewMessage({ recipient: '', subject: '', message: '' })
+      setShowCompose(false)
+      showSuccess('Message sent successfully!')
+    }
+  }
+
+  const markAsRead = (messageId) => {
+    setMessages(messages.map(m => 
+      m.id === messageId ? { ...m, unread: false } : m
+    ))
+  }
+
+  const deleteMessage = (messageId) => {
+    setMessages(messages.filter(m => m.id !== messageId))
+    if (selectedMessage?.id === messageId) {
+      setSelectedMessage(null)
+    }
+    showWarning('Message deleted')
+  }
+
+  const handleGroupClick = (group) => {
+    setSelectedGroup(group)
+    setMessageView('groups')
+    // Mark group messages as read
+    setGroupChats(groupChats.map(g => 
+      g.id === group.id ? { ...g, unreadCount: 0 } : g
+    ))
+  }
+
+  const handleSendGroupMessage = () => {
+    if (newGroupMessage.trim() && selectedGroup) {
+      const newMessage = {
+        id: Date.now(),
+        sender: 'You',
+        message: newGroupMessage,
+        time: 'Just now',
+        isOwn: true
+      }
+      
+      setGroupMessages(prev => ({
+        ...prev,
+        [selectedGroup.id]: {
+          messages: [...(prev[selectedGroup.id]?.messages || []), newMessage]
+        }
+      }))
+      
+      // Update group's last message
+      setGroupChats(groupChats.map(g => 
+        g.id === selectedGroup.id 
+          ? { ...g, lastMessage: newGroupMessage, lastMessageTime: 'Just now' }
+          : g
+      ))
+      
+      setNewGroupMessage('')
+      showSuccess('Message sent to group')
+    }
+  }
+
+  const handleCreateGroup = () => {
+    if (newGroup.name.trim() && newGroup.description.trim()) {
+      const createdGroup = {
+        id: groupChats.length + 1,
+        name: newGroup.name,
+        description: newGroup.description,
+        members: 1,
+        lastMessage: 'Group created',
+        lastMessageTime: 'Just now',
+        unreadCount: 0,
+        course: newGroup.course,
+        type: newGroup.type
+      }
+      
+      setGroupChats([createdGroup, ...groupChats])
+      setNewGroup({ name: '', description: '', course: '', type: 'study' })
+      setShowCreateGroup(false)
+      showSuccess('Group created successfully!')
+    }
+  }
+
+  const leaveGroup = (groupId) => {
+    setGroupChats(groupChats.filter(g => g.id !== groupId))
+    if (selectedGroup?.id === groupId) {
+      setSelectedGroup(null)
+    }
+    showWarning('You left the group')
   }
 
   const aiSuggestions = [
@@ -661,10 +939,395 @@ function LMSDashboardPage() {
           )}
 
           {activeSection === 'messages' && (
-            <div>
-              <h2 className="text-xl font-semibold text-[#011F5B] mb-6">Messages</h2>
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <p className="text-gray-600">Your messaging interface will appear here.</p>
+            <div className="space-y-6">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-semibold text-[#011F5B] mb-6">Messages</h2>
+                <div className="flex gap-3">
+                  {messageView === 'groups' && (
+                    <button
+                      onClick={() => setShowCreateGroup(!showCreateGroup)}
+                      className="px-4 py-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      Create Group
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setShowCompose(!showCompose)}
+                    className="px-4 py-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    Compose
+                  </button>
+                </div>
+              </div>
+
+              {/* Message Type Toggle */}
+              <div className="bg-white rounded-xl shadow-sm p-2 flex gap-2">
+                <button
+                  onClick={() => setMessageView('personal')}
+                  className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                    messageView === 'personal'
+                      ? 'bg-[#011F5B] text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Personal Messages
+                </button>
+                <button
+                  onClick={() => setMessageView('groups')}
+                  className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                    messageView === 'groups'
+                      ? 'bg-[#011F5B] text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Group Chats
+                </button>
+              </div>
+
+              {showCompose && messageView === 'personal' && (
+                <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
+                  <h3 className="text-lg font-semibold text-[#011F5B] mb-4">New Message</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Recipient</label>
+                      <input
+                        type="text"
+                        value={newMessage.recipient}
+                        onChange={(e) => setNewMessage({...newMessage, recipient: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                        placeholder="Enter recipient name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                      <input
+                        type="text"
+                        value={newMessage.subject}
+                        onChange={(e) => setNewMessage({...newMessage, subject: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                        placeholder="Enter subject"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                      <textarea
+                        value={newMessage.message}
+                        onChange={(e) => setNewMessage({...newMessage, message: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                        placeholder="Type your message here..."
+                        rows="4"
+                      />
+                    </div>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={handleCompose}
+                        className="px-6 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                      >
+                        Send Message
+                      </button>
+                      <button
+                        onClick={() => setShowCompose(false)}
+                        className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-all duration-300"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {showCreateGroup && messageView === 'groups' && (
+                <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
+                  <h3 className="text-lg font-semibold text-[#011F5B] mb-4">Create New Group</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Group Name</label>
+                      <input
+                        type="text"
+                        value={newGroup.name}
+                        onChange={(e) => setNewGroup({...newGroup, name: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                        placeholder="Enter group name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                      <textarea
+                        value={newGroup.description}
+                        onChange={(e) => setNewGroup({...newGroup, description: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                        placeholder="Describe the group purpose"
+                        rows="3"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Course</label>
+                      <input
+                        type="text"
+                        value={newGroup.course}
+                        onChange={(e) => setNewGroup({...newGroup, course: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                        placeholder="Associated course (optional)"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                      <select
+                        value={newGroup.type}
+                        onChange={(e) => setNewGroup({...newGroup, type: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                      >
+                        <option value="study">Study Group</option>
+                        <option value="project">Project Team</option>
+                        <option value="discussion">Discussion</option>
+                        <option value="social">Social</option>
+                      </select>
+                    </div>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={handleCreateGroup}
+                        className="px-6 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                      >
+                        Create Group
+                      </button>
+                      <button
+                        onClick={() => setShowCreateGroup(false)}
+                        className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-all duration-300"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="grid lg:grid-cols-3 gap-6">
+                {/* Messages/Groups List */}
+                <div className="lg:col-span-1">
+                  <div className="bg-white rounded-xl shadow-sm">
+                    <div className="p-4 border-b border-gray-200">
+                      <h3 className="font-semibold text-[#011F5B]">
+                        {messageView === 'personal' ? 'Inbox' : 'Group Chats'}
+                      </h3>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {messageView === 'personal' 
+                          ? `${messages.filter(m => m.unread).length} unread messages`
+                          : `${groupChats.filter(g => g.unreadCount > 0).length} groups with unread messages`
+                        }
+                      </p>
+                    </div>
+                    <div className="max-h-96 overflow-y-auto">
+                      {messageView === 'personal' ? (
+                        messages.map((message) => (
+                          <div
+                            key={message.id}
+                            onClick={() => handleMessageClick(message)}
+                            className={`p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors ${
+                              selectedMessage?.id === message.id ? 'bg-blue-50' : ''
+                            } ${message.unread ? 'bg-blue-50' : ''}`}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <h4 className={`font-medium text-sm ${message.unread ? 'text-[#011F5B] font-semibold' : 'text-gray-900'}`}>
+                                    {message.sender}
+                                  </h4>
+                                  {message.unread && (
+                                    <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                                  )}
+                                </div>
+                                <p className={`text-sm mb-1 ${message.unread ? 'text-[#011F5B] font-medium' : 'text-gray-700'}`}>
+                                  {message.subject}
+                                </p>
+                                <p className="text-xs text-gray-500 truncate">{message.message}</p>
+                                <p className="text-xs text-gray-400 mt-1">{message.time}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        groupChats.map((group) => (
+                          <div
+                            key={group.id}
+                            onClick={() => handleGroupClick(group)}
+                            className={`p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors ${
+                              selectedGroup?.id === group.id ? 'bg-blue-50' : ''
+                            }`}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <Hash className="w-4 h-4 text-gray-500" />
+                                  <h4 className="font-medium text-sm text-gray-900">{group.name}</h4>
+                                  {group.unreadCount > 0 && (
+                                    <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+                                      {group.unreadCount}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-xs text-gray-500 mb-1">{group.description}</p>
+                                <p className="text-xs text-gray-600 truncate">{group.lastMessage}</p>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <p className="text-xs text-gray-400">{group.lastMessageTime}</p>
+                                  <span className="text-xs text-gray-500">•</span>
+                                  <p className="text-xs text-gray-500">{group.members} members</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Message/Group Detail */}
+                <div className="lg:col-span-2">
+                  {messageView === 'personal' && selectedMessage ? (
+                    <div className="bg-white rounded-xl shadow-sm">
+                      <div className="p-6 border-b border-gray-200">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="text-lg font-semibold text-[#011F5B]">{selectedMessage.subject}</h3>
+                            <div className="flex items-center gap-4 mt-2">
+                              <p className="text-sm text-gray-600">From: <span className="font-medium">{selectedMessage.sender}</span></p>
+                              <p className="text-sm text-gray-600">{selectedMessage.time}</p>
+                            </div>
+                            {selectedMessage.course && (
+                              <p className="text-sm text-gray-600 mt-1">Course: <span className="font-medium">{selectedMessage.course}</span></p>
+                            )}
+                          </div>
+                          <div className="flex gap-2">
+                            {selectedMessage.unread && (
+                              <button
+                                onClick={() => markAsRead(selectedMessage.id)}
+                                className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
+                              >
+                                Mark as Read
+                              </button>
+                            )}
+                            <button
+                              onClick={() => deleteMessage(selectedMessage.id)}
+                              className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <p className="text-gray-700 leading-relaxed">{selectedMessage.message}</p>
+                        
+                        {/* Reply Section */}
+                        <div className="mt-6 pt-6 border-t border-gray-200">
+                          <h4 className="font-medium text-[#011F5B] mb-3">Reply</h4>
+                          <div className="space-y-3">
+                            <textarea
+                              value={replyText}
+                              onChange={(e) => setReplyText(e.target.value)}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                              placeholder="Type your reply here..."
+                              rows="3"
+                            />
+                            <div className="flex gap-3">
+                              <button
+                                onClick={handleReply}
+                                className="px-4 py-2 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                              >
+                                Send Reply
+                              </button>
+                              <button
+                                onClick={() => setReplyText('')}
+                                className="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-all duration-300"
+                              >
+                                Clear
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : messageView === 'groups' && selectedGroup ? (
+                    <div className="bg-white rounded-xl shadow-sm">
+                      <div className="p-6 border-b border-gray-200">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <div className="flex items-center gap-3">
+                              <Hash className="w-5 h-5 text-gray-500" />
+                              <h3 className="text-lg font-semibold text-[#011F5B]">{selectedGroup.name}</h3>
+                            </div>
+                            <p className="text-sm text-gray-600 mt-1">{selectedGroup.description}</p>
+                            <div className="flex items-center gap-4 mt-2">
+                              <p className="text-sm text-gray-600">{selectedGroup.members} members</p>
+                              <p className="text-sm text-gray-600">Course: <span className="font-medium">{selectedGroup.course}</span></p>
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => leaveGroup(selectedGroup.id)}
+                              className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                            >
+                              Leave Group
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Group Messages */}
+                      <div className="p-6 h-96 overflow-y-auto">
+                        {groupMessages[selectedGroup.id]?.messages?.map((msg) => (
+                          <div
+                            key={msg.id}
+                            className={`mb-4 ${msg.isOwn ? 'text-right' : 'text-left'}`}
+                          >
+                            <div className={`inline-block max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                              msg.isOwn
+                                ? 'bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white'
+                                : 'bg-gray-100 text-gray-900'
+                            }`}>
+                              <p className="font-medium text-sm mb-1">{msg.sender}</p>
+                              <p className="text-sm">{msg.message}</p>
+                              <p className={`text-xs mt-1 ${msg.isOwn ? 'text-white/70' : 'text-gray-500'}`}>{msg.time}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* Group Message Input */}
+                      <div className="p-6 border-t border-gray-200">
+                        <div className="flex gap-3">
+                          <input
+                            type="text"
+                            value={newGroupMessage}
+                            onChange={(e) => setNewGroupMessage(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSendGroupMessage()}
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                            placeholder="Type a message..."
+                          />
+                          <button
+                            onClick={handleSendGroupMessage}
+                            className="px-4 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF8C61] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                          >
+                            <Send size={20} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+                      <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                        {messageView === 'personal' ? 'Select a message' : 'Select a group chat'}
+                      </h3>
+                      <p className="text-gray-600">
+                        {messageView === 'personal' 
+                          ? 'Choose a message from the inbox to read'
+                          : 'Choose a group chat to start messaging'
+                        }
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           )}

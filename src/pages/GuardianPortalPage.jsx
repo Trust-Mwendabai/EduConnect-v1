@@ -44,17 +44,18 @@ export default function GuardianPortalPage() {
   ]
 
   const paymentHistory = [
-    { date: '2024-05-01', description: 'Tuition Fee - May 2024', amount: 850.00, status: 'paid', method: 'Credit Card' },
-    { date: '2024-04-01', description: 'Tuition Fee - April 2024', amount: 850.00, status: 'paid', method: 'Bank Transfer' },
-    { date: '2024-03-15', description: 'Field Trip - Science Museum', amount: 45.00, status: 'paid', method: 'Credit Card' },
-    { date: '2024-03-01', description: 'Tuition Fee - March 2024', amount: 850.00, status: 'paid', method: 'Bank Transfer' },
-    { date: '2024-02-01', description: 'Tuition Fee - February 2024', amount: 850.00, status: 'paid', method: 'Credit Card' }
+    { date: '2024-05-01', description: 'Tuition Fee - May 2024', amount: 8500.00, status: 'paid', method: 'Credit Card', currency: 'ZMW' },
+    { date: '2024-04-01', description: 'Tuition Fee - April 2024', amount: 8500.00, status: 'paid', method: 'Bank Transfer', currency: 'ZMW' },
+    { date: '2024-03-15', description: 'Field Trip - Science Museum', amount: 450.00, status: 'paid', method: 'Credit Card', currency: 'ZMW' },
+    { date: '2024-03-01', description: 'Tuition Fee - March 2024', amount: 8500.00, status: 'paid', method: 'Bank Transfer', currency: 'ZMW' },
+    { date: '2024-02-01', description: 'Library Fees - Semester 2', amount: 350.00, status: 'paid', method: 'Mobile Money', currency: 'ZMW' },
+    { date: '2024-01-15', description: 'Lab Equipment', amount: 250.00, status: 'paid', method: 'Bank Transfer', currency: 'ZMW' }
   ]
 
   const outstandingBalances = [
-    { item: 'Tuition Fee - June 2024', amount: 850.00, dueDate: '2024-06-01' },
-    { item: 'Summer Camp Fee', amount: 200.00, dueDate: '2024-06-15' },
-    { item: 'Textbook Rental', amount: 75.00, dueDate: '2024-05-30' }
+    { item: 'Tuition Fee - June 2024', amount: 8500.00, dueDate: '2024-06-01', currency: 'ZMW' },
+    { item: 'Summer Camp Fee', amount: 2000.00, dueDate: '2024-06-15', currency: 'ZMW' },
+    { item: 'Textbook Rental', amount: 750.00, dueDate: '2024-05-30', currency: 'ZMW' }
   ]
 
   const teachers = [
@@ -64,16 +65,42 @@ export default function GuardianPortalPage() {
   ]
 
   const messages = [
-    { id: '1', teacher: 'Prof. Sarah Smith', subject: 'Mathematics', message: 'Emma is doing excellent in algebra. Keep up the great work!', date: '2024-05-15', time: '2:30 PM', unread: true },
-    { id: '2', teacher: 'Dr. John Davis', subject: 'Science', message: 'Please ensure Emma completes her science project by Friday.', date: '2024-05-14', time: '10:15 AM', unread: false },
-    { id: '3', teacher: 'Dr. Emily Wilson', subject: 'English', message: 'Emma\'s essay writing has improved significantly this term.', date: '2024-05-13', time: '3:45 PM', unread: false }
+    { id: '1', teacher: 'Prof. Sarah Smith', subject: 'Mathematics', message: 'Emma is doing excellent in algebra. Keep up the great work!', date: '2024-05-15', time: '2:30 PM', unread: true, priority: 'high', type: 'academic' },
+    { id: '2', teacher: 'Dr. John Davis', subject: 'Science', message: 'Please ensure Emma completes her science project by Friday.', date: '2024-05-14', time: '10:15 AM', unread: false, priority: 'medium', type: 'assignment' },
+    { id: '3', teacher: 'Dr. Emily Wilson', subject: 'English', message: 'Emma\'s essay writing has improved significantly this term.', date: '2024-05-13', time: '3:45 PM', unread: false, priority: 'low', type: 'progress' },
+    { id: '4', teacher: 'University Registrar', subject: 'University Updates', message: 'Reminder: Final exam schedule has been posted. Please check the portal.', date: '2024-05-12', time: '9:00 AM', unread: true, priority: 'high', type: 'university' },
+    { id: '5', teacher: 'Student Affairs', subject: 'Campus Activities', message: 'Emma has been selected for the debate team competition next week.', date: '2024-05-11', time: '11:30 AM', unread: false, priority: 'medium', type: 'extracurricular' },
+    { id: '6', teacher: 'Financial Office', subject: 'Fee Information', message: 'Second semester tuition fees are due by May 30th. Payment portal is now open.', date: '2024-05-10', time: '8:00 AM', unread: true, priority: 'high', type: 'financial' }
   ]
 
   const sendMessage = () => {
     if (messageText.trim() && selectedTeacher) {
+      const newMessage = {
+        id: messages.length + 1,
+        teacher: 'Parent User',
+        subject: 'Parent Inquiry',
+        message: messageText,
+        date: new Date().toISOString().split('T')[0],
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        unread: false,
+        priority: 'medium',
+        type: 'parent_message'
+      }
+      // Add message to list
       setMessageText('')
       setSelectedTeacher('')
+      alert('Message sent successfully!')
     }
+  }
+
+  const markAsRead = (messageId) => {
+    // In real app, this would update the message status
+    console.log(`Marking message ${messageId} as read`)
+  }
+
+  const archiveMessage = (messageId) => {
+    // In real app, this would archive the message
+    console.log(`Archiving message ${messageId}`)
   }
 
   const getAttendancePercentage = (month) => {
@@ -643,7 +670,7 @@ export default function GuardianPortalPage() {
                       <p className="text-sm text-gray-600">Due: {balance.dueDate}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xl font-bold text-red-600">${balance.amount.toFixed(2)}</p>
+                      <p className="text-xl font-bold text-red-600">ZMW {balance.amount.toFixed(2)}</p>
                       <button className="mt-1 px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
                         Pay Now
                       </button>
@@ -663,7 +690,7 @@ export default function GuardianPortalPage() {
                       <p className="text-sm text-gray-600">{payment.method} • {payment.date}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-semibold text-gray-900">${payment.amount.toFixed(2)}</p>
+                      <p className="text-lg font-semibold text-gray-900">ZMW {payment.amount.toFixed(2)}</p>
                       <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${
                         payment.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
                       }`}>
@@ -716,8 +743,8 @@ export default function GuardianPortalPage() {
                       <button className="px-3 py-1 text-sm bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors">
                         Unread
                       </button>
-                      <button className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
-                        Important
+                      <button className="px-3 py-1 text-sm bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-colors">
+                        High Priority
                       </button>
                     </div>
                   </div>
@@ -726,41 +753,57 @@ export default function GuardianPortalPage() {
                       <div key={index} className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md cursor-pointer ${
                         message.unread ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200' : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                       }`}>
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex items-center gap-3">
-                            <div className="relative">
-                              <img src={teachers.find(t => t.name === message.teacher)?.avatar} alt={message.teacher} className="w-12 h-12 rounded-full border-2 border-white shadow-sm" />
-                              <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${
-                                teachers.find(t => t.name === message.teacher)?.status === 'online' ? 'bg-green-500' : 'bg-gray-300'
-                              }`}></div>
-                            </div>
-                            <div>
+                        <div className="flex items-start gap-4">
+                          <div className="relative">
+                            <img src={teachers.find(t => t.name === message.teacher)?.avatar} alt={message.teacher} className="w-12 h-12 rounded-full border-2 border-white shadow-sm" />
+                            <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${
+                              teachers.find(t => t.name === message.teacher)?.status === 'online' ? 'bg-green-500' : 'bg-gray-300'
+                            }`}></div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-2">
                               <h3 className="font-semibold text-gray-900">{message.teacher}</h3>
-                              <p className="text-sm text-gray-600">{message.subject}</p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-medium text-gray-900">{message.date}</p>
-                            <p className="text-xs text-gray-500">{message.time}</p>
-                            {message.unread && (
-                              <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full">
-                                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                                New
+                              <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                message.priority === 'high' ? 'bg-red-100 text-red-700' :
+                                message.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                                'bg-gray-100 text-gray-700'
+                              }`}>
+                                {message.priority}
                               </span>
+                              <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                message.type === 'university' ? 'bg-purple-100 text-purple-700' :
+                                message.type === 'academic' ? 'bg-blue-100 text-blue-700' :
+                                message.type === 'assignment' ? 'bg-orange-100 text-orange-700' :
+                                message.type === 'financial' ? 'bg-green-100 text-green-700' :
+                                'bg-gray-100 text-gray-700'
+                              }`}>
+                                {message.type}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-600">{message.subject}</p>
+                            <div className="flex items-center gap-4 mt-2">
+                              <p className="text-sm font-medium text-gray-900">{message.date}</p>
+                              <p className="text-xs text-gray-500">{message.time}</p>
+                            </div>
+                            {message.unread && (
+                              <div className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                                <AlertCircle className="w-3 h-3" />
+                                New
+                              </div>
                             )}
-                          </div>
-                        </div>
-                        <p className="text-gray-700 leading-relaxed">{message.message}</p>
-                        <div className="flex items-center justify-between mt-4">
-                          <div className="flex items-center gap-3">
-                            <button className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium">
-                              <Reply className="w-4 h-4" />
-                              Reply
-                            </button>
-                            <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-700">
-                              <Eye className="w-4 h-4" />
-                              View Details
-                            </button>
+                            <p className="text-gray-700 leading-relaxed">{message.message}</p>
+                            <div className="flex items-center gap-2 mt-3">
+                              <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                Reply
+                              </button>
+                              <button className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                                Archive
+                              </button>
+                              <button className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center gap-2">
+                                <Eye className="w-4 h-4" />
+                                View Details
+                              </button>
+                            </div>
                           </div>
                           {message.unread && (
                             <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">

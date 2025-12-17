@@ -21,7 +21,7 @@ const contactInfo = [
     icon: MapPin,
     title: 'Visit Us',
     details: 'Lusaka, Zambia',
-    subdetails: 'By appointment only'
+    subdetails: 'Kamwala South, Lusaka Central Business District'
   },
   {
     icon: Clock,
@@ -146,14 +146,14 @@ function ContactPage() {
             <div className="space-y-8">
               <div className="bg-gray-200 rounded-2xl overflow-hidden h-64 lg:h-80">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=27.8%2C-15.5%2C29.0%2C-15.2&layer=mapnik&marker=28.2877%2C-15.4337"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Office Location"
+                  title="EduConnect Office - Lusaka, Zambia"
                 ></iframe>
               </div>
               
@@ -162,8 +162,8 @@ function ContactPage() {
                   <Clock className="w-6 h-6 text-[--color-warm-orange] shrink-0 mt-1" />
                   <div>
                     <h3 className="font-bold text-[--color-navy-blue] mb-2">Business Hours</h3>
-                    <p className="text-gray-600 text-sm">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                    <p className="text-gray-600 text-sm">Saturday: 10:00 AM - 4:00 PM EST</p>
+                    <p className="text-gray-600 text-sm">Monday - Friday: 8:00 AM - 5:00 PM CAT</p>
+                    <p className="text-gray-600 text-sm">Saturday: 9:00 AM - 1:00 PM CAT</p>
                     <p className="text-gray-600 text-sm">Sunday: Closed</p>
                   </div>
                 </div>
